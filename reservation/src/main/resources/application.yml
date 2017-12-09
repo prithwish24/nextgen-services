@@ -1,3 +1,8 @@
 server:
-  port: 8001
+  port: 8101
   
+logging:
+  level:
+     org:
+       springframework:
+         security: DEBUG  
