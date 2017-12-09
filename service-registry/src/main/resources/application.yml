@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: nextgen-registry-server
+
+server:
+    port: 8198
+
+eureka:
+  instance:
+    hostname: localhost
+    nonSecurePort: ${server.port}
+    lease-renewal-interval-in-seconds: 30
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+     
+     
+logging:
+  level:
+     org:
+       springframework:
+         security: DEBUG  

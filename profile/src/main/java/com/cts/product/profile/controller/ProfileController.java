@@ -3,7 +3,6 @@ package com.cts.product.profile.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
@@ -21,11 +20,6 @@ import com.cts.product.profile.service.ProfileService;
 @ComponentScan(basePackages= {"com.cts.product.profile"})
 public class ProfileController {
 	private static final Logger LOG = LoggerFactory.getLogger(ProfileController.class);
-	
-	public static void main(String[] args) {
-		SpringApplication.run(ProfileController.class, args);
-	}
-	
 	
 	@Autowired
 	private ProfileService profileService;
