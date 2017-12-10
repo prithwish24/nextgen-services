@@ -1,21 +1,30 @@
-spring:
-  application:
-    name: nextgen-registry-server
+#spring:
+#  application:
+#    name: registry-server
 
 server:
-    port: 8198
+    port: 8088
 
 eureka:
-  instance:
-    hostname: localhost
-    nonSecurePort: ${server.port}
-    lease-renewal-interval-in-seconds: 30
   client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-     
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    enableSelfPreservation: false
+    
+#eureka:
+#  instance:
+#    hostname: localhost
+#    nonSecurePort: ${server.port}
+#    lease-renewal-interval-in-seconds: 30
+#  server:
+#    wait-time-in-ms-when-sync-empty: 0
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    
      
 logging:
   level:

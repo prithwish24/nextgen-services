@@ -1,16 +1,15 @@
-package com.cts.product.eureka;
+package com.cts.product.addon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
+import com.cts.product.addon.controller.AddonServicesController;
 
 @SpringBootApplication
-@EnableEurekaServer
 @EnableDiscoveryClient
 public class Application {
-	
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(AddonServicesController.class, args);
 	}
 }

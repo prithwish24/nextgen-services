@@ -15,7 +15,7 @@ import com.cts.product.rental.google.ai.transformer.ReservationTransformer;
 import com.cts.product.rental.service.ReservationService;
 
 @RestController
-@RequestMapping("/nextgen/apps/rental")
+@RequestMapping("/")
 @ComponentScan(basePackages= {"com.cts.product.rental"})
 public class ReservationController {
 	private static final Logger LOG = LoggerFactory.getLogger(ReservationController.class);
@@ -26,7 +26,7 @@ public class ReservationController {
 	private ReservationTransformer transformer;
 	
 	@RequestMapping(
-			value = "/reservation/lfs", 
+			value = "/lfs", 
 			method = {RequestMethod.GET},
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Fulfillment lowFareSearch() {
@@ -35,7 +35,7 @@ public class ReservationController {
 	}
 
 	@RequestMapping(
-			value = "/reservation/create", 
+			value = "/create", 
 			method = {RequestMethod.POST, RequestMethod.GET},
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Fulfillment create() {

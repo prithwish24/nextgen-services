@@ -16,7 +16,7 @@ import com.cts.product.profile.domain.UserProfile;
 import com.cts.product.profile.service.ProfileService;
 
 @RestController
-@RequestMapping("/nextgen/apps/profile")
+@RequestMapping("/")
 @ComponentScan(basePackages= {"com.cts.product.profile"})
 public class ProfileController {
 	private static final Logger LOG = LoggerFactory.getLogger(ProfileController.class);
