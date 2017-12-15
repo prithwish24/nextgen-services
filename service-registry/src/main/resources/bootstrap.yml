@@ -1,6 +1,10 @@
-#spring:
-#  application:
-#    name: nextgen-registry-server
-#  cloud:
-#    config:
-#      uri: http://localhost:8199    
+spring:
+  application:
+    name: registry-server
+  cloud:
+    config:
+      uri: http://127.0.0.1:8199
+      username: user
+      password: s3cr3t
+      fail-fast: true
+      

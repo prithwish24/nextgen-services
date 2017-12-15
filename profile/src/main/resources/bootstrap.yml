@@ -1,6 +1,11 @@
-#spring:
-#  application:
-#    name: nextgen-profile-service
-#  cloud:
-#    config:
-#      uri: http://localhost:8888    
+spring:
+  application:
+    name: profile-service
+  cloud:
+    config:
+      uri: http://127.0.0.1:8199
+      username: user
+      password: s3cr3t
+      fail-fast: true
+      
+      

@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+import com.cts.product.profile.controller.ConfigController;
 import com.cts.product.profile.controller.ProfileController;
 
 @SpringBootApplication
@@ -12,7 +13,7 @@ import com.cts.product.profile.controller.ProfileController;
 public class Application {
 	public static void main(String[] args) {
 		//SpringApplication.run(ProfileController.class, args);
-		new SpringApplicationBuilder(ProfileController.class)
+		new SpringApplicationBuilder(ProfileController.class, ConfigController.class)
 		.bannerMode(Banner.Mode.OFF)
 		.logStartupInfo(true)
 		.run(args);

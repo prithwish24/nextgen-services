@@ -3,7 +3,7 @@ spring:
     name: addon-service
     
 server:
-  port: 8003
+  port: ${port:8003}  
   error:
     whitelabel:
       enabled: false

@@ -1,10 +1,6 @@
-#spring:
-#  application:
-#    name: registry-server
-
 server:
-    port: 8088
-
+    port: ${port:8088}  
+    
 eureka:
   client:
     registerWithEureka: false
@@ -26,8 +22,8 @@ eureka:
 #      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
     
      
-logging:
-  level:
-     org:
-       springframework:
-         security: DEBUG  
+#logging:
+#  level:
+#     org:
+#       springframework:
+#         security: DEBUG  
