@@ -2,7 +2,7 @@ spring:
   application:
     name: nextgen-configserver
   profiles:
-    active: git
+    active: native
     
 ---
 spring:  

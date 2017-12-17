@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.product.profile.delegate.ProfileServiceDelegate;
 import com.cts.product.profile.domain.BaseResponse;
 import com.cts.product.profile.domain.UserProfile;
 import com.cts.product.profile.service.ProfileService;
@@ -21,8 +22,11 @@ import com.cts.product.profile.service.ProfileService;
 public class ProfileController {
 	private static final Logger LOG = LoggerFactory.getLogger(ProfileController.class);
 	
+//	@Autowired
+//	private ProfileService profileService;
+	
 	@Autowired
-	private ProfileService profileService;
+	private ProfileServiceDelegate delegate;
 	
 	@RequestMapping (value = "/login", 
 			method = {RequestMethod.GET, RequestMethod.POST},
@@ -33,7 +37,7 @@ public class ProfileController {
 		LOG.debug("Inside userlogin(");
 
 		BaseResponse<UserProfile> bp = new BaseResponse<>();
-		UserProfile profile = profileService.authenticate(username, password);
+		UserProfile profile = delegate.authenticate(username, password);
 		if (profile == null) {
 			bp.setServiceError("2001", "ERROR", "Invalid User Login");
 		} else {
@@ -56,7 +60,7 @@ public class ProfileController {
 		if (StringUtils.isEmpty(userId)) {
 			bp.setServiceError("2002", "INFO", "Profile Not Found");
 		} else {
-			UserProfile profile = profileService.getUserProfile(userId);
+			UserProfile profile = delegate.getUserProfile(userId);
 			bp.setResponse(profile);
 			bp.setSuccess(true);
 		}

@@ -1,13 +1,6 @@
 server:
     port: ${port:8088}  
     
-eureka:
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-  server:
-    enableSelfPreservation: false
-    
 #eureka:
 #  instance:
 #    hostname: localhost

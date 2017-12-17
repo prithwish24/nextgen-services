@@ -15,15 +15,6 @@ server:
 #          thread:
 #            timeoutInMilliseconds: 10000
  
-eureka:
-  instance:
-    prefer-ip-address: true
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
-  client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8088/eureka/
-
 #security:
 #  oauth2:
 #    resource:

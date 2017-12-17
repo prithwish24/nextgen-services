@@ -25,6 +25,14 @@ management:
   security:
     enabled: false
 
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+    
 zuul:
   prefix: /ngapi
   ignoredServices: '*'
@@ -33,15 +41,20 @@ zuul:
       path: /profile/**
 #      stripPrefix: false
       serviceId: PROFILE-SERVICE
+      sensitiveHeaders: 
     reservation-service:
       path: /reservation/**
 #      stripPrefix: false
       serviceId: RESERVATION-SERVICE
-#      sensitiveHeaders:
+      sensitiveHeaders:
     addons-service:
       path: /addonsvc/**
 #      stripPrefix: false
-      serviceId: ADDONS-SERVICE
-#      sensitiveHeaders:
+      serviceId: ADDON-SERVICE
+      sensitiveHeaders:
       
-      
+hystrix:
+  metrics:
+    polling-interval-ms: 20000
+    enabled: true
+    
