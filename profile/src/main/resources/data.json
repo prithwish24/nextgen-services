@@ -1,67 +1,68 @@
 [{
-  "fullName":"John Smith",
-  "userId":"jsmith",
-  "dateOfBirth":"1982-01-01",
-  "mobileNo":"3145125555",
-  "emailId":"jsmith@mailinator.com",
-  "preferences" :[ 
-    {
-      "type":"Fev Movie",
-      "value":"Jo Jeeta Wohi Sikandar"
-    },
-    {
-      "type":"Fev Food",
-      "value":"Biriyani"
-    },
-    {
-      "type":"Fev Music",
-      "value":"Hindi Songs"
-    }
-  ]
-},
-{
-  "fullName":"Virat Kohli",
-  "userId":"viratk",
-  "dateOfBirth":"1988-11-05",
-  "mobileNo":"9840387202",
-  "emailId":"viratk@cricket.com",
-  "preferences" :[ 
-    {
-      "type":"Fev Place",
-      "value":"Paris"
-    },
-    {
-      "type":"Fev Food",
-      "value":"Sushi"
-    },
-    {
-      "type":"Fev Actress",
-      "value":"Angelina Jolie"
-    }
-  ]
-},
- {
-  "fullName":"Amitabh Bachchan",
-  "userId":"ab",
-  "dateOfBirth":"1942-10-11",
-  "mobileNo":"9732173892",
-  "emailId":"ab@bollywood.in",
-  "preferences" :[ 
-    {
-      "type":"Hobbies",
-      "value":"Singing, Blogging, Reading"
-    },
-    {
-      "type":"Fev Sports",
-      "value":"Cricket"
-    },
-    {
-      "type":"Fev Car",
-      "value":"Rolls-Royce Phantom"
-    },
-    {
-      "type":"Favourite Destination",
-      "value":"London, Switzerland"
-    }
-  ]
-}]
+		"fullName": "John Smith",
+		"userId": "jsmith",
+		"dateOfBirth": "1982-01-01",
+		"mobileNo": "3145125555",
+		"emailId": "jsmith@mailinator.com",
+		"password":"password1$",
+		"preferences": [{
+				"type": "Fev Movie",
+				"value": "Jo Jeeta Wohi Sikandar"
+			},
+			{
+				"type": "Fev Food",
+				"value": "Biriyani"
+			},
+			{
+				"type": "Fev Music",
+				"value": "Hindi Songs"
+			}
+		]
+	},
+	{
+		"fullName": "Virat Kohli",
+		"userId": "viratk",
+		"dateOfBirth": "1988-11-05",
+		"mobileNo": "9840387202",
+		"emailId": "viratk@cricket.com",
+		"password":"password1$",
+		"preferences": [{
+				"type": "Fev Place",
+				"value": "Paris"
+			},
+			{
+				"type": "Fev Food",
+				"value": "Sushi"
+			},
+			{
+				"type": "Fev Actress",
+				"value": "Angelina Jolie"
+			}
+		]
+	},
+	{
+		"fullName": "Amitabh Bachchan",
+		"userId": "ab",
+		"dateOfBirth": "1942-10-11",
+		"mobileNo": "9732173892",
+		"emailId": "ab@bollywood.in",
+		"password":"password1$",
+		"preferences": [{
+				"type": "Hobbies",
+				"value": "Singing, Blogging, Reading"
+			},
+			{
+				"type": "Fev Sports",
+				"value": "Cricket"
+			},
+			{
+				"type": "Fev Car",
+				"value": "Rolls-Royce Phantom"
+			},
+			{
+				"type": "Favourite Destination",
+				"value": "London, Switzerland"
+			}
+		]
+	}
+]

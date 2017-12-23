@@ -1,0 +1,20 @@
+[{
+  "id":"1987456",
+  "pickupPoint":"STLT01",
+  "dropPoint":"STLT01",
+  "pickupDateTime":"2018-02-05",
+  "dropoffDateTime":"2018-02-06"
+},
+{
+  "id":"1987457",
+  "pickupPoint":"RICT01",
+  "dropPoint":"RICT01",
+  "pickupDateTime":"2018-03-05",
+  "dropoffDateTime":"2018-03-06"
+},{
+  "id":"1987458",
+  "pickupPoint":"MCOT01",
+  "dropPoint":"MCOT01",
+  "pickupDateTime":"2018-02-12",
+  "dropoffDateTime":"2018-02-13"
+}]

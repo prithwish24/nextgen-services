@@ -14,26 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.product.profile.delegate.ProfileServiceDelegate;
 import com.cts.product.profile.domain.BaseResponse;
 import com.cts.product.profile.domain.UserProfile;
-import com.cts.product.profile.service.ProfileService;
 
 @RestController
 @RequestMapping("/")
-@ComponentScan(basePackages= {"com.cts.product.profile"})
+@ComponentScan(basePackages = { "com.cts.product.profile" })
 public class ProfileController {
 	private static final Logger LOG = LoggerFactory.getLogger(ProfileController.class);
-	
-//	@Autowired
-//	private ProfileService profileService;
-	
+
 	@Autowired
 	private ProfileServiceDelegate delegate;
-	
-	@RequestMapping (value = "/login", 
-			method = {RequestMethod.GET, RequestMethod.POST},
-			produces = MediaType.APPLICATION_JSON_VALUE)
+
+	@RequestMapping(value = "/login", method = { RequestMethod.GET,
+			RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public BaseResponse<UserProfile> userlogin(
-			@RequestParam(name="username", required=true, defaultValue="") String username,
-			@RequestParam(name="password", required=true, defaultValue="") String password) {
+			@RequestParam(name = "username", required = true, defaultValue = "") String username,
+			@RequestParam(name = "password", required = true, defaultValue = "") String password) {
 		LOG.debug("Inside userlogin(");
 
 		BaseResponse<UserProfile> bp = new BaseResponse<>();
@@ -46,17 +41,13 @@ public class ProfileController {
 		}
 		return bp;
 	}
-	
-	
-	@RequestMapping (
-			value = "/getprofile", 
-			method = {RequestMethod.GET},
-			produces = MediaType.APPLICATION_JSON_VALUE)
+
+	@RequestMapping(value = "/getprofile", method = { RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public BaseResponse<UserProfile> getProfile(
-			@RequestParam(name="userid", required=true, defaultValue="") String userId) {
+			@RequestParam(name = "userid", required = true, defaultValue = "") String userId) {
 		LOG.debug("Inside getProfile(");
 		BaseResponse<UserProfile> bp = new BaseResponse<>();
-		
+
 		if (StringUtils.isEmpty(userId)) {
 			bp.setServiceError("2002", "INFO", "Profile Not Found");
 		} else {
@@ -66,5 +57,5 @@ public class ProfileController {
 		}
 		return bp;
 	}
-	
+
 }

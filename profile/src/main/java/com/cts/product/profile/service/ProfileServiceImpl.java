@@ -1,37 +1,61 @@
 package com.cts.product.profile.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.cts.product.profile.domain.UserProfile;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public UserProfile authenticate(String username, String password) {
+		List<UserProfile> userProfileList = getAllUsers();
 		UserProfile profile = null;
-		if (username.equalsIgnoreCase("john") && password.equals("password1$")) {
-			profile = new UserProfile.ProfileBuilder(username)
-					.fullName("John Smith")
-					.emailId("testemail@mailinator.com")
-					.mobileNo("3145125555")
-					.build();
-		}
-		
+		for (UserProfile userProfile : userProfileList)
+			if (username.equalsIgnoreCase(userProfile.getUserId()) && password.equals(userProfile.getPassword())) {
+				profile = userProfile;
+				break;
+			}
+
 		return profile;
 	}
 
 	@Override
 	public UserProfile getUserProfile(String userId) {
-		UserProfile profile = new UserProfile.ProfileBuilder(userId)
-				.fullName("John Smith")
-				.emailId("testemail@mailinator.com")
-				.mobileNo("3145125555")
-				.addPreference("Fev Movie", "Jo Jeeta Wohi Sikandar")
-				.addPreference("Fev Food", "Biriyani")
-				.addPreference("Fev Music", "Hindi Songs")
-				.build();
+		List<UserProfile> userProfileList = getAllUsers();
+		UserProfile profile = null;
+		for (UserProfile userProfile : userProfileList) {
+			if (userProfile.getUserId().equals(userId)) {
+				profile = userProfile;
+				break;
+			}
+		}
 		return profile;
 	}
 
+	public List<UserProfile> getAllUsers() {
+		ObjectMapper mapper = new ObjectMapper();
+		TypeReference<List<UserProfile>> typeReference = new TypeReference<List<UserProfile>>() {
+
+		};
+		List<UserProfile> userProfileList = null;
+		try {
+			userProfileList = mapper.readValue(new File("src/main/resources/data.json"), typeReference);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return userProfileList;
+	}
 }
