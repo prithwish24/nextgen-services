@@ -1,6 +1,9 @@
 spring:
   application:
     name: addon-service
+  cache:
+    jcache:
+      config: ehcache.xml
     
 server:
   port: ${port:8003}  
