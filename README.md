@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/prithwish24/nextgen-services.svg?branch=master)](https://travis-ci.org/prithwish24/nextgen-services)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/prithwish24/nextgen-services/blob/master/LICENCE)
 
 # Enterprise NextGen Services
 Next Gen Services for Enterprise. This project follows Spring Boot Microservice Architecture.
