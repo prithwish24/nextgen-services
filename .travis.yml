@@ -1,2 +1,12 @@
+sudo: false
 language: java
 jdk: oraclejdk8
+cache:
+  directories:
+  - "$HOME/.cache"
+notifications:
+  email:
+    recipients:
+    - prithwish.ghosh@cognizant.com
+    on_success: change
+    on_failure: always  
