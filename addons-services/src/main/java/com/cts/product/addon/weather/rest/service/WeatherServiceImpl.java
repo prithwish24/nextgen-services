@@ -1,11 +1,11 @@
-package com.cts.product.weather.rest.service;
+package com.cts.product.addon.weather.rest.service;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.cts.product.addon.domain.WeatherResponse;
+import com.cts.product.addon.weather.model.WeatherResponse;
 
 @Service
 public class WeatherServiceImpl implements WeatherService {
