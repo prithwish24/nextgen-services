@@ -19,8 +19,4 @@ public class NearbyFuelStationServiceImpl implements NearbyFuelStationService {
 
 		return result;
 	}
-
-	public static void main(String[] args) {
-		System.out.println(new NearbyFuelStationServiceImpl().getNearbyFuelStations("St. Louis"));
-	}
 }

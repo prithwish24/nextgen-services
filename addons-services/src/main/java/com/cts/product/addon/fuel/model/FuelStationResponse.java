@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cts.product.addon.fuel.domain.FuelStation;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "fuel_stations" })
 public class FuelStationResponse {
 
-	private List<FuelStation> fuel_stations;
+	@JsonProperty("fuel_stations")
+	private List<FuelStation> fuelStations = null;
 
+	@JsonProperty("fuel_stations")
 	public List<FuelStation> getFuelStations() {
-		if (this.fuel_stations == null) {
-			this.fuel_stations = new ArrayList<FuelStation>();
+		if (this.fuelStations == null) {
+			this.fuelStations = new ArrayList<FuelStation>();
 		}
-		return this.fuel_stations;
+		return this.fuelStations;
 	}
 }

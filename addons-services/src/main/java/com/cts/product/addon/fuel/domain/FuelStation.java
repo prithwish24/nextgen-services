@@ -1,234 +1,303 @@
 package com.cts.product.addon.fuel.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "access_days_time", "cards_accepted", "date_last_confirmed", "expected_date", "fuel_type_code",
+		"id", "groups_with_access_code", "open_date", "owner_type_code", "status_code", "station_name", "station_phone",
+		"updated_at", "geocode_status", "latitude", "longitude", "city", "intersection_directions", "state",
+		"street_address", "zip", "lpg_primary", "ng_vehicle_class", "distance" })
 public class FuelStation {
 
-	private String access_days_time;
-
-	private boolean cards_accepted;
-
-	private String date_last_confirmed;
-
-	private String expected_date;
-
-	private String fuel_type_code;
-
-	private int id;
-
-	private String groups_with_access_code;
-
-	private String open_date;
-
-	private String owner_type_code;
-
-	private String status_code;
-
-	private String station_name;
-
-	private String station_phone;
-
-	private String updated_at;
-
-	private String geocode_status;
-
-	private double latitude;
-
-	private double longitude;
-
+	@JsonProperty("access_days_time")
+	private String accessDaysTime;
+	@JsonProperty("cards_accepted")
+	private String cardsAccepted;
+	@JsonProperty("date_last_confirmed")
+	private String dateLastConfirmed;
+	@JsonProperty("expected_date")
+	private String expectedDate;
+	@JsonProperty("fuel_type_code")
+	private String fuelTypeCode;
+	@JsonProperty("id")
+	private String id;
+	@JsonProperty("groups_with_access_code")
+	private String groupsWithAccessCode;
+	@JsonProperty("open_date")
+	private String openDate;
+	@JsonProperty("owner_type_code")
+	private String ownerTypeCode;
+	@JsonProperty("status_code")
+	private String statusCode;
+	@JsonProperty("station_name")
+	private String stationName;
+	@JsonProperty("station_phone")
+	private String stationPhone;
+	@JsonProperty("updated_at")
+	private String updatedAt;
+	@JsonProperty("geocode_status")
+	private String geocodeStatus;
+	@JsonProperty("latitude")
+	private String latitude;
+	@JsonProperty("longitude")
+	private String longitude;
+	@JsonProperty("city")
 	private String city;
-
-	private String intersection_directions;
-
+	@JsonProperty("intersection_directions")
+	private String intersectionDirections;
+	@JsonProperty("state")
 	private String state;
+	@JsonProperty("street_address")
+	private String streetAddress;
+	@JsonProperty("zip")
+	private String zip;
+	@JsonProperty("lpg_primary")
+	private boolean lpgPrimary;
+	@JsonProperty("ng_vehicle_class")
+	private String ngVehicleClass;
+	@JsonProperty("distance")
+	private String distance;
 
-	private String street_address;
-
-	private String ng_vehicle_class;
-
-	private double distance;
-
+	@JsonProperty("access_days_time")
 	public String getAccessDaysTime() {
-		return this.access_days_time;
+		return accessDaysTime;
 	}
 
-	public void setAccessDaysTime(String access_days_time) {
-		this.access_days_time = access_days_time;
+	@JsonProperty("access_days_time")
+	public void setAccessDaysTime(String accessDaysTime) {
+		this.accessDaysTime = accessDaysTime;
 	}
 
-	public boolean isCardsAccepted() {
-		return this.cards_accepted;
+	@JsonProperty("cards_accepted")
+	public String getCardsAccepted() {
+		return cardsAccepted;
 	}
 
-	public void setCardsAccepted(boolean cards_accepted) {
-		this.cards_accepted = cards_accepted;
+	@JsonProperty("cards_accepted")
+	public void setCardsAccepted(String cardsAccepted) {
+		this.cardsAccepted = cardsAccepted;
 	}
 
+	@JsonProperty("date_last_confirmed")
 	public String getDateLastConfirmed() {
-		return this.date_last_confirmed;
+		return dateLastConfirmed;
 	}
 
-	public void setDateLastConfirmed(String date_last_confirmed) {
-		this.date_last_confirmed = date_last_confirmed;
+	@JsonProperty("date_last_confirmed")
+	public void setDateLastConfirmed(String dateLastConfirmed) {
+		this.dateLastConfirmed = dateLastConfirmed;
 	}
 
+	@JsonProperty("expected_date")
 	public String getExpectedDate() {
-		return this.expected_date;
+		return expectedDate;
 	}
 
-	public void setExpectedDate(String expected_date) {
-		this.expected_date = expected_date;
+	@JsonProperty("expected_date")
+	public void setExpectedDate(String expectedDate) {
+		this.expectedDate = expectedDate;
 	}
 
+	@JsonProperty("fuel_type_code")
 	public String getFuelTypeCode() {
-		return this.fuel_type_code;
+		return fuelTypeCode;
 	}
 
-	public void setFuelTypeCode(String fuel_type_code) {
-		this.fuel_type_code = fuel_type_code;
+	@JsonProperty("fuel_type_code")
+	public void setFuelTypeCode(String fuelTypeCode) {
+		this.fuelTypeCode = fuelTypeCode;
 	}
 
-	public int getId() {
-		return this.id;
+	@JsonProperty("id")
+	public String getId() {
+		return id;
 	}
 
-	public void setId(int id) {
+	@JsonProperty("id")
+	public void setId(String id) {
 		this.id = id;
 	}
 
+	@JsonProperty("groups_with_access_code")
 	public String getGroupsWithAccessCode() {
-		return this.groups_with_access_code;
+		return groupsWithAccessCode;
 	}
 
-	public void setGroupsWithAccessCode(String groups_with_access_code) {
-		this.groups_with_access_code = groups_with_access_code;
+	@JsonProperty("groups_with_access_code")
+	public void setGroupsWithAccessCode(String groupsWithAccessCode) {
+		this.groupsWithAccessCode = groupsWithAccessCode;
 	}
 
+	@JsonProperty("open_date")
 	public String getOpenDate() {
-		return this.open_date;
+		return openDate;
 	}
 
-	public void setOpenDate(String open_date) {
-		this.open_date = open_date;
+	@JsonProperty("open_date")
+	public void setOpenDate(String openDate) {
+		this.openDate = openDate;
 	}
 
+	@JsonProperty("owner_type_code")
 	public String getOwnerTypeCode() {
-		return this.owner_type_code;
+		return ownerTypeCode;
 	}
 
-	public void setOwnerTypeCode(String owner_type_code) {
-		this.owner_type_code = owner_type_code;
+	@JsonProperty("owner_type_code")
+	public void setOwnerTypeCode(String ownerTypeCode) {
+		this.ownerTypeCode = ownerTypeCode;
 	}
 
+	@JsonProperty("status_code")
 	public String getStatusCode() {
-		return this.status_code;
+		return statusCode;
 	}
 
-	public void setStatusCode(String status_code) {
-		this.status_code = status_code;
+	@JsonProperty("status_code")
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
 	}
 
+	@JsonProperty("station_name")
 	public String getStationName() {
-		return this.station_name;
+		return stationName;
 	}
 
-	public void setStationName(String station_name) {
-		this.station_name = station_name;
+	@JsonProperty("station_name")
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
 	}
 
+	@JsonProperty("station_phone")
 	public String getStationPhone() {
-		return this.station_phone;
+		return stationPhone;
 	}
 
-	public void setStationPhone(String station_phone) {
-		this.station_phone = station_phone;
+	@JsonProperty("station_phone")
+	public void setStationPhone(String stationPhone) {
+		this.stationPhone = stationPhone;
 	}
 
+	@JsonProperty("updated_at")
 	public String getUpdatedAt() {
-		return this.updated_at;
+		return updatedAt;
 	}
 
-	public void setUpdatedAt(String updated_at) {
-		this.updated_at = updated_at;
+	@JsonProperty("updated_at")
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
+	@JsonProperty("geocode_status")
 	public String getGeocodeStatus() {
-		return this.geocode_status;
+		return geocodeStatus;
 	}
 
-	public void setGeocodeStatus(String geocode_status) {
-		this.geocode_status = geocode_status;
+	@JsonProperty("geocode_status")
+	public void setGeocodeStatus(String geocodeStatus) {
+		this.geocodeStatus = geocodeStatus;
 	}
 
-	public double getLatitude() {
-		return this.latitude;
+	@JsonProperty("latitude")
+	public String getLatitude() {
+		return latitude;
 	}
 
-	public void setLatitude(double latitude) {
+	@JsonProperty("latitude")
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 
-	public double getLongitude() {
-		return this.longitude;
+	@JsonProperty("longitude")
+	public String getLongitude() {
+		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
+	@JsonProperty("longitude")
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
+	@JsonProperty("city")
 	public String getCity() {
-		return this.city;
+		return city;
 	}
 
+	@JsonProperty("city")
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+	@JsonProperty("intersection_directions")
 	public String getIntersectionDirections() {
-		return this.intersection_directions;
+		return intersectionDirections;
 	}
 
-	public void setIntersectionDirections(String intersection_directions) {
-		this.intersection_directions = intersection_directions;
+	@JsonProperty("intersection_directions")
+	public void setIntersectionDirections(String intersectionDirections) {
+		this.intersectionDirections = intersectionDirections;
 	}
 
+	@JsonProperty("state")
 	public String getState() {
-		return this.state;
+		return state;
 	}
 
+	@JsonProperty("state")
 	public void setState(String state) {
 		this.state = state;
 	}
 
+	@JsonProperty("street_address")
 	public String getStreetAddress() {
-		return this.street_address;
+		return streetAddress;
 	}
 
-	public void setStreetAddress(String street_address) {
-		this.street_address = street_address;
+	@JsonProperty("street_address")
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
 	}
 
-	private String zip;
-
+	@JsonProperty("zip")
 	public String getZip() {
-		return this.zip;
+		return zip;
 	}
 
+	@JsonProperty("zip")
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
+	@JsonProperty("lpg_primary")
+	public boolean getLpgPrimary() {
+		return lpgPrimary;
+	}
+
+	@JsonProperty("lpg_primary")
+	public void setLpgPrimary(boolean lpgPrimary) {
+		this.lpgPrimary = lpgPrimary;
+	}
+
+	@JsonProperty("ng_vehicle_class")
 	public String getNgVehicleClass() {
-		return this.ng_vehicle_class;
+		return ngVehicleClass;
 	}
 
-	public void setNgVehicleClass(String ng_vehicle_class) {
-		this.ng_vehicle_class = ng_vehicle_class;
+	@JsonProperty("ng_vehicle_class")
+	public void setNgVehicleClass(String ngVehicleClass) {
+		this.ngVehicleClass = ngVehicleClass;
 	}
 
-	public double getDistance() {
-		return this.distance;
+	@JsonProperty("distance")
+	public String getDistance() {
+		return distance;
 	}
 
-	public void setDistance(double distance) {
+	@JsonProperty("distance")
+	public void setDistance(String distance) {
 		this.distance = distance;
 	}
+
 }
