@@ -10,7 +10,7 @@ import com.cts.product.addon.fuel.model.FuelStationResponse;
 public class NearbyFuelStationServiceImpl implements NearbyFuelStationService {
 
 	@Override
-	@Cacheable(value = "nearbyFuel", key = "#city")
+	@Cacheable(value = "nearbyFuelStations", key = "#city")
 	public FuelStationResponse getNearbyFuelStations(String city) {
 		final String q = "api_key=DEMO_KEY&location=" + city;
 		final String uri = "http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?";
