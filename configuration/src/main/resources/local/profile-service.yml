@@ -1,12 +1,10 @@
 msg: Hello World !!
 
 eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
   client:
+    register-with-eureka: true
     serviceUrl:
-        defaultZone: http://127.0.0.1:8088/eureka/
+        defaultZone: http://nextgen-registry:8088/eureka/
     healthcheck:
       enabled: true
     lease:

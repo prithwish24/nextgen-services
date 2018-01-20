@@ -1,0 +1,43 @@
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+        defaultZone: http://nextgen-registry:8088/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+    
+zuul:
+  prefix: /ngapi
+  ignoredServices: '*'
+  routes:
+    profile-service:
+      path: /profile/**
+#      stripPrefix: false
+      serviceId: PROFILE-SERVICE
+      sensitiveHeaders: 
+    reservation-service:
+      path: /reservation/**
+#      stripPrefix: false
+      serviceId: RESERVATION-SERVICE
+      sensitiveHeaders:
+    addons-service:
+      path: /addonsvc/**
+#      stripPrefix: false
+      serviceId: ADDON-SERVICE
+      sensitiveHeaders:
+      
+hystrix:
+  metrics:
+    polling-interval-ms: 20000
+    enabled: true
+    

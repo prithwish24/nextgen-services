@@ -1,6 +1,12 @@
-#spring:
-#  application:
-#    name: nextgen-addon-service
-#  cloud:
-#    config:
-#      uri: http://localhost:8888    
+server:
+  port: ${port:8003}
+
+spring:
+  application:
+    name: addon-service
+  cloud:
+    config:
+      uri: http://nextgen-config:8199
+      username: user
+      password: ${CONFIG_SERVICE_PASSWORD:s3cr3t}
+      fail-fast: true   

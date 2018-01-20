@@ -1,11 +1,12 @@
 logging:
   level:
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG
 
 server:
   error:
     whitelabel:
-      enabled: false
+      enabled: true
+
       
 #hystrix:
 #  command:

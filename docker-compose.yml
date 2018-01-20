@@ -1,65 +1,71 @@
-version: '3'
+version: '3.1'
 
 services:
   nextgen-config:
     build: configuration
+    image: nextgen-config
     ports:
       - 8199:8199
+#    volumes:
+#      - spring-config-repo:/var/apps/config-repo
+    networks:
+      - spring-cloud-network
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
   
   nextgen-registry:
     build: service-registry
+    image: nextgen-registry
     ports:
       - 8088:8088
+    networks:
+      - spring-cloud-network
+    links:
+      - nextgen-config:nextgen-config
     depends_on:
-      - "nextgen-config"
+      - nextgen-config
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    healthcheck:
+#      test: ["CMD", "/var/apps/wait-for-it.sh", "nextgen-config:8199", "--", "echo 'Config is UP'"]
       
   nextgen-profile:
     build: profile
+    image: nextgen-profile
     ports:
       - 8001:8001
+    networks:
+      - spring-cloud-network
+    links:
+      - nextgen-config:nextgen-config
     depends_on:
-      - "nextgen-config"
+      - nextgen-config
+      - nextgen-registry
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      
-  nextgen-reservation:
-    build: reservation
-    ports:
-      - 8002:8002
-    depends_on:
-      - "nextgen-config"
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      
-  nextgen-addon-svcs:
-    build: addons-services
-    ports:
-      - 8003:8003
-    depends_on:
-      - "nextgen-config"
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+
       
   nextgen-gateway:
     build: gateway
+    image: nextgen-gateway
     ports:
       - 8080:8080
+    networks:
+      - spring-cloud-network
+    links:
+      - nextgen-config:nextgen-config
     depends_on:
-      - "nextgen-config"
+      - nextgen-config
+      - nextgen-registry
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       
-  nextgen-monitor:
-    build: monitoring
-    ports:
-      - 9080:9080
-    depends_on:
-      - "nextgen-config"
-      - "nextgen-registry"
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
- 
+
+networks:
+  spring-cloud-network:
+    driver: bridge
+
+#volumes:
+#  spring-config-repo:
+#    external: true
+

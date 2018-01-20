@@ -1,11 +1,14 @@
+server:
+  port: 9080
+
 spring:
   application:
     name: service-monitor
   cloud:
     config:
-      uri: http://127.0.0.1:8199
+      uri: http://nextgen-config:8199
       username: user
-      password: s3cr3t
+      password: ${CONFIG_SERVICE_PASSWORD:s3cr3t}
       fail-fast: true 
       
          
