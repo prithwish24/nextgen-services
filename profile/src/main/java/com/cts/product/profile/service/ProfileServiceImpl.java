@@ -1,9 +1,9 @@
 package com.cts.product.profile.service;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.cts.product.profile.domain.UserProfile;
@@ -48,7 +48,7 @@ public class ProfileServiceImpl implements ProfileService {
 		};
 		List<UserProfile> userProfileList = null;
 		try {
-			userProfileList = mapper.readValue(new File("src/main/resources/data.json"), typeReference);
+			userProfileList = mapper.readValue(new ClassPathResource("data.json").getInputStream(), typeReference);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

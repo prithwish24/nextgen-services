@@ -1,10 +1,10 @@
 package com.cts.product.rental.service;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import com.cts.product.rental.bo.Reservation;
@@ -30,7 +30,7 @@ public class ReservationServiceImpl implements ReservationService {
 		};
 		List<Reservation> reservationList = null;
 		try {
-			reservationList = mapper.readValue(new File("src/main/resources/data.json"), typeReference);
+			reservationList = mapper.readValue(new ClassPathResource("data.json").getInputStream(), typeReference);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
