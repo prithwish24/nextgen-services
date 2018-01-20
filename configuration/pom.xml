@@ -17,8 +17,16 @@
 	            <groupId>org.springframework.boot</groupId>
 	            <artifactId>spring-boot-maven-plugin</artifactId>
 	            <configuration>
-					<finalName>config</finalName>
-				</configuration>
+	                <addResources>true</addResources>
+	                <finalName>nextgen-config</finalName>
+	            </configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 	        </plugin>
 		</plugins>
 	</build>

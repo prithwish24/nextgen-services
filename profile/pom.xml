@@ -5,6 +5,7 @@
   
   <artifactId>NextGenProfile</artifactId>
   <name>Enterprise Profile Service</name>
+  <packaging>jar</packaging>
   
 	<parent>
 		<groupId>com.cts.product</groupId>
@@ -46,13 +47,21 @@
 	</dependencies>
 
 	<build>
+		<finalName>nextgen-profile</finalName>
 		<plugins>
 	        <plugin>
 	            <groupId>org.springframework.boot</groupId>
 	            <artifactId>spring-boot-maven-plugin</artifactId>
 	            <configuration>
-	                <executable>true</executable>
+	                <addResources>true</addResources>
 	            </configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 	        </plugin>
 		</plugins>
 	</build>

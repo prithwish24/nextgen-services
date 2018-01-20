@@ -12,4 +12,4 @@ endpoints:
 security:
   user:
     name: root
-    password: s3cr3t
+    password: ${CONFIG_SERVICE_PASSWORD}

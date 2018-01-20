@@ -42,6 +42,7 @@
 	            <artifactId>spring-boot-maven-plugin</artifactId>
 	            <configuration>
 	                <executable>true</executable>
+	                <finalName>nextgen-auth</finalName>
 	            </configuration>
 	        </plugin>
 		</plugins>

@@ -40,13 +40,21 @@
 	</dependencies>
 
 	<build>
+		<finalName>nextgen-reservation</finalName>
 		<plugins>
 	        <plugin>
 	            <groupId>org.springframework.boot</groupId>
 	            <artifactId>spring-boot-maven-plugin</artifactId>
 	            <configuration>
-	                <executable>true</executable>
+	                <addResources>true</addResources>
 	            </configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 	        </plugin>
 		</plugins>
 	</build>	
