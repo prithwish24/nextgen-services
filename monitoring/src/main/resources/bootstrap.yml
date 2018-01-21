@@ -3,7 +3,7 @@ spring:
     name: service-monitor
   cloud:
     config:
-      uri: http://127.0.0.1:8199
+      uri: http://nextgen-config:8199
       fail-fast: true 
       
 server:
