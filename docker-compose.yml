@@ -13,6 +13,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
   
+
   nextgen-registry:
     build: service-registry
     image: nextgen-registry
@@ -29,6 +30,7 @@ services:
 #    healthcheck:
 #      test: ["CMD", "/var/apps/wait-for-it.sh", "nextgen-config:8199", "--", "echo 'Config is UP'"]
       
+
   nextgen-profile:
     build: profile
     image: nextgen-profile
