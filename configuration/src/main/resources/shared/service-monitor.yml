@@ -1,0 +1,21 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+      
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+        defaultZone: http://127.0.0.1:8088/eureka/
+
+turbine:
+  cluster-name-expression: new String("default")
+  app-config: PROFILE-SERVICE
+  combine-host-port: true
+  
+  
+#turbine:
+#  clusterNameExpression: new String("default")
+#  appConfig: HYSTRIX-EXAMPLE-SERVICE,HYSTRIX-EXAMPLE-SERVICE2,CUSTOMER-CLIENT-SERVICE
+#  combineHostPort: true         

@@ -1,0 +1,19 @@
+server:
+    error:
+      whitelabel:
+        enabled: true
+    
+eureka:
+  client:
+    serviceUrl:
+        defaultZone: http://127.0.0.1:8088/eureka/
+          
+logging:
+  level:
+     org:
+       springframework:
+         security: DEBUG  
+
+hystrix:
+  metrics:
+    enabled: true         

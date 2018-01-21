@@ -1,31 +1,13 @@
 spring:
   application:
     name: addon-services
-  cache:
-    jcache:
-      config: ehcache.xml
-#  cloud:
-#    config:
-#      uri: http://127.0.0.1:8199
-#      username: user
-#      password: s3cr3t
-#      fail-fast: true
+  cloud:
+    config:
+      uri: http://127.0.0.1:8199
+      username: user
+      password: s3cr3t
+      fail-fast: true
   
     
 server:
-  port: ${port:8003}  
-  error:
-    whitelabel:
-      enabled: false
-      
-eureka:
-  client:
-    register-with-eureka: true
-    serviceUrl:
-        defaultZone: http://localhost:8088/eureka/
-
-logging:
-  level:
-     org:
-       springframework:
-         security: DEBUG      
+  port: ${port:8003}

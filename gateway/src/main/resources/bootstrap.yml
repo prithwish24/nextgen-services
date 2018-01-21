@@ -1,59 +1,13 @@
 spring:
   application:
     name: service-gateway
-#  cloud:
-#    config:
-#      uri: http://localhost:8888
-
+  cloud:
+    config:
+      uri: http://127.0.0.1:8199
+      username: user
+      password: s3cr3t
+      fail-fast: true
+      
 server:
   port: ${port:8080}  
-  error:
-    whitelabel:
-      enabled: true
 
-eureka:
-  client:
-#    register-with-eureka: true
-#    fetch-registry: false  ## this will create error 
-    serviceUrl:
-        defaultZone: http://127.0.0.1:8088/eureka/
-
-logging:
-  level:
-     org:
-       springframework:
-         security: DEBUG  
-
-management:
-  security:
-    enabled: false
-
-endpoints:
-  restart:
-    enabled: true
-  shutdown:
-    enabled: true
-  health:
-    sensitive: false
-    
-zuul:
-  prefix: /ngapi
-  ignoredServices: '*'
-  routes:
-    profile-service:
-      path: /profile/**
-      serviceId: PROFILE-SERVICE
-      sensitiveHeaders: 
-    reservation-service:
-      path: /reservation/**
-      serviceId: RESERVATION-SERVICE
-      sensitiveHeaders:
-    addons-service:
-      path: /addonsvc/**
-      serviceId: ADDON-SERVICES
-      sensitiveHeaders:
-      
-hystrix:
-  metrics:
-#    polling-interval-ms: 20000
-    enabled: true
