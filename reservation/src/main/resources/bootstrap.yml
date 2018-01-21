@@ -3,4 +3,30 @@
 #    name: nextgen-reservation-service
 #  cloud:
 #    config:
-#      uri: http://localhost:8888    
+#      uri: http://localhost:8888
+
+spring:
+  application:
+    name: reservation-service
+    
+server:
+  port: ${port:8002}
+  error:
+    whitelabel:
+      enabled: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+        defaultZone: http://127.0.0.1:8088/eureka/
+          
+logging:
+  level:
+     org:
+       springframework:
+         security: DEBUG 
+
+hystrix:
+  metrics:
+    enabled: true               
