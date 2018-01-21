@@ -4,10 +4,31 @@ server:
 spring:
   application:
     name: registry-server
-  cloud:
-    config:
-      uri: http://nextgen-config:8199
-      username: user
-      password: ${CONFIG_SERVICE_PASSWORD:s3cr3t}
-      fail-fast: true
+#  cloud:
+#    config:
+#      uri: http://127.0.0.1:8199
+#      username: user
+#      password: s3cr3t
+#      fail-fast: true
       
+
+eureka:
+  instance:
+#    hostname: localhost
+#    nonSecurePort: ${server.port}
+    lease-renewal-interval-in-seconds: 30
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8088/eureka/
+
+     
+logging:
+  level:
+     org:
+       springframework:
+         security: DEBUG
+

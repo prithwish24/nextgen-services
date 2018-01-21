@@ -1,14 +1,32 @@
-server:
-  port: 9080
-
 spring:
   application:
     name: service-monitor
-  cloud:
-    config:
-      uri: http://nextgen-config:8199
-      username: user
-      password: ${CONFIG_SERVICE_PASSWORD:s3cr3t}
-      fail-fast: true 
+#  cloud:
+#    config:
+#      uri: http://127.0.0.1:8199
+#      username: user
+#      password: s3cr3t
+#      fail-fast: true 
       
-         
+server:
+  port: 9080
+  error:
+    whitelabel:
+      enabled: false
+      
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+        defaultZone: http://127.0.0.1:8088/eureka/
+
+turbine:
+  cluster-name-expression: new String("default")
+  app-config: PROFILE-SERVICE
+  combine-host-port: true
+  
+  
+#turbine:
+#  clusterNameExpression: new String("default")
+#  appConfig: HYSTRIX-EXAMPLE-SERVICE,HYSTRIX-EXAMPLE-SERVICE2,CUSTOMER-CLIENT-SERVICE
+#  combineHostPort: true         

@@ -1,12 +1,32 @@
-server:
-    port: ${port:8002} 
-
 spring:
   application:
     name: reservation-service
-  cloud:
-    config:
-      uri: http://nextgen-config:8199
-      username: user
-      password: ${CONFIG_SERVICE_PASSWORD:s3cr3t}
-      fail-fast: true  
+#  cloud:
+#    config:
+#      uri: http://nextgen-config:8199
+#      username: user
+#      password: ${CONFIG_SERVICE_PASSWORD:s3cr3t}
+#      fail-fast: true  
+
+    
+server:
+  port: ${port:8002}
+  error:
+    whitelabel:
+      enabled: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+        defaultZone: http://127.0.0.1:8088/eureka/
+          
+logging:
+  level:
+     org:
+       springframework:
+         security: DEBUG 
+
+hystrix:
+  metrics:
+    enabled: true               
