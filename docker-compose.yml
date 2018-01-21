@@ -31,11 +31,26 @@ services:
 #      test: ["CMD", "/var/apps/wait-for-it.sh", "nextgen-config:8199", "--", "echo 'Config is UP'"]
       
 
-  nextgen-profile:
-    build: profile
-    image: nextgen-profile
+#  nextgen-profile:
+#    build: profile
+#    image: nextgen-profile
+#    ports:
+#      - 8001:8001
+#    networks:
+#      - spring-cloud-network
+#    links:
+#      - nextgen-config:nextgen-config
+#    depends_on:
+#      - nextgen-config
+#      - nextgen-registry
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+
+  nextgen-addon-svcs:
+    build: addons-services
+    image: nextgen-addon-svcs
     ports:
-      - 8001:8001
+      - 8003:8003
     networks:
       - spring-cloud-network
     links:
@@ -45,8 +60,8 @@ services:
       - nextgen-registry
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-
       
+
   nextgen-gateway:
     build: gateway
     image: nextgen-gateway

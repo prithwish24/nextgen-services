@@ -1,6 +1,6 @@
 eureka:
   instance:
-    hostname: localhost
+    hostname: nextgen-registry
     lease-renewal-interval-in-seconds: 30
   server:
     wait-time-in-ms-when-sync-empty: 0
