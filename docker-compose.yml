@@ -6,8 +6,8 @@ services:
     image: nextgen-config
     ports:
       - 8199:8199
-#    volumes:
-#      - spring-config-repo:/var/apps/config-repo
+    volumes:
+      - spring-config-repo:/var/apps/config-repo
     networks:
       - spring-cloud-network
     environment:
@@ -31,20 +31,36 @@ services:
 #      test: ["CMD", "/var/apps/wait-for-it.sh", "nextgen-config:8199", "--", "echo 'Config is UP'"]
       
 
-#  nextgen-profile:
-#    build: profile
-#    image: nextgen-profile
-#    ports:
-#      - 8001:8001
-#    networks:
-#      - spring-cloud-network
-#    links:
-#      - nextgen-config:nextgen-config
-#    depends_on:
-#      - nextgen-config
-#      - nextgen-registry
-#    environment:
-#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+  nextgen-profile:
+    build: profile
+    image: nextgen-profile
+    ports:
+      - 8001:8001
+    networks:
+      - spring-cloud-network
+    links:
+      - nextgen-config:nextgen-config
+    depends_on:
+      - nextgen-config
+      - nextgen-registry
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+
+  nextgen-reservation:
+    build: reservation
+    image: nextgen-reservation
+    ports:
+      - 8002:8002
+    networks:
+      - spring-cloud-network
+    links:
+      - nextgen-config:nextgen-config
+    depends_on:
+      - nextgen-config
+      - nextgen-registry
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+
 
   nextgen-addon-svcs:
     build: addons-services
@@ -78,11 +94,27 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       
 
+  nextgen-monitor:
+    build: monitoring
+    image: monitoring
+    ports:
+      - 9080:9080
+    networks:
+      - spring-cloud-network
+    links:
+      - nextgen-config:nextgen-config
+    depends_on:
+      - nextgen-config
+      - nextgen-registry
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+
+
 networks:
   spring-cloud-network:
     driver: bridge
 
-#volumes:
-#  spring-config-repo:
-#    external: true
+volumes:
+  spring-config-repo:
+    external: true
 

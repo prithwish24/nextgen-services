@@ -5,4 +5,4 @@ while ! nc -z nextgen-config 8199 ; do
 	sleep 2
 done
 
-java -Xmx256m -jar /var/apps/nextgen-registry.jar
+java -Xmx256m -jar /var/apps/nextgen-monitor.jar
