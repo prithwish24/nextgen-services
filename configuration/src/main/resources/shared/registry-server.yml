@@ -1,14 +1,14 @@
-eureka:
-  instance:
-    hostname: ${NEXTGEN_REGISTRY_SERVER:localhost}
-    prefer-ip-address: true
-    lease-expiration-duration-in-seconds: 10
-    lease-renewal-interval-in-seconds: 10
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#eureka:
+#  instance:
+#    hostname: ${NEXTGEN_REGISTRY_SERVER:localhost}
+#    prefer-ip-address: true
+#    lease-expiration-duration-in-seconds: 10
+#    lease-renewal-interval-in-seconds: 10
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
      
 logging:

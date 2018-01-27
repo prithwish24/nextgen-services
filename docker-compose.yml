@@ -10,8 +10,7 @@ services:
     networks:
       - spring-cloud-network
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      port: $port
+      CONFIG_SERVICE_PASSWORD: ${CONFIG_SERVICE_PASSWORD}
   
 
   nextgen-registry:
@@ -25,9 +24,8 @@ services:
     depends_on:
       - nextgen-config
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      NEXTGEN_REGISTRY_SERVER: $NEXTGEN_REGISTRY_SERVER
-      port: $port
+      - CONFIG_SERVICE_PASSWORD=${CONFIG_SERVICE_PASSWORD}
+      - NEXTGEN_REGISTRY_SERVER=${NEXTGEN_REGISTRY_SERVER}
 
 
   nextgen-profile:
@@ -42,11 +40,9 @@ services:
       - nextgen-config
       - nextgen-registry
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      NEXTGEN_REGISTRY_SERVER: $NEXTGEN_REGISTRY_SERVER
-      port: $port
+      CONFIG_SERVICE_PASSWORD: ${CONFIG_SERVICE_PASSWORD}
+      NEXTGEN_REGISTRY_SERVER: ${NEXTGEN_REGISTRY_SERVER}
       
-
 
   nextgen-reservation:
     image: prithwish24/nextgen-reservation
@@ -60,9 +56,8 @@ services:
       - nextgen-config
       - nextgen-registry
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      NEXTGEN_REGISTRY_SERVER: $NEXTGEN_REGISTRY_SERVER
-      port: $port
+      CONFIG_SERVICE_PASSWORD: ${CONFIG_SERVICE_PASSWORD}
+      NEXTGEN_REGISTRY_SERVER: ${NEXTGEN_REGISTRY_SERVER}
 
 
   nextgen-addon-svcs:
@@ -77,9 +72,8 @@ services:
       - nextgen-config
       - nextgen-registry
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      NEXTGEN_REGISTRY_SERVER: $NEXTGEN_REGISTRY_SERVER
-      port: $port
+      CONFIG_SERVICE_PASSWORD: ${CONFIG_SERVICE_PASSWORD}
+      NEXTGEN_REGISTRY_SERVER: ${NEXTGEN_REGISTRY_SERVER}
       
 
   nextgen-gateway:
@@ -94,13 +88,12 @@ services:
       - nextgen-config
       - nextgen-registry
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      NEXTGEN_REGISTRY_SERVER: $NEXTGEN_REGISTRY_SERVER
-      port: $port
+      CONFIG_SERVICE_PASSWORD: ${CONFIG_SERVICE_PASSWORD}
+      NEXTGEN_REGISTRY_SERVER: ${NEXTGEN_REGISTRY_SERVER}
       
 
   nextgen-monitor:
-    image: prithwish24/monitoring
+    image: prithwish24/nextgen-monitor
     ports:
       - 9080:9080
     networks:
@@ -111,9 +104,8 @@ services:
       - nextgen-config
       - nextgen-registry
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      NEXTGEN_REGISTRY_SERVER: $NEXTGEN_REGISTRY_SERVER
-      port: $port
+      CONFIG_SERVICE_PASSWORD: ${CONFIG_SERVICE_PASSWORD}
+      NEXTGEN_REGISTRY_SERVER: ${NEXTGEN_REGISTRY_SERVER}
 
 
 networks:
