@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+  nextgen-config:
+    build: configuration
+
+  nextgen-registry:
+    build: service-registry      
+
+  nextgen-profile:
+    build: profile
+
+  nextgen-reservation:
+    build: reservation
+
+  nextgen-addon-svcs:
+    build: addons-services
+
+  nextgen-gateway:
+    build: gateway
+
+  nextgen-monitor:
+    build: monitoring
