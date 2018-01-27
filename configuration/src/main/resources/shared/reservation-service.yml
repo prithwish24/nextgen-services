@@ -4,10 +4,11 @@ server:
       enabled: true
 
 eureka:
+  instance:
+    hostname: ${NEXTGEN_REGISTRY_SERVER:localhost}
   client:
-    register-with-eureka: true
     serviceUrl:
-        defaultZone: http://nextgen-registry:8088/eureka/
+        defaultZone: http://${eureka.instance.hostname}:8088/eureka/
           
 logging:
   level:
