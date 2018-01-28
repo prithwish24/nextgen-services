@@ -1,30 +1,14 @@
-spring:
-  application:
-    name: registry-server
-  cloud:
-    config:
-      uri: http://${NEXTGEN_CONFIG_SERVER:localhost}:8199
+#spring:
+#  application:
+#    name: registry-server
+#  cloud:
+#    config:
+#      uri: ${NEXTGEN_CONFIG_SERVER}
 #      username: user
 #      password: s3cr3t
-      fail-fast: false
-      retry:
-        initial-interval: 5000
-        max-attempts: 24
-        max-interval: 5000 
-
-server:
-    port: ${port:8088}
-      
-
-eureka:
-  instance:
-    hostname: ${NEXTGEN_REGISTRY_SERVER:localhost}
-    prefer-ip-address: true
-    lease-expiration-duration-in-seconds: 10
-    lease-renewal-interval-in-seconds: 10
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#      fail-fast: false
+#      retry:
+#        initial-interval: 5000
+#        max-attempts: 24
+#        max-interval: 5000 
 

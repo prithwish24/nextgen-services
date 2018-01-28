@@ -2,21 +2,4 @@ spring:
   cache:
     jcache:
       config: ehcache.xml
-    
-server:
-  error:
-    whitelabel:
-      enabled: true
-      
-eureka:
-  instance:
-    hostname: ${NEXTGEN_REGISTRY_SERVER:localhost}
-  client:
-    serviceUrl:
-        defaultZone: http://${eureka.instance.hostname}:8088/eureka/
-
-logging:
-  level:
-     org:
-       springframework:
-         security: DEBUG      
+  

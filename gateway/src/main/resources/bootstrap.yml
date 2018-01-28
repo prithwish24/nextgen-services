@@ -3,7 +3,7 @@ spring:
     name: service-gateway
   cloud:
     config:
-      uri: http://${NEXTGEN_CONFIG_SERVER:localhost}:8199
+      uri: ${NEXTGEN_CONFIG_SERVER}
 #      username: user
 #      password: s3cr3t
       fail-fast: false
@@ -13,5 +13,5 @@ spring:
         max-interval: 5000
       
 server:
-  port: ${port:8080}  
+  port: ${PORT:8080}  
 
