@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: nextgen-healthcheck
+    
+server:
+  port: ${PORT:8888}    
