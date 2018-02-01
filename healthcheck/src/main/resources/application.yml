@@ -3,4 +3,4 @@ spring:
     name: nextgen-healthcheck
     
 server:
-  port: ${PORT:8888}    
+  port: ${PORT:9088}    
