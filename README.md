@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/prithwish24/nextgen-services.svg?branch=master)](https://travis-ci.org/prithwish24/nextgen-services)
 [![GitHub license](https://img.shields.io/badge/License-GPL%20v3.0-blue.svg)](https://github.com/prithwish24/nextgen-services/blob/master/LICENSE)
 
-# Enterprise NextGen Services
+# Next Generation MicroServices (POC App)
 NextGen Services for Car Rental Company. This project follows Spring Boot Microservice Architecture.
 
 ## Applications are -
