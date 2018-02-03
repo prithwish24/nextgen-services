@@ -7,8 +7,8 @@ services:
       - 8199:8199
     volumes:
       - spring-config-repo:/var/apps/config-repo
-    networks:
-      - spring-cloud-network
+    #networks:
+    #  - spring-cloud-network
     environment:
       CONFIG_SERVICE_PASSWORD: ${CONFIG_SERVICE_PASSWORD}
   
@@ -17,10 +17,10 @@ services:
     image: prithwish24/nextgen-registry
     ports:
       - 8088:8088
-    networks:
-      - spring-cloud-network
-    links:
-      - nextgen-config:nextgen-config
+    #networks:
+    #  - spring-cloud-network
+    #links:
+    #  - nextgen-config:nextgen-config
     depends_on:
       - nextgen-config
     environment:
@@ -32,10 +32,10 @@ services:
     image: prithwish24/nextgen-profile
     ports:
       - 8001:8001
-    networks:
-      - spring-cloud-network
-    links:
-      - nextgen-config:nextgen-config
+    #networks:
+    #  - spring-cloud-network
+    #links:
+    #  - nextgen-config:nextgen-config
     depends_on:
       - nextgen-config
       - nextgen-registry
@@ -48,10 +48,10 @@ services:
     image: prithwish24/nextgen-reservation
     ports:
       - 8002:8002
-    networks:
-      - spring-cloud-network
-    links:
-      - nextgen-config:nextgen-config
+    #networks:
+    #  - spring-cloud-network
+    #links:
+    #  - nextgen-config:nextgen-config
     depends_on:
       - nextgen-config
       - nextgen-registry
@@ -64,10 +64,10 @@ services:
     image: prithwish24/nextgen-addon-svcs
     ports:
       - 8003:8003
-    networks:
-      - spring-cloud-network
-    links:
-      - nextgen-config:nextgen-config
+    #networks:
+    #  - spring-cloud-network
+    #links:
+    #  - nextgen-config:nextgen-config
     depends_on:
       - nextgen-config
       - nextgen-registry
@@ -80,10 +80,10 @@ services:
     image: prithwish24/nextgen-gateway
     ports:
       - 8080:8080
-    networks:
-      - spring-cloud-network
-    links:
-      - nextgen-config:nextgen-config
+    #networks:
+    #  - spring-cloud-network
+    #links:
+    #  - nextgen-config:nextgen-config
     depends_on:
       - nextgen-config
       - nextgen-registry
@@ -96,10 +96,10 @@ services:
     image: prithwish24/nextgen-monitor
     ports:
       - 9080:9080
-    networks:
-      - spring-cloud-network
-    links:
-      - nextgen-config:nextgen-config
+    #networks:
+    #  - spring-cloud-network
+    #links:
+    #  - nextgen-config:nextgen-config
     depends_on:
       - nextgen-config
       - nextgen-registry
@@ -108,11 +108,10 @@ services:
       NEXTGEN_REGISTRY_SERVER: ${NEXTGEN_REGISTRY_SERVER}
 
 
-networks:
-  spring-cloud-network:
-    driver: bridge
+#networks:
+#  spring-cloud-network:
+#    driver: bridge
 
-volumes:
-  spring-config-repo:
-    external: true
-
+#volumes:
+#  spring-config-repo:
+#    external: true

@@ -3,3 +3,7 @@ spring:
     jcache:
       config: ehcache.xml
   
+hystrix:
+  metrics:
+    enabled: true         
+  

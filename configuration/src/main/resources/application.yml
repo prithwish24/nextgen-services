@@ -5,8 +5,8 @@ spring:
     active: native
 
 server:
-  port: ${port:8199}  
-      
+  port: ${PORT:8199}  
+
 management:
   security:
     enabled: false
@@ -17,7 +17,7 @@ endpoints:
 
 security:
   user:
-    name: root
+    name: ${CONFIG_SERVICE_USER:user}
     password: ${CONFIG_SERVICE_PASSWORD:s3cr3t}
     
         

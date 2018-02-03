@@ -14,18 +14,18 @@ eureka:
     serviceUrl:
         defaultZone: ${EUREKA_SERVER_URL:http://localhost:8088}/eureka/
 
-#security:
-#  user:
-#    name: ${EUREKA_USERNAME}
-#    password: ${EUREKA_PASSWORD}
+security:
+  user:
+    name: ${APP_USERNAME:user}
+    password: ${APP_PASSWORD:s3cr3t}
 
----
-spring:
-  profiles: heroku
+#---
+#spring:
+#  profiles: heroku
 
-eureka:
-  instance:
-    hostname: ${EUREKA_DOMAIN_NAME} 
-    nonSecurePort: 80
-  password: ${EUREKA_USER_PASSWORD:password}  
+#eureka:
+#  instance:
+#    hostname: ${EUREKA_DOMAIN_NAME} 
+#    nonSecurePort: 80
+#  password: ${EUREKA_USER_PASSWORD:password}  
 

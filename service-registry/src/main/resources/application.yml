@@ -5,17 +5,17 @@ spring:
 server:
     port: ${PORT:8088}
       
-#security:
-#  user:
-#    name: ${EUREKA_USERNAME}
-#    password: ${EUREKA_PASSWORD}
+security:
+  user:
+    name: ${EUREKA_USERNAME:user}
+    password: ${EUREKA_PASSWORD:s3cr3t}
 
 eureka:
   instance:
-    hostname: localhost
+    hostname: ${EUREKA_HOSTNAME:localhost}
+    prefer-ip-address: true
     lease-expiration-duration-in-seconds: 15
     lease-renewal-interval-in-seconds: 10
-  password: ${EUREKA_USER_PASSWORD:password}
   client:
     register-with-eureka: false
     fetch-registry: false

@@ -3,14 +3,14 @@ spring:
     name: service-monitor
   cloud:
     config:
-      uri: ${NEXTGEN_CONFIG_SERVER}
+      uri: ${NEXTGEN_CONFIG_SERVER:http://localhost:8199}
 #      username: user
 #      password: s3cr3t
       fail-fast: false
       retry:
-        initial-interval: 5000
-        max-attempts: 24
-        max-interval: 5000
+        initial-interval: 60000
+        max-attempts: 5
+        max-interval: 30000
       
 server:
   port: ${PORT:9080}

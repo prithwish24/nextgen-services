@@ -17,21 +17,14 @@ zuul:
   routes:
     profile-service:
       path: /profile/**
-      #serviceId: PROFILE-SERVICE
-      url: https://nextgen-profile.herokuapp.com
-      sensitiveHeaders: 
+      serviceId: PROFILE-SERVICE
     reservation-service:
       path: /reservation/**
-      #serviceId: RESERVATION-SERVICE
-      url: https://nextgen-reservation.herokuapp.com
-      sensitiveHeaders:
+      serviceId: RESERVATION-SERVICE
     addons-service:
       path: /addonsvc/**
-      #serviceId: ADDON-SERVICES
-      url: https://nextgen-addon-svcs.herokuapp.com
-      sensitiveHeaders:
+      serviceId: ADDON-SERVICES
       
 hystrix:
   metrics:
-#    polling-interval-ms: 20000
-    enabled: true
+    enabled: true         
