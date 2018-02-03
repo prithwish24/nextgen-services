@@ -2,7 +2,7 @@
 [![GitHub license](https://img.shields.io/badge/License-GPL%20v3.0-blue.svg)](https://github.com/prithwish24/nextgen-services/blob/master/LICENSE)
 
 # Enterprise NextGen Services
-Next Gen Services for Enterprise. This project follows Spring Boot Microservice Architecture.
+NextGen Services for Car Rental Company. This project follows Spring Boot Microservice Architecture.
 
 ## Applications are -
 
