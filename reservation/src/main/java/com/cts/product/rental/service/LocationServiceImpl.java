@@ -7,30 +7,32 @@ import java.util.Random;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import com.cts.product.rental.bo.Reservation;
+import com.cts.product.rental.bo.Location;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
-public class ReservationServiceImpl implements ReservationService {
+public class LocationServiceImpl implements LocationService {
 
-	public Reservation createReservation() {
-		List<Reservation> reservationList = getAllReservations();
+	@Override
+	public Location getLocation() {
+		List<Location> locationList = getAllLocations();
 		int nextInt = new Random().nextInt(3);
-		Reservation reservation = reservationList.get(nextInt);
-		return reservation;
+		Location location = locationList.get(nextInt);
+		return location;
 	}
 
-	public List<Reservation> getAllReservations() {
+	public List<Location> getAllLocations() {
 		ObjectMapper mapper = new ObjectMapper();
-		TypeReference<List<Reservation>> typeReference = new TypeReference<List<Reservation>>() {
+		TypeReference<List<Location>> typeReference = new TypeReference<List<Location>>() {
 
 		};
-		List<Reservation> reservationList = null;
+		List<Location> locationList = null;
 		try {
-			reservationList = mapper.readValue(new ClassPathResource("reservation.json").getInputStream(),
+			locationList = mapper.readValue(
+					new ClassPathResource("location.json").getInputStream(),
 					typeReference);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
@@ -39,6 +41,7 @@ public class ReservationServiceImpl implements ReservationService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return reservationList;
+		return locationList;
 	}
+
 }
