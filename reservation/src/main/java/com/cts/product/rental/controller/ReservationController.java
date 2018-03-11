@@ -5,17 +5,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.product.rental.bo.Location;
 import com.cts.product.rental.bo.Reservation;
+import com.cts.product.rental.bo.ReservationRequest;
+import com.cts.product.rental.bo.ReservationResponse;
+import com.cts.product.rental.delegate.ReservationServiceDelegate;
 import com.cts.product.rental.google.ai.bo.Fulfillment;
-import com.cts.product.rental.google.ai.transformer.ReservationTransformer;
 import com.cts.product.rental.service.LocationService;
 import com.cts.product.rental.service.ReservationService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping("/")
@@ -27,9 +29,11 @@ public class ReservationController {
 	@Autowired
 	private ReservationService reservationService;
 	@Autowired
-	private LocationService locationService;
+	private ReservationServiceDelegate reservationServiceDelegate;
 	@Autowired
-	private ReservationTransformer transformer;
+	private LocationService locationService;
+	// @Autowired
+	// private ReservationTransformer transformer;
 
 	@RequestMapping(value = "/lfs", method = {
 			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -38,26 +42,40 @@ public class ReservationController {
 		return new Fulfillment();
 	}
 
-	@HystrixCommand(fallbackMethod = "create_fallback")
-	@RequestMapping(value = "/create", method = { RequestMethod.POST,
+	// @HystrixCommand(fallbackMethod = "create_fallback")
+	@RequestMapping(value = "/rental", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Fulfillment create() {
-		LOG.debug("Entered into create reservation service");
-		Reservation reservation = reservationService.createReservation();
-		Fulfillment fullfillment = transformer.transform(reservation);
-		LOG.debug("Exiting from create reservation service");
-		return fullfillment;
+	public ReservationResponse aiCall(
+			@RequestBody ReservationRequest reservationRequest)
+			throws Exception {
+		LOG.debug("Entered into reservation service");
+		ReservationResponse reservationResponse = reservationServiceDelegate
+				.delegate(reservationRequest);
+		LOG.debug("Exiting from reservation service");
+		return reservationResponse;
 	}
 
-	@HystrixCommand(fallbackMethod = "create_fallback")
+	// @HystrixCommand(fallbackMethod = "create_fallback")
+	@RequestMapping(value = "/create", method = { RequestMethod.POST,
+			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Reservation create(
+			@RequestBody ReservationRequest reservationRequest) {
+		LOG.debug("Entered into create reservation service");
+		Reservation reservation = reservationService
+				.createReservation(reservationRequest);
+		LOG.debug("Exiting from create reservation service");
+		return reservation;
+	}
+
+	// @HystrixCommand(fallbackMethod = "create_fallback")
 	@RequestMapping(value = "/location", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Fulfillment getLocation() {
+	public Location getLocation(@RequestBody Location locationRequest) {
 		LOG.debug("Entered into get location service");
-		Location location = locationService.getLocation();
-		Fulfillment fullfillment = transformer.transform(location);
+		Location locationResponse = locationService
+				.getLocation(locationRequest);
 		LOG.debug("Exiting from get location service");
-		return fullfillment;
+		return locationResponse;
 	}
 
 	public Fulfillment create_fallback() {

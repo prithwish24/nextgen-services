@@ -2,8 +2,8 @@ package com.cts.product.rental.service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +17,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class LocationServiceImpl implements LocationService {
 
 	@Override
-	public Location getLocation() {
+	public Location getLocation(Location locationRequest) {
 		List<Location> locationList = getAllLocations();
-		int nextInt = new Random().nextInt(3);
-		Location location = locationList.get(nextInt);
+		Location location = null;
+		for (Location loc : locationList) {
+			String zipcode = locationRequest.getZipcode();
+			String businessName = locationRequest.getBusinessName();
+			String city = locationRequest.getCity();
+			if (StringUtils.isNotBlank(zipcode)
+					&& StringUtils.equals(loc.getZipcode(), zipcode)) {
+				location = loc;
+				break;
+			} else if (StringUtils.isNotBlank(businessName)
+					&& StringUtils.isNotBlank(city)
+					&& StringUtils.equalsIgnoreCase(loc.getBusinessName(),
+							businessName)
+					&& StringUtils.equalsIgnoreCase(loc.getCity(), city)) {
+				location = loc;
+				break;
+			}
+		}
 		return location;
 	}
 
