@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cts.product.rental.bo.Location;
 import com.cts.product.rental.bo.ReservationRequest;
 import com.cts.product.rental.dao.SessionDao;
 
@@ -20,5 +21,18 @@ public class SessionServiceImpl implements SessionService {
 		String orchSessionId = RandomStringUtils.randomAlphanumeric(40);
 		sessionDao.create(reservationRequest.getSessionId(), orchSessionId);
 		return orchSessionId;
+	}
+
+	@Override
+	public Location updateSessionWithZipcode(String sessionId, String zipcode) {
+		sessionDao.updateZip(sessionId, zipcode);
+		Location location = new Location();
+		location.setZipcode(zipcode);
+		return location;
+	}
+
+	@Override
+	public String findBySessionId(String requestSessionId) {
+		return sessionDao.findBySessionId(requestSessionId);
 	}
 }

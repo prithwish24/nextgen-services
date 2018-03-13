@@ -23,28 +23,22 @@ public class ReservationServiceDelegate {
 	@Autowired
 	private SessionService sessionService;
 
-	public ReservationResponse delegate(ReservationRequest reservationRequest)
-			throws Exception {
+	public ReservationResponse delegate(ReservationRequest reservationRequest) throws Exception {
 		ReservationResponse reservationResponse = new ReservationResponse();
 		String action = reservationRequest.getResult().getAction();
 		switch (action) {
 		case "getSessionId":
 			String sessionId = sessionService.createSession(reservationRequest);
-			reservationResponse = ReservationResponseMapper
-					.mapSession(sessionId);
+			reservationResponse = ReservationResponseMapper.mapSession(sessionId);
 			break;
 		case "findNearestRentOffice":
-			Location locationRequest = LocationRequestMapper
-					.map(reservationRequest);
+			Location locationRequest = LocationRequestMapper.map(reservationRequest);
 			Location location = locationService.getLocation(locationRequest);
-			reservationResponse = ReservationResponseMapper
-					.mapLocation(reservationRequest, location);
+			reservationResponse = ReservationResponseMapper.mapLocation(reservationRequest, location);
 			break;
 		case "createReservation":
-			Reservation reservation = reservationService
-					.createReservation(reservationRequest);
-			reservationResponse = ReservationResponseMapper
-					.mapReservation(reservation);
+			Reservation reservation = reservationService.createReservation(reservationRequest);
+			reservationResponse = ReservationResponseMapper.mapReservation(reservation);
 			break;
 		default:
 			throw new Exception("Undefined action.");

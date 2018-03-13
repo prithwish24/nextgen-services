@@ -10,6 +10,8 @@ public class Location {
 	private String businessName;
 	private String zipcode;
 	private String phone;
+	private boolean pickupFromNearestLocation;
+	private String sessionId;
 
 	public String getId() {
 		return id;
@@ -73,6 +75,22 @@ public class Location {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public boolean isPickupFromNearestLocation() {
+		return pickupFromNearestLocation;
+	}
+
+	public void setPickupFromNearestLocation(boolean pickupFromNearestLocation) {
+		this.pickupFromNearestLocation = pickupFromNearestLocation;
+	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 
 }

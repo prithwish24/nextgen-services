@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -16,22 +17,30 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class LocationServiceImpl implements LocationService {
 
+	@Autowired
+	private SessionService sessionService;
+
 	@Override
 	public Location getLocation(Location locationRequest) {
-		List<Location> locationList = getAllLocations();
 		Location location = null;
+		String zipcode = null;
+		String businessName = null;
+		String city = null;
+		List<Location> locationList = getAllLocations();
+		boolean pickupFromNearestLocation = locationRequest.isPickupFromNearestLocation();
+		if (pickupFromNearestLocation) {
+			zipcode = sessionService.findBySessionId(locationRequest.getSessionId());
+		} else {
+			zipcode = locationRequest.getZipcode();
+			businessName = locationRequest.getBusinessName();
+			city = locationRequest.getCity();
+		}
 		for (Location loc : locationList) {
-			String zipcode = locationRequest.getZipcode();
-			String businessName = locationRequest.getBusinessName();
-			String city = locationRequest.getCity();
-			if (StringUtils.isNotBlank(zipcode)
-					&& StringUtils.equals(loc.getZipcode(), zipcode)) {
+			if (StringUtils.isNotBlank(zipcode) && StringUtils.equals(loc.getZipcode(), zipcode)) {
 				location = loc;
 				break;
-			} else if (StringUtils.isNotBlank(businessName)
-					&& StringUtils.isNotBlank(city)
-					&& StringUtils.equalsIgnoreCase(loc.getBusinessName(),
-							businessName)
+			} else if (StringUtils.isNotBlank(businessName) && StringUtils.isNotBlank(city)
+					&& StringUtils.equalsIgnoreCase(loc.getBusinessName(), businessName)
 					&& StringUtils.equalsIgnoreCase(loc.getCity(), city)) {
 				location = loc;
 				break;
@@ -47,9 +56,7 @@ public class LocationServiceImpl implements LocationService {
 		};
 		List<Location> locationList = null;
 		try {
-			locationList = mapper.readValue(
-					new ClassPathResource("location.json").getInputStream(),
-					typeReference);
+			locationList = mapper.readValue(new ClassPathResource("location.json").getInputStream(), typeReference);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

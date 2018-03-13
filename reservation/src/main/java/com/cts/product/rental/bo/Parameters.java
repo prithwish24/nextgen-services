@@ -8,12 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "duration", "sessionId.original", "date-period.original",
-		"sessionId", "duration.original", "date-period", "TypeOfItems",
-		"cartype", "TypeOfItems.original", "TypeOfService.original",
-		"TypeOfService", "cartype.original", "pickuptime",
-		"pickupdate.original", "pickupdate", "pickuptime.original",
-		"pickuplocation", "landmark", "landmark.original" })
+@JsonPropertyOrder({ "duration", "sessionId.original", "date-period.original", "sessionId", "duration.original",
+		"date-period", "TypeOfItems", "cartype", "TypeOfItems.original", "TypeOfService.original", "TypeOfService",
+		"cartype.original", "pickuptime", "pickupdate.original", "pickupdate", "pickuptime.original", "pickuplocation",
+		"landmark", "landmark.original", "pickupfromnearestlocation" })
 public class Parameters {
 
 	@JsonProperty("duration")
@@ -31,7 +29,7 @@ public class Parameters {
 	@JsonProperty("TypeOfItems")
 	private String typeOfItems;
 	@JsonProperty("cartype")
-	private List<String> cartype = null;
+	private List<String> cartype;
 	@JsonProperty("TypeOfItems.original")
 	private String typeOfItemsOriginal;
 	@JsonProperty("TypeOfService.original")
@@ -49,11 +47,13 @@ public class Parameters {
 	@JsonProperty("pickuptime.original")
 	private String pickuptimeOriginal;
 	@JsonProperty("pickuplocation")
-	private Location pickuplocation;
+	private String pickuplocation;
 	@JsonProperty("landmark")
 	private Landmark landmark;
 	@JsonProperty("landmark.original")
 	private String landmarkOriginal;
+	@JsonProperty("pickupfromnearestlocation")
+	private boolean pickupfromnearestlocation;
 
 	@JsonProperty("duration")
 	public String getDuration() {
@@ -216,12 +216,12 @@ public class Parameters {
 	}
 
 	@JsonProperty("pickuplocation")
-	public Location getPickuplocation() {
+	public String getPickuplocation() {
 		return pickuplocation;
 	}
 
 	@JsonProperty("pickuplocation")
-	public void setPickuplocation(Location pickuplocation) {
+	public void setPickuplocation(String pickuplocation) {
 		this.pickuplocation = pickuplocation;
 	}
 
@@ -243,6 +243,16 @@ public class Parameters {
 	@JsonProperty("landmark.original")
 	public void setLandmarkOriginal(String landmarkOriginal) {
 		this.landmarkOriginal = landmarkOriginal;
+	}
+
+	@JsonProperty("pickupfromnearestlocation")
+	public boolean isPickupFromNearestLocation() {
+		return pickupfromnearestlocation;
+	}
+
+	@JsonProperty("pickupfromnearestlocation")
+	public void setPickupfromnearestlocation(boolean pickupfromnearestlocation) {
+		this.pickupfromnearestlocation = pickupfromnearestlocation;
 	}
 
 }

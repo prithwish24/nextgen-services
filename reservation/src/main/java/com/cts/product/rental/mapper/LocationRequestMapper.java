@@ -12,10 +12,10 @@ public class LocationRequestMapper {
 		Location locationRequest = new Location();
 		for (Context context : reservationRequest.getResult().getContexts()) {
 			if (StringUtils.equals("carrental", context.getName())) {
-				locationRequest.setBusinessName(context.getParameters()
-						.getLandmark().getBusinessName());
-				locationRequest.setCity(
-						context.getParameters().getLandmark().getCity());
+				locationRequest.setPickupFromNearestLocation(context.getParameters().isPickupFromNearestLocation());
+				locationRequest.setSessionId(context.getParameters().getSessionId());
+				locationRequest.setBusinessName(context.getParameters().getLandmark().getBusinessName());
+				locationRequest.setCity(context.getParameters().getLandmark().getCity());
 				break;
 			}
 		}

@@ -1,5 +1,10 @@
 package com.cts.product.rental.dao;
 
 public interface SessionDao {
-	public void create(String requestSessionId, String orchSessionId);
+
+	void create(String requestSessionId, String orchSessionId);
+
+	void updateZip(String requestSessionId, String zipcode);
+
+	String findBySessionId(String sessionId);
 }
