@@ -38,7 +38,7 @@ public class Application {
 		try {
 			return restTemplate.getForObject(endpoint, String.class);
 		} catch (RestClientException re) {
-			throw new RuntimeException("Service is DOWN");
+			throw new RuntimeException("Service is DOWN", re);
 		}
 	}
 	

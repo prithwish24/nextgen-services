@@ -1,0 +1,114 @@
+<html>
+<body>
+<h2>Welcome to the NextGen Service Health Check Page  </h2>  <h4> => <a href="#" id="activateheroku"> Activate Heroku Services </a></h4> 
+
+<ul>
+	<li style="height:25px"><span id="config" style="color:888888;">UNKNOWN</span>  | Configuration Service |  <input type="text" id="epconfig" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8199"> </li>
+	<li style="height:25px"><span id="eureka" style="color:888888;">UNKNOWN</span>  | Service Discovery (Eureka) Service |  <input type="text" id="epeureka" style="border-style:none" readonly="readonly" size="50"  value="http://localhost:8088"> </li>
+	<li style="height:25px"><span id="profile" style="color:888888;">UNKNOWN</span> | Profile Service |  <input type="text" id="epprofile" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8001"> </li>
+	<li style="height:25px"><span id="reservation" style="color:888888;">UNKNOWN</span>  | Reservation Service |  <input type="text" id="epreservation" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8002"> </li>
+	<li style="height:25px"><span id="addon" style="color:888888;">UNKNOWN</span>  | Addon/Misc Services |  <input type="text" id="epaddone" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8003"> </li>
+	<li style="height:25px"><span id="monitor" style="color:888888;">UNKNOWN</span>  | Hystrix Dashboard Service |  <input type="text" id="epmonitor" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8090"> </li>
+	<li style="height:25px"><span id="gateway" style="color:888888;">UNKNOWN</span>  | Service Gateway (Zuul) |  <input type="text" id="epgateway" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8080"> </li>
+</ul>
+
+<p> 
+	<input type="button" id="healthCheck" value="Check Service Status"> &nbsp;&nbsp;&nbsp;
+	<input type="button" id="editEndpoints" value="Edit Endpoints">  
+</p>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#editEndpoints").click(function() {
+			if ($("#editEndpoints").val() === 'SAVE') {
+				$("#editEndpoints").val("Edit Endpoints");
+				$("#epconfig").attr('readonly', 'true');
+				$("#epeureka").attr('readonly', 'true');
+				$("#epprofile").attr('readonly', 'true');
+				$("#epreservation").attr('readonly', 'true');
+				$("#epaddone").attr('readonly', 'true');
+				$("#epmonitor").attr('readonly', 'true');
+				$("#epconfig").attr('readonly', 'true');
+				$("#epgateway").attr('readonly', 'true');
+				
+				$("#epconfig").css('border-style', 'none');
+				$("#epeureka").css('border-style', 'none');
+				$("#epprofile").css('border-style', 'none');
+				$("#epreservation").css('border-style', 'none');
+				$("#epaddone").css('border-style', 'none');
+				$("#epmonitor").css('border-style', 'none');
+				$("#epconfig").css('border-style', 'none');
+				$("#epgateway").css('border-style', 'none');
+			} else {
+				$("#editEndpoints").val("SAVE");
+				$("#epconfig").removeAttr('readonly');
+				$("#epeureka").removeAttr('readonly');
+				$("#epprofile").removeAttr('readonly');
+				$("#epreservation").removeAttr('readonly');
+				$("#epaddone").removeAttr('readonly');
+				$("#epmonitor").removeAttr('readonly');
+				$("#epconfig").removeAttr('readonly');
+				$("#epgateway").removeAttr('readonly');
+				
+				$("#epconfig").css('border-style', 'inset');
+				$("#epeureka").css('border-style', 'inset');
+				$("#epprofile").css('border-style', 'inset');
+				$("#epreservation").css('border-style', 'inset');
+				$("#epaddone").css('border-style', 'inset');
+				$("#epmonitor").css('border-style', 'inset');
+				$("#epconfig").css('border-style', 'inset');
+				$("#epgateway").css('border-style', 'inset');
+			}
+		});
+		
+		$("#activateheroku").click(function() {
+			var yn = confirm("Do you want to start ALL HEROKU Services ?")
+			if (yn === true) {
+				health("/config/ping?host=https://nextgen-config.herokuapp.com", "config");
+		        health("/eureka/ping?host=https://nextgen-registry.herokuapp.com", "eureka");
+		        health("/profile/ping?host=https://nextgen-profile.herokuapp.com", "profile");
+		        health("/reservation/ping?host=https://nextgen-reservation.herokuapp.com", "reservation");
+		        health("/addonsvc/ping?host=https://nextgen-addon-svcs.herokuapp.com", "addon");
+		        health("/monitor/ping?host=https://nextgen-monitor.herokuapp.com", "monitor");
+		        health("/gateway/ping?host=https://nextgen-gateway.herokuapp.com", "gateway");
+		        alert("Heroku Services Initialized !")
+			}
+		});
+		
+		$("#healthCheck").click(function() {
+			health("/config/ping?host="+$("#epconfig").val(), "config");
+	        health("/eureka/ping?host="+$("#epeureka").val(), "eureka");
+	        health("/profile/ping?host="+$("#epprofile").val(), "profile");
+	        health("/reservation/ping?host="+$("#epreservation").val(), "reservation");
+	        health("/addonsvc/ping?host="+$("#epaddone").val(), "addon");
+	        health("/monitor/ping?host="+$("#epmonitor").val(), "monitor");
+	        health("/gateway/ping?host="+$("#epgateway").val(), "gateway");
+		});
+		
+		var health = function (url, id) {
+        	$("#"+id).text("Verifying...");
+        	$("#"+id).css('color', 'black');
+        	$.ajax({
+    			url: url,
+    			method: 'GET',
+    			async: true, 
+    			cache: false,
+    			success: function () {
+    				$("#"+id).text("READY");
+    				$("#"+id).css('color', 'blue');
+    			},
+    			error: function () {
+    				$("#"+id).text("DOWN");
+    				$("#"+id).css('color', 'red');
+    			}
+            });
+		}
+	});
+
+</script>
+
+</body>
+</html>

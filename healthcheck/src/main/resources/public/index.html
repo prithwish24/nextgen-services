@@ -1,28 +1,34 @@
 <html>
+<head>
+<style type="text/css">
+.url { color: blue; }
+.status { color: gray}
+li{ height: 30px}
+</style>
+</head>
 <body>
-<h2>Welcome to the NextGen Service Health Check Page  </h2>  <h4> => <a href="#" id="activateheroku"> Activate Heroku Services </a></h4> 
+<h2>Welcome to the NextGen Service Health Check Page (Heroku Only)  </h2> 
 
 <ul>
-	<li style="height:25px"><span id="config" style="color:888888;">UNKNOWN</span>  | Configuration Service |  <input type="text" id="epconfig" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8199"> </li>
-	<li style="height:25px"><span id="eureka" style="color:888888;">UNKNOWN</span>  | Service Discovery (Eureka) Service |  <input type="text" id="epeureka" style="border-style:none" readonly="readonly" size="50"  value="http://localhost:8088"> </li>
-	<li style="height:25px"><span id="profile" style="color:888888;">UNKNOWN</span> | Profile Service |  <input type="text" id="epprofile" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8001"> </li>
-	<li style="height:25px"><span id="reservation" style="color:888888;">UNKNOWN</span>  | Reservation Service |  <input type="text" id="epreservation" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8002"> </li>
-	<li style="height:25px"><span id="addon" style="color:888888;">UNKNOWN</span>  | Addon/Misc Services |  <input type="text" id="epaddone" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8003"> </li>
-	<li style="height:25px"><span id="monitor" style="color:888888;">UNKNOWN</span>  | Hystrix Dashboard Service |  <input type="text" id="epmonitor" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8090"> </li>
-	<li style="height:25px"><span id="gateway" style="color:888888;">UNKNOWN</span>  | Service Gateway (Zuul) |  <input type="text" id="epgateway" style="border-style:none" readonly="readonly" size="50" value="http://localhost:8080"> </li>
+	<li><span id="config" class="status">UNKNOWN</span>  	|  <span class="url">https://nextgen-config.herokuapp.com</span> | Configuration Service </li>
+	<li><span id="eureka" class="status">UNKNOWN</span>  	|  <span class="url">https://nextgen-registry.herokuapp.com</span> | Service Discovery (Eureka) Service  </li>
+	<li><span id="profile" class="status">UNKNOWN</span> 	|  <span class="url">https://nextgen-profile.herokuapp.com</span> | Profile Service   </li>
+	<li><span id="reservation" class="status">UNKNOWN</span>|  <span class="url">https://nextgen-reservation.herokuapp.com</span> | Reservation Service   </li>
+	<li><span id="addon" class="status">UNKNOWN</span>  	|  <span class="url">https://nextgen-addon-svcs.herokuapp.com</span> | Addon/Misc Services   </li>
+	<li><span id="monitor" class="status">UNKNOWN</span>  	|  <span class="url">https://nextgen-monitor.herokuapp.com</span> | Hystrix Dashboard Service   </li>
+	<li><span id="gateway" class="status">UNKNOWN</span>  	|  <span class="url">https://nextgen-gateway.herokuapp.com</span> | Service Gateway (Zuul)   </li>
 </ul>
 
 <p> 
-	<input type="button" id="healthCheck" value="Check Service Status"> &nbsp;&nbsp;&nbsp;
-	<input type="button" id="editEndpoints" value="Edit Endpoints">  
+	<input type="button" id="activateheroku" value="Activate Services">
+	<!-- <input type="button" id="editEndpoints" value="Edit Endpoints">  -->  
 </p>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$("#editEndpoints").click(function() {
+		/*$("#editEndpoints").click(function() {
 			if ($("#editEndpoints").val() === 'SAVE') {
 				$("#editEndpoints").val("Edit Endpoints");
 				$("#epconfig").attr('readonly', 'true');
@@ -62,7 +68,7 @@
 				$("#epconfig").css('border-style', 'inset');
 				$("#epgateway").css('border-style', 'inset');
 			}
-		});
+		});*/
 		
 		$("#activateheroku").click(function() {
 			var yn = confirm("Do you want to start ALL HEROKU Services ?")
@@ -78,7 +84,7 @@
 			}
 		});
 		
-		$("#healthCheck").click(function() {
+		/* $("#healthCheck").click(function() {
 			health("/config/ping?host="+$("#epconfig").val(), "config");
 	        health("/eureka/ping?host="+$("#epeureka").val(), "eureka");
 	        health("/profile/ping?host="+$("#epprofile").val(), "profile");
@@ -86,7 +92,7 @@
 	        health("/addonsvc/ping?host="+$("#epaddone").val(), "addon");
 	        health("/monitor/ping?host="+$("#epmonitor").val(), "monitor");
 	        health("/gateway/ping?host="+$("#epgateway").val(), "gateway");
-		});
+		}); */
 		
 		var health = function (url, id) {
         	$("#"+id).text("Verifying...");
@@ -98,11 +104,12 @@
     			cache: false,
     			success: function () {
     				$("#"+id).text("READY");
-    				$("#"+id).css('color', 'blue');
+    				$("#"+id).css('color', 'green');
     			},
-    			error: function () {
+    			error: function (xhr, status, error) {
     				$("#"+id).text("DOWN");
     				$("#"+id).css('color', 'red');
+    				window.console.error(xhr.responseText);
     			}
             });
 		}
