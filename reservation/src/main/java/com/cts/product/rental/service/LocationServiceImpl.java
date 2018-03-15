@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import com.cts.product.rental.bo.Location;
+import com.cts.product.rental.entity.Session;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -21,7 +22,7 @@ public class LocationServiceImpl implements LocationService {
 	private SessionService sessionService;
 
 	@Override
-	public Location getLocation(Location locationRequest) {
+	public Location getLocation(Location locationRequest) throws IOException {
 		Location location = null;
 		String zipcode = null;
 		String businessName = null;
@@ -29,23 +30,39 @@ public class LocationServiceImpl implements LocationService {
 		List<Location> locationList = getAllLocations();
 		boolean pickupFromNearestLocation = locationRequest.isPickupFromNearestLocation();
 		if (pickupFromNearestLocation) {
-			zipcode = sessionService.findBySessionId(locationRequest.getSessionId());
+			Session findBySessionId = sessionService.findBySessionId(locationRequest.getSessionId());
+			zipcode = findBySessionId.getZipcode();
 		} else {
 			zipcode = locationRequest.getZipcode();
 			businessName = locationRequest.getBusinessName();
 			city = locationRequest.getCity();
 		}
-		for (Location loc : locationList) {
-			if (StringUtils.isNotBlank(zipcode) && StringUtils.equals(loc.getZipcode(), zipcode)) {
-				location = loc;
-				break;
-			} else if (StringUtils.isNotBlank(businessName) && StringUtils.isNotBlank(city)
-					&& StringUtils.equalsIgnoreCase(loc.getBusinessName(), businessName)
-					&& StringUtils.equalsIgnoreCase(loc.getCity(), city)) {
-				location = loc;
-				break;
-			}
-		}
+
+		String finalZipcode = zipcode;
+		String finalBusinessName = businessName;
+		String finalCity = city;
+
+		location = locationList.stream().filter(
+				loc -> ((StringUtils.isNotBlank(finalZipcode) && StringUtils.equals(loc.getZipcode(), finalZipcode)
+						|| (StringUtils.isNotBlank(finalBusinessName) && StringUtils.isNotBlank(finalCity)
+								&& StringUtils.equalsIgnoreCase(loc.getBusinessName(), finalBusinessName)
+								&& StringUtils.equalsIgnoreCase(loc.getCity(), finalCity)))))
+				.findFirst().get();
+
+		// for (Location loc : locationList) {
+		// if (StringUtils.isNotBlank(zipcode) && StringUtils.equals(loc.getZipcode(),
+		// zipcode)) {
+		// location = loc;
+		// break;
+		// } else if (StringUtils.isNotBlank(businessName) &&
+		// StringUtils.isNotBlank(city)
+		// && StringUtils.equalsIgnoreCase(loc.getBusinessName(), businessName)
+		// && StringUtils.equalsIgnoreCase(loc.getCity(), city)) {
+		// location = loc;
+		// break;
+		// }
+		// }
+
 		return location;
 	}
 

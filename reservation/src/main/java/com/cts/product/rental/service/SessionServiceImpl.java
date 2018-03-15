@@ -1,13 +1,15 @@
 package com.cts.product.rental.service;
 
+import java.io.IOException;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cts.product.rental.bo.Location;
 import com.cts.product.rental.bo.ReservationRequest;
 import com.cts.product.rental.dao.SessionDao;
+import com.cts.product.rental.entity.Session;
 
 @Transactional
 @Component
@@ -24,15 +26,16 @@ public class SessionServiceImpl implements SessionService {
 	}
 
 	@Override
-	public Location updateSessionWithZipcode(String sessionId, String zipcode) {
+	public void updateSessionWithZipcode(String sessionId, String zipcode) throws IOException {
 		sessionDao.updateZip(sessionId, zipcode);
-		Location location = new Location();
-		location.setZipcode(zipcode);
-		return location;
 	}
 
 	@Override
-	public String findBySessionId(String requestSessionId) {
-		return sessionDao.findBySessionId(requestSessionId);
+	public Session findBySessionId(String requestSessionId) throws IOException {
+		Session session = sessionDao.findBySessionId(requestSessionId);
+		if (session == null) {
+			throw new IOException("No data found");
+		}
+		return session;
 	}
 }

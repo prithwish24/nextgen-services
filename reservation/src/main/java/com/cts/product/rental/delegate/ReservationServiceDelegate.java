@@ -1,5 +1,7 @@
 package com.cts.product.rental.delegate;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class ReservationServiceDelegate {
 	@Autowired
 	private SessionService sessionService;
 
-	public ReservationResponse delegate(ReservationRequest reservationRequest) throws Exception {
+	public ReservationResponse delegate(ReservationRequest reservationRequest) throws IOException {
 		ReservationResponse reservationResponse = new ReservationResponse();
 		String action = reservationRequest.getResult().getAction();
 		switch (action) {
@@ -41,7 +43,7 @@ public class ReservationServiceDelegate {
 			reservationResponse = ReservationResponseMapper.mapReservation(reservation);
 			break;
 		default:
-			throw new Exception("Undefined action.");
+			throw new IOException("Undefined action.");
 		}
 
 		return reservationResponse;

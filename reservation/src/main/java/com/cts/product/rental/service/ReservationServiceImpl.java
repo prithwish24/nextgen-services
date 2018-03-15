@@ -49,7 +49,10 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public Location updateSessionWithZipcode(String sessionId, String zipcode) {
-		return sessionService.updateSessionWithZipcode(sessionId, zipcode);
+	public Location updateSessionWithZipcode(String sessionId, String zipcode) throws IOException {
+		sessionService.updateSessionWithZipcode(sessionId, zipcode);
+		Location location = new Location();
+		location.setZipcode(zipcode);
+		return location;
 	}
 }

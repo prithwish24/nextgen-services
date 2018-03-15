@@ -1,5 +1,7 @@
 package com.cts.product.rental.controller;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +47,7 @@ public class ReservationController {
 	// @HystrixCommand(fallbackMethod = "create_fallback")
 	@RequestMapping(value = "/rental", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ReservationResponse aiCall(@RequestBody ReservationRequest reservationRequest) throws Exception {
+	public ReservationResponse aiCall(@RequestBody ReservationRequest reservationRequest) throws IOException {
 		LOG.debug("Entered into reservation service");
 		ReservationResponse reservationResponse = reservationServiceDelegate.delegate(reservationRequest);
 		LOG.debug("Exiting from reservation service");
@@ -55,7 +57,8 @@ public class ReservationController {
 	// @HystrixCommand(fallbackMethod = "create_fallback")
 	@RequestMapping(value = "/zipcode/{sessionId}", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Location updateSessionWithZipcode(@PathVariable String sessionId, @RequestParam String zipcode) {
+	public Location updateSessionWithZipcode(@PathVariable String sessionId, @RequestParam String zipcode)
+			throws IOException {
 		LOG.debug("Entered into update Session With Zipcode service");
 		Location locationResponse = reservationService.updateSessionWithZipcode(sessionId, zipcode);
 		LOG.debug("Exiting from update Session With Zipcode service");
@@ -75,7 +78,7 @@ public class ReservationController {
 	// @HystrixCommand(fallbackMethod = "create_fallback")
 	@RequestMapping(value = "/location", method = { RequestMethod.POST,
 			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Location getLocation(@RequestBody Location locationRequest) {
+	public Location getLocation(@RequestBody Location locationRequest) throws IOException {
 		LOG.debug("Entered into get location service");
 		Location locationResponse = locationService.getLocation(locationRequest);
 		LOG.debug("Exiting from get location service");
