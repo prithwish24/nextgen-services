@@ -57,6 +57,7 @@
 		<module>addons-services</module>
 		<module>auth-server</module>
 		<module>monitoring</module>
+		<module>healthcheck</module>
 	</modules>
 
 </project>
