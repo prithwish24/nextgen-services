@@ -1,5 +1,6 @@
 package com.cts.product.rental.google.ai.transformer;
 
+import com.cts.product.rental.bo.Location;
 import com.cts.product.rental.bo.Reservation;
 import com.cts.product.rental.google.ai.bo.AIOutputContext;
 import com.cts.product.rental.google.ai.bo.Fulfillment;
@@ -12,11 +13,22 @@ public class ReservationTransformer {
 		Fulfillment fulfillment = new Fulfillment();
 		fulfillment.setSpeech("Reservation created successfully.");
 		fulfillment.setDisplayText("Reservation #" + reservation.getId());
-		
+
 		AIOutputContext aiOutputContext = new AIOutputContext();
 		aiOutputContext.setName("CarBooking");
 		fulfillment.setContextOut(aiOutputContext);
 		return fulfillment;
 	}
-	
+
+	public Fulfillment transform(Location location) {
+		Fulfillment fulfillment = new Fulfillment();
+		fulfillment.setSpeech("Reservation created successfully.");
+		fulfillment.setDisplayText("Reservation #" + location.getId());
+
+		AIOutputContext aiOutputContext = new AIOutputContext();
+		aiOutputContext.setName("CarBooking");
+		fulfillment.setContextOut(aiOutputContext);
+		return fulfillment;
+	}
+
 }

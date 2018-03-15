@@ -3,7 +3,7 @@ spring:
     name: reservation-service
   cloud:
     config:
-      uri: ${NEXTGEN_CONFIG_SERVER}
+      uri: ${NEXTGEN_CONFIG_SERVER:http://localhost:8199}
 #      username: user
 #      password: s3cr3t
       fail-fast: false
