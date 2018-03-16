@@ -2,6 +2,7 @@ package com.cts.product.rental.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,14 @@ public class LocationServiceImpl implements LocationService {
 		String businessName = null;
 		String city = null;
 		List<Location> locationList = getAllLocations();
-		boolean pickupFromNearestLocation = locationRequest.isPickupFromNearestLocation();
+		boolean pickupFromNearestLocation = locationRequest
+				.isPickupFromNearestLocation();
 		if (pickupFromNearestLocation) {
-			Session findBySessionId = sessionService.findBySessionId(locationRequest.getSessionId());
+			Session findBySessionId = sessionService
+					.findBySessionId(locationRequest.getSessionId());
+			if (findBySessionId == null) {
+				return null;
+			}
 			zipcode = findBySessionId.getZipcode();
 		} else {
 			zipcode = locationRequest.getZipcode();
@@ -41,28 +47,20 @@ public class LocationServiceImpl implements LocationService {
 		String finalZipcode = zipcode;
 		String finalBusinessName = businessName;
 		String finalCity = city;
-
-		location = locationList.stream().filter(
-				loc -> ((StringUtils.isNotBlank(finalZipcode) && StringUtils.equals(loc.getZipcode(), finalZipcode)
-						|| (StringUtils.isNotBlank(finalBusinessName) && StringUtils.isNotBlank(finalCity)
-								&& StringUtils.equalsIgnoreCase(loc.getBusinessName(), finalBusinessName)
-								&& StringUtils.equalsIgnoreCase(loc.getCity(), finalCity)))))
-				.findFirst().get();
-
-		// for (Location loc : locationList) {
-		// if (StringUtils.isNotBlank(zipcode) && StringUtils.equals(loc.getZipcode(),
-		// zipcode)) {
-		// location = loc;
-		// break;
-		// } else if (StringUtils.isNotBlank(businessName) &&
-		// StringUtils.isNotBlank(city)
-		// && StringUtils.equalsIgnoreCase(loc.getBusinessName(), businessName)
-		// && StringUtils.equalsIgnoreCase(loc.getCity(), city)) {
-		// location = loc;
-		// break;
-		// }
-		// }
-
+		try {
+			location = locationList.stream().filter(loc -> ((StringUtils
+					.isNotBlank(finalZipcode)
+					&& StringUtils.equals(loc.getZipcode(), finalZipcode)
+					|| (StringUtils.isNotBlank(finalBusinessName)
+							&& StringUtils.isNotBlank(finalCity)
+							&& StringUtils.equalsIgnoreCase(
+									loc.getBusinessName(), finalBusinessName)
+							&& StringUtils.equalsIgnoreCase(loc.getCity(),
+									finalCity)))))
+					.findFirst().get();
+		} catch (NoSuchElementException e) {
+			return null;
+		}
 		return location;
 	}
 
@@ -73,7 +71,9 @@ public class LocationServiceImpl implements LocationService {
 		};
 		List<Location> locationList = null;
 		try {
-			locationList = mapper.readValue(new ClassPathResource("location.json").getInputStream(), typeReference);
+			locationList = mapper.readValue(
+					new ClassPathResource("location.json").getInputStream(),
+					typeReference);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

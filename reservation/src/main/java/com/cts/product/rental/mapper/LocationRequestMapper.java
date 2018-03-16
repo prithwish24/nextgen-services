@@ -13,12 +13,24 @@ public class LocationRequestMapper {
 	public static Location map(ReservationRequest reservationRequest) {
 		Location locationRequest = new Location();
 		List<Context> contexts = reservationRequest.getResult().getContexts();
-		contexts.stream().filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
-			locationRequest.setPickupFromNearestLocation(context.getParameters().isPickupFromNearestLocation());
-			locationRequest.setSessionId(context.getParameters().getSessionId());
-			locationRequest.setBusinessName(context.getParameters().getLandmark().getBusinessName());
-			locationRequest.setCity(context.getParameters().getLandmark().getCity());
-		});
+		contexts.stream().filter(
+				context -> StringUtils.equals("carrental", context.getName()))
+				.forEach(context -> {
+					locationRequest.setPickupFromNearestLocation(context
+							.getParameters().isPickupFromNearestLocation());
+					locationRequest.setSessionId(
+							context.getParameters().getSessionId());
+					locationRequest.setBusinessName(
+							context.getParameters().getLandmark() != null
+									? context.getParameters().getLandmark()
+											.getBusinessName()
+									: null);
+					locationRequest.setCity(
+							context.getParameters().getLandmark() != null
+									? context.getParameters().getLandmark()
+											.getCity()
+									: null);
+				});
 		return locationRequest;
 	}
 }

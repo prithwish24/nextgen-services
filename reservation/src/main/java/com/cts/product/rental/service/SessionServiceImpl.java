@@ -26,16 +26,14 @@ public class SessionServiceImpl implements SessionService {
 	}
 
 	@Override
-	public void updateSessionWithZipcode(String sessionId, String zipcode) throws IOException {
+	public void updateSessionWithZipcode(String sessionId, String zipcode)
+			throws IOException {
 		sessionDao.updateZip(sessionId, zipcode);
 	}
 
 	@Override
-	public Session findBySessionId(String requestSessionId) throws IOException {
+	public Session findBySessionId(String requestSessionId) {
 		Session session = sessionDao.findBySessionId(requestSessionId);
-		if (session == null) {
-			throw new IOException("No data found");
-		}
 		return session;
 	}
 }

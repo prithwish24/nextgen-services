@@ -9,7 +9,8 @@ public interface SessionService {
 
 	String createSession(ReservationRequest reservationRequest);
 
-	void updateSessionWithZipcode(String sessionId, String zipcode) throws IOException;
+	void updateSessionWithZipcode(String sessionId, String zipcode)
+			throws IOException;
 
-	Session findBySessionId(String requestSessionId) throws IOException;
+	Session findBySessionId(String requestSessionId);
 }
