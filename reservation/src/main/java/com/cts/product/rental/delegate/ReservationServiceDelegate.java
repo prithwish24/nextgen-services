@@ -18,41 +18,35 @@ import com.cts.product.rental.service.SessionService;
 @Service
 public class ReservationServiceDelegate {
 
-	@Autowired
-	private ReservationService reservationService;
-	@Autowired
-	private LocationService locationService;
-	@Autowired
-	private SessionService sessionService;
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private LocationService locationService;
+    @Autowired
+    private SessionService sessionService;
 
-	public ReservationResponse delegate(ReservationRequest reservationRequest)
-			throws IOException {
-		ReservationResponse reservationResponse = new ReservationResponse();
-		String action = reservationRequest.getResult().getAction();
-		switch (action) {
-		case "getSessionId":
-			String sessionId = sessionService.createSession(reservationRequest);
-			reservationResponse = ReservationResponseMapper
-					.mapSession(sessionId);
-			break;
-		case "findNearestRentOffice":
-			Location locationRequest = LocationRequestMapper
-					.map(reservationRequest);
-			Location location = locationService.getLocation(locationRequest);
-			reservationResponse = ReservationResponseMapper
-					.mapLocation(reservationRequest, location);
-			break;
-		case "createReservation":
-			Reservation reservation = reservationService
-					.createReservation(reservationRequest);
-			reservationResponse = ReservationResponseMapper
-					.mapReservation(reservation);
-			break;
-		default:
-			throw new IOException("Undefined action.");
-		}
-
-		return reservationResponse;
-
+    public ReservationResponse delegate(ReservationRequest reservationRequest) throws IOException {
+	ReservationResponse reservationResponse = new ReservationResponse();
+	String action = reservationRequest.getResult().getAction();
+	switch (action) {
+	case "getSessionId":
+	    String sessionId = sessionService.createSession(reservationRequest);
+	    reservationResponse = ReservationResponseMapper.mapSession(sessionId);
+	    break;
+	case "findNearestRentOffice":
+	    Location locationRequest = LocationRequestMapper.map(reservationRequest);
+	    Location location = locationService.getLocation(locationRequest);
+	    reservationResponse = ReservationResponseMapper.mapLocation(reservationRequest, location);
+	    break;
+	case "createReservation":
+	    Reservation reservation = reservationService.createReservation(reservationRequest);
+	    reservationResponse = ReservationResponseMapper.mapReservation(reservation);
+	    break;
+	default:
+	    throw new IOException("Undefined action.");
 	}
+
+	return reservationResponse;
+
+    }
 }
