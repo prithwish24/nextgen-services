@@ -19,6 +19,8 @@ public class ReservationResponse {
 	private String displayText;
 	@JsonProperty("contextOut")
 	private List<Context> contextOut;
+	@JsonProperty("fulfillment")
+	private Fulfillment fulfillment;
 
 	@JsonProperty("followupEvent")
 	public FollowupEvent getFollowupEvent() {
@@ -58,6 +60,16 @@ public class ReservationResponse {
 	@JsonProperty("contextOut")
 	public void setContextOut(List<Context> contextOut) {
 		this.contextOut = contextOut;
+	}
+
+	@JsonProperty("fulfillment")
+	public Fulfillment getFulfillment() {
+		return fulfillment;
+	}
+
+	@JsonProperty("fulfillment")
+	public void setFulfillment(Fulfillment fulfillment) {
+		this.fulfillment = fulfillment;
 	}
 
 }
