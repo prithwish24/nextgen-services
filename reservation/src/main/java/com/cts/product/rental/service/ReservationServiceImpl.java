@@ -55,4 +55,9 @@ public class ReservationServiceImpl implements ReservationService {
 		location.setZipcode(zipcode);
 		return location;
 	}
+
+	@Override
+	public List<Reservation> listReservations() {
+		return getAllReservations();
+	}
 }

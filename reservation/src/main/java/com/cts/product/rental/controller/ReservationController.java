@@ -1,6 +1,7 @@
 package com.cts.product.rental.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,6 +86,13 @@ public class ReservationController {
 		return locationResponse;
 	}
 
+	@RequestMapping(value="/retrieve", method=RequestMethod.GET, 
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Reservation> retrieve(
+			@RequestParam(name="userid", required=true, defaultValue="") String userId) {
+		return reservationService.listReservations();
+	}
+	
 	public Fulfillment create_fallback() {
 		return null;
 	}

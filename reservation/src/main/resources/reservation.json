@@ -3,18 +3,21 @@
   "pickupPoint":"St. Louis",
   "dropPoint":"St. Louis",
   "pickupDateTime":"2018-02-05",
-  "dropoffDateTime":"2018-02-06"
+  "dropoffDateTime":"2018-02-06",
+  "carType":"MidSize"
 },
 {
   "id":"1987457",
   "pickupPoint":"Richmond",
   "dropPoint":"Richmond",
   "pickupDateTime":"2018-03-05",
-  "dropoffDateTime":"2018-03-06"
+  "dropoffDateTime":"2018-03-06",
+  "carType":"Standard"
 },{
   "id":"1987458",
   "pickupPoint":"Orlando",
   "dropPoint":"Orlando",
-  "pickupDateTime":"2018-02-12",
-  "dropoffDateTime":"2018-02-13"
+  "pickupDateTime":"2018-04-12",
+  "dropoffDateTime":"2018-04-13",
+  "carType":"MidSize"
 }]

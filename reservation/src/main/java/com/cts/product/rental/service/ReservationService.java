@@ -1,6 +1,7 @@
 package com.cts.product.rental.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.cts.product.rental.bo.Location;
 import com.cts.product.rental.bo.Reservation;
@@ -11,4 +12,6 @@ public interface ReservationService {
 	Reservation createReservation(ReservationRequest reservationRequest);
 
 	Location updateSessionWithZipcode(String sessionId, String zipcode) throws IOException;
+	
+	List<Reservation> listReservations();
 }

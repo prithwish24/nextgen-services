@@ -9,6 +9,7 @@ public class Reservation {
 	private String dropPoint;
 	private Date pickupDateTime;
 	private Date dropoffDateTime;
+	private String carType;
 	
 	public String getId() {
 		return id;
@@ -39,6 +40,12 @@ public class Reservation {
 	}
 	public void setDropoffDateTime(Date dropoffDateTime) {
 		this.dropoffDateTime = dropoffDateTime;
+	}
+	public String getCarType() {
+		return carType;
+	}
+	public void setCarType(String carType) {
+		this.carType = carType;
 	}
 	
 }
