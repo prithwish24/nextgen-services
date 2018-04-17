@@ -1,7 +1,6 @@
 package com.cts.product.rental.mapper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,63 +8,58 @@ import org.apache.commons.lang3.StringUtils;
 import com.cts.product.rental.bo.Context;
 import com.cts.product.rental.bo.Data;
 import com.cts.product.rental.bo.FollowupEvent;
-import com.cts.product.rental.bo.Fulfillment;
 import com.cts.product.rental.bo.Location;
-import com.cts.product.rental.bo.Message;
 import com.cts.product.rental.bo.Reservation;
 import com.cts.product.rental.bo.ReservationRequest;
 import com.cts.product.rental.bo.ReservationResponse;
 
 public class ReservationResponseMapper {
 
-	public static ReservationResponse mapReservation(Reservation reservation) {
+    public static ReservationResponse mapReservation(Reservation reservation) {
 
-		ReservationResponse reservationResponse = new ReservationResponse();
-		reservationResponse
-				.setSpeech("Your Booking is Confirmed and the confirmation number is #" + reservation.getId());
-		reservationResponse
-				.setDisplayText("Your Booking is Confirmed and the confirmation number is #" + reservation.getId());
-		return reservationResponse;
+	ReservationResponse reservationResponse = new ReservationResponse();
+	String speechText = "Your Booking is Confirmed and the confirmation number is #";
+	reservationResponse
+		.setSpeech(speechText + reservation.getId());
+	reservationResponse
+		.setDisplayText(speechText + reservation.getId());
+	return reservationResponse;
+    }
+
+    public static ReservationResponse mapLocation(ReservationRequest reservationRequest, Location location) {
+
+	ReservationResponse reservationResponse = new ReservationResponse();
+	List<Context> contextOut = new ArrayList<>();
+	for (Context context : reservationRequest.getResult().getContexts()) {
+	    if (StringUtils.equals("carrental", context.getName())) {
+		contextOut.add(context);
+		break;
+	    }
 	}
+	if (location != null) {
+	    contextOut.get(0).getParameters().setPickuplocation(location.getAddress());
 
-	public static ReservationResponse mapLocation(ReservationRequest reservationRequest, Location location) {
-
-		ReservationResponse reservationResponse = new ReservationResponse();
-		List<Context> contextOut = new ArrayList<>();
-		for (Context context : reservationRequest.getResult().getContexts()) {
-			if (StringUtils.equals("carrental", context.getName())) {
-				contextOut.add(context);
-				break;
-			}
-		}
-		if (location != null) {
-			contextOut.get(0).getParameters().setPickuplocation(location.getAddress());
-
-			Fulfillment fulfillment = new Fulfillment();
-			fulfillment.setSpeech("What type of car do you want?");
-			Message message = new Message();
-			message.setSpeech("What type of car do you want?");
-			message.setType(0);
-			fulfillment.setMessages(Arrays.asList(message));
-			reservationResponse.setFulfillment(fulfillment);
-		} else {
-			FollowupEvent followupEvent = new FollowupEvent();
-			followupEvent.setName("error_location");
-			reservationResponse.setFollowupEvent(followupEvent);
-		}
-		reservationResponse.setContextOut(contextOut);
-		return reservationResponse;
+	    String speechText = "What type of car do you want?";
+	    reservationResponse.setSpeech(speechText);
+	    reservationResponse.setDisplayText(speechText);
+	} else {
+	    FollowupEvent followupEvent = new FollowupEvent();
+	    followupEvent.setName("error_location");
+	    reservationResponse.setFollowupEvent(followupEvent);
 	}
+	reservationResponse.setContextOut(contextOut);
+	return reservationResponse;
+    }
 
-	public static ReservationResponse mapSession(String sessionId) {
+    public static ReservationResponse mapSession(String sessionId) {
 
-		ReservationResponse reservationResponse = new ReservationResponse();
-		FollowupEvent followupEvent = new FollowupEvent();
-		followupEvent.setName("start_reservation");
-		Data data = new Data();
-		data.setSessionId(sessionId);
-		followupEvent.setData(data);
-		reservationResponse.setFollowupEvent(followupEvent);
-		return reservationResponse;
-	}
+	ReservationResponse reservationResponse = new ReservationResponse();
+	FollowupEvent followupEvent = new FollowupEvent();
+	followupEvent.setName("start_reservation");
+	Data data = new Data();
+	data.setSessionId(sessionId);
+	followupEvent.setData(data);
+	reservationResponse.setFollowupEvent(followupEvent);
+	return reservationResponse;
+    }
 }
