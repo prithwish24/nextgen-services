@@ -19,40 +19,40 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class ReservationServiceImpl implements ReservationService {
 
-	@Autowired
-	private SessionService sessionService;
+    @Autowired
+    private SessionService sessionService;
 
-	public Reservation createReservation(ReservationRequest reservationRequest) {
-		List<Reservation> reservationList = getAllReservations();
-		int nextInt = new Random().nextInt(3);
-		Reservation reservation = reservationList.get(nextInt);
-		return reservation;
+    public Reservation createReservation(ReservationRequest reservationRequest) {
+	List<Reservation> reservationList = getAllReservations();
+	int nextInt = new Random().nextInt(3);
+	Reservation reservation = reservationList.get(nextInt);
+	return reservation;
+    }
+
+    public List<Reservation> getAllReservations() {
+	ObjectMapper mapper = new ObjectMapper();
+	TypeReference<List<Reservation>> typeReference = new TypeReference<List<Reservation>>() {
+
+	};
+	List<Reservation> reservationList = null;
+	try {
+	    reservationList = mapper.readValue(new ClassPathResource("reservation.json").getInputStream(),
+		    typeReference);
+	} catch (JsonParseException e) {
+	    e.printStackTrace();
+	} catch (JsonMappingException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
 	}
+	return reservationList;
+    }
 
-	public List<Reservation> getAllReservations() {
-		ObjectMapper mapper = new ObjectMapper();
-		TypeReference<List<Reservation>> typeReference = new TypeReference<List<Reservation>>() {
-
-		};
-		List<Reservation> reservationList = null;
-		try {
-			reservationList = mapper.readValue(new ClassPathResource("reservation.json").getInputStream(),
-					typeReference);
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return reservationList;
-	}
-
-	@Override
-	public Location updateSessionWithZipcode(String sessionId, String zipcode) throws IOException {
-		sessionService.updateSessionWithZipcode(sessionId, zipcode);
-		Location location = new Location();
-		location.setZipcode(zipcode);
-		return location;
-	}
+    @Override
+    public Location updateSessionWithZipcode(String sessionId, String zipcode) throws IOException {
+	sessionService.updateSessionWithZipcode(sessionId, zipcode);
+	Location location = new Location();
+	location.setZipcode(zipcode);
+	return location;
+    }
 }

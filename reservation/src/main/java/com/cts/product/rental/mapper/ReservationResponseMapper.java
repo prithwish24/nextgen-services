@@ -19,10 +19,8 @@ public class ReservationResponseMapper {
 
 	ReservationResponse reservationResponse = new ReservationResponse();
 	String speechText = "Your Booking is Confirmed and the confirmation number is #";
-	reservationResponse
-		.setSpeech(speechText + reservation.getId());
-	reservationResponse
-		.setDisplayText(speechText + reservation.getId());
+	reservationResponse.setSpeech(speechText + reservation.getId());
+	reservationResponse.setDisplayText(speechText + reservation.getId());
 	return reservationResponse;
     }
 
