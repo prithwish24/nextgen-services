@@ -15,12 +15,21 @@ import com.cts.product.rental.bo.ReservationResponse;
 
 public class ReservationResponseMapper {
 
-    public static ReservationResponse mapReservation(Reservation reservation) {
+    public static ReservationResponse mapReservation(ReservationRequest reservationRequest, Reservation reservation) {
 
 	ReservationResponse reservationResponse = new ReservationResponse();
-	String speechText = "Your Booking is Confirmed and the confirmation number is #";
-	reservationResponse.setSpeech(speechText + reservation.getId());
-	reservationResponse.setDisplayText(speechText + reservation.getId());
+	List<Context> contextOut = new ArrayList<>();
+	for (Context context : reservationRequest.getResult().getContexts()) {
+	    if (StringUtils.equals("carrental", context.getName())) {
+		contextOut.add(context);
+		break;
+	    }
+	}
+	contextOut.get(0).getParameters().setConfirmationNumber(reservation.getId());
+	reservationResponse.setContextOut(contextOut);
+	String speechText = "Your booking is confirmed";
+	reservationResponse.setSpeech(speechText);
+	reservationResponse.setDisplayText(speechText);
 	return reservationResponse;
     }
 

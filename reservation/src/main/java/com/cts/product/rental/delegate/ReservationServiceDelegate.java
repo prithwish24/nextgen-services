@@ -40,7 +40,7 @@ public class ReservationServiceDelegate {
 	    break;
 	case "createReservation":
 	    Reservation reservation = reservationService.createReservation(reservationRequest);
-	    reservationResponse = ReservationResponseMapper.mapReservation(reservation);
+	    reservationResponse = ReservationResponseMapper.mapReservation(reservationRequest, reservation);
 	    break;
 	default:
 	    throw new IOException("Undefined action.");

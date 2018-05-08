@@ -1,6 +1,7 @@
 package com.cts.product.rental.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,66 +28,75 @@ import com.cts.product.rental.service.ReservationService;
 @RequestMapping("/")
 @ComponentScan(basePackages = { "com.cts.product.rental" })
 public class ReservationController {
-	private static final Logger LOG = LoggerFactory.getLogger(ReservationController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReservationController.class);
 
-	@Autowired
-	private ReservationService reservationService;
-	@Autowired
-	private ReservationServiceDelegate reservationServiceDelegate;
-	@Autowired
-	private LocationService locationService;
-	// @Autowired
-	// private ReservationTransformer transformer;
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private ReservationServiceDelegate reservationServiceDelegate;
+    @Autowired
+    private LocationService locationService;
+    // @Autowired
+    // private ReservationTransformer transformer;
 
-	@RequestMapping(value = "/lfs", method = { RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Fulfillment lowFareSearch() {
+    @RequestMapping(value = "/lfs", method = { RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Fulfillment lowFareSearch() {
 
-		return new Fulfillment();
-	}
+	return new Fulfillment();
+    }
 
-	// @HystrixCommand(fallbackMethod = "create_fallback")
-	@RequestMapping(value = "/rental", method = { RequestMethod.POST,
-			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ReservationResponse aiCall(@RequestBody ReservationRequest reservationRequest) throws IOException {
-		LOG.debug("Entered into reservation service");
-		ReservationResponse reservationResponse = reservationServiceDelegate.delegate(reservationRequest);
-		LOG.debug("Exiting from reservation service");
-		return reservationResponse;
-	}
+    // @HystrixCommand(fallbackMethod = "create_fallback")
+    @RequestMapping(value = "/rental", method = { RequestMethod.POST,
+	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ReservationResponse aiCall(@RequestBody ReservationRequest reservationRequest) throws IOException {
+	LOG.debug("Entered into reservation service");
+	ReservationResponse reservationResponse = reservationServiceDelegate.delegate(reservationRequest);
+	LOG.debug("Exiting from reservation service");
+	return reservationResponse;
+    }
 
-	// @HystrixCommand(fallbackMethod = "create_fallback")
-	@RequestMapping(value = "/zipcode/{sessionId}", method = { RequestMethod.POST,
-			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Location updateSessionWithZipcode(@PathVariable String sessionId, @RequestParam String zipcode)
-			throws IOException {
-		LOG.debug("Entered into update Session With Zipcode service");
-		Location locationResponse = reservationService.updateSessionWithZipcode(sessionId, zipcode);
-		LOG.debug("Exiting from update Session With Zipcode service");
-		return locationResponse;
-	}
+    // @HystrixCommand(fallbackMethod = "create_fallback")
+    @RequestMapping(value = "/zipcode/{sessionId}", method = { RequestMethod.POST,
+	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Location updateSessionWithZipcode(@PathVariable String sessionId, @RequestParam String zipcode)
+	    throws IOException {
+	LOG.debug("Entered into update Session With Zipcode service");
+	Location locationResponse = reservationService.updateSessionWithZipcode(sessionId, zipcode);
+	LOG.debug("Exiting from update Session With Zipcode service");
+	return locationResponse;
+    }
 
-	// @HystrixCommand(fallbackMethod = "create_fallback")
-	@RequestMapping(value = "/create", method = { RequestMethod.POST,
-			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Reservation create(@RequestBody ReservationRequest reservationRequest) {
-		LOG.debug("Entered into create reservation service");
-		Reservation reservation = reservationService.createReservation(reservationRequest);
-		LOG.debug("Exiting from create reservation service");
-		return reservation;
-	}
+    @RequestMapping(value = "/trips/upcoming", method = { RequestMethod.POST,
+	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Reservation> getUpcomingTrips() {
+	LOG.debug("Entered into get upcoming trips");
+	List<Reservation> reservationList = reservationService.getUpcomingTrips();
+	LOG.debug("Entered into get upcoming trips");
+	return reservationList;
+    }
 
-	// @HystrixCommand(fallbackMethod = "create_fallback")
-	@RequestMapping(value = "/location", method = { RequestMethod.POST,
-			RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Location getLocation(@RequestBody Location locationRequest) throws IOException {
-		LOG.debug("Entered into get location service");
-		Location locationResponse = locationService.getLocation(locationRequest);
-		LOG.debug("Exiting from get location service");
-		return locationResponse;
-	}
+    // @HystrixCommand(fallbackMethod = "create_fallback")
+    @RequestMapping(value = "/create", method = { RequestMethod.POST,
+	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Reservation create(@RequestBody ReservationRequest reservationRequest) {
+	LOG.debug("Entered into create reservation service");
+	Reservation reservation = reservationService.createReservation(reservationRequest);
+	LOG.debug("Exiting from create reservation service");
+	return reservation;
+    }
 
-	public Fulfillment create_fallback() {
-		return null;
-	}
+    // @HystrixCommand(fallbackMethod = "create_fallback")
+    @RequestMapping(value = "/location", method = { RequestMethod.POST,
+	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Location getLocation(@RequestBody Location locationRequest) throws IOException {
+	LOG.debug("Entered into get location service");
+	Location locationResponse = locationService.getLocation(locationRequest);
+	LOG.debug("Exiting from get location service");
+	return locationResponse;
+    }
+
+    public Fulfillment create_fallback() {
+	return null;
+    }
 
 }

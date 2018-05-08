@@ -24,7 +24,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     public Reservation createReservation(ReservationRequest reservationRequest) {
 	List<Reservation> reservationList = getAllReservations();
-	int nextInt = new Random().nextInt(3);
+	int nextInt = new Random().nextInt(2) + 2;
 	Reservation reservation = reservationList.get(nextInt);
 	return reservation;
     }
@@ -54,5 +54,11 @@ public class ReservationServiceImpl implements ReservationService {
 	Location location = new Location();
 	location.setZipcode(zipcode);
 	return location;
+    }
+
+    @Override
+    public List<Reservation> getUpcomingTrips() {
+	List<Reservation> reservationList = getAllReservations();
+	return reservationList.subList(0, 2);
     }
 }
