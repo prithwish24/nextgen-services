@@ -56,6 +56,8 @@ public class Parameters {
     private boolean pickupfromnearestlocation;
     @JsonProperty("confirmationnumber")
     private String confirmationnumber;
+    @JsonProperty("step")
+    private String step;
 
     @JsonProperty("duration")
     public String getDuration() {
@@ -267,4 +269,13 @@ public class Parameters {
 	this.confirmationnumber = confirmationnumber;
     }
 
+    @JsonProperty("step")
+    public String getStep() {
+	return step;
+    }
+
+    @JsonProperty("step")
+    public void setStep(String step) {
+	this.step = step;
+    }
 }
