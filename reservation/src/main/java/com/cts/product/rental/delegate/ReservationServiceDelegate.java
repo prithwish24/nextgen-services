@@ -2,6 +2,7 @@ package com.cts.product.rental.delegate;
 
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,15 +25,12 @@ public class ReservationServiceDelegate {
     private LocationService locationService;
     @Autowired
     private SessionService sessionService;
+    String sessionId;
 
     public ReservationResponse delegate(ReservationRequest reservationRequest) throws IOException {
 	ReservationResponse reservationResponse = new ReservationResponse();
 	String action = reservationRequest.getResult().getAction();
 	switch (action) {
-	case "getSessionId":
-	    String sessionId = sessionService.createSession(reservationRequest);
-	    reservationResponse = ReservationResponseMapper.mapSession(sessionId);
-	    break;
 	case "findNearestRentOffice":
 	    Location locationRequest = LocationRequestMapper.map(reservationRequest);
 	    Location location = locationService.getLocation(locationRequest);
@@ -40,13 +38,19 @@ public class ReservationServiceDelegate {
 	    break;
 	case "createReservation":
 	    Reservation reservation = reservationService.createReservation(reservationRequest);
+	    reservationRequest.getResult().getContexts().stream()
+		    .filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
+			sessionId = context.getParameters().getSessionId();
+		    });
+	    if (reservation != null) {
+		sessionService.updateSessionWithReservation(sessionId, reservation);
+	    }
 	    reservationResponse = ReservationResponseMapper.mapReservation(reservationRequest, reservation);
 	    break;
 	default:
-	    throw new IOException("Undefined action.");
+	    throw new IOException("Undefined action (" + action + ")");
 	}
 
 	return reservationResponse;
-
     }
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -21,15 +22,24 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     private SessionService sessionService;
+    String sessionId;
 
-    public Reservation createReservation(ReservationRequest reservationRequest) {
+    @Override
+    public Reservation createReservation(ReservationRequest reservationRequest) throws IOException {
+	reservationRequest.getResult().getContexts().stream()
+		.filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
+		    sessionId = context.getParameters().getSessionId();
+		});
+	if (sessionService.findBySessionId(sessionId) == null) {
+	    return null;
+	}
 	List<Reservation> reservationList = getAllReservations();
-	int nextInt = new Random().nextInt(2) + 2;
+	int nextInt = new Random().nextInt(3);
 	Reservation reservation = reservationList.get(nextInt);
 	return reservation;
     }
 
-    public List<Reservation> getAllReservations() {
+    private List<Reservation> getAllReservations() {
 	ObjectMapper mapper = new ObjectMapper();
 	TypeReference<List<Reservation>> typeReference = new TypeReference<List<Reservation>>() {
 
@@ -57,8 +67,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getUpcomingTrips() {
-	List<Reservation> reservationList = getAllReservations();
-	return reservationList.subList(0, 2);
+    public List<Reservation> getUpcomingTrips(String sessionId, String username) {
+	return sessionService.getUpcomingTrips(sessionId, username);
     }
 }

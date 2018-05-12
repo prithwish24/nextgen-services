@@ -9,9 +9,9 @@ import com.cts.product.rental.bo.ReservationRequest;
 
 public interface ReservationService {
 
-    Reservation createReservation(ReservationRequest reservationRequest);
+    Reservation createReservation(ReservationRequest reservationRequest) throws IOException;
 
-    List<Reservation> getUpcomingTrips();
+    List<Reservation> getUpcomingTrips(String sessionId, String username);
 
     Location updateSessionWithZipcode(String sessionId, String zipcode) throws IOException;
 }

@@ -1,16 +1,18 @@
 package com.cts.product.rental.service;
 
 import java.io.IOException;
+import java.util.List;
 
-import com.cts.product.rental.bo.ReservationRequest;
+import com.cts.product.rental.bo.Reservation;
 import com.cts.product.rental.entity.Session;
 
 public interface SessionService {
 
-	String createSession(ReservationRequest reservationRequest);
+    List<Reservation> getUpcomingTrips(String sessionId, String username);
 
-	void updateSessionWithZipcode(String sessionId, String zipcode)
-			throws IOException;
+    void updateSessionWithZipcode(String sessionId, String zipcode) throws IOException;
 
-	Session findBySessionId(String requestSessionId);
+    Session findBySessionId(String requestSessionId);
+
+    void updateSessionWithReservation(String sessionId, Reservation reservation) throws IOException;
 }

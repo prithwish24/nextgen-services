@@ -1,4 +1,4 @@
-package com.cts.product.profile.domain;
+package com.cts.product.rental.bo;
 
 public class BaseResponse<T> {
     private boolean success;

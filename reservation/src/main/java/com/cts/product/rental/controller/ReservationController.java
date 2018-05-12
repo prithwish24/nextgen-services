@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.product.rental.bo.BaseResponse;
 import com.cts.product.rental.bo.Location;
 import com.cts.product.rental.bo.Reservation;
 import com.cts.product.rental.bo.ReservationRequest;
@@ -58,27 +59,36 @@ public class ReservationController {
     // @HystrixCommand(fallbackMethod = "create_fallback")
     @RequestMapping(value = "/zipcode/{sessionId}", method = { RequestMethod.POST,
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Location updateSessionWithZipcode(@PathVariable String sessionId, @RequestParam String zipcode)
+    public BaseResponse<Location> updateSessionWithZipcode(@PathVariable String sessionId, @RequestParam String zipcode)
 	    throws IOException {
 	LOG.debug("Entered into update Session With Zipcode service");
 	Location locationResponse = reservationService.updateSessionWithZipcode(sessionId, zipcode);
+	BaseResponse<Location> bp = new BaseResponse<>();
+	bp.setResponse(locationResponse);
+	bp.setSuccess(true);
+	bp.setSessionId(sessionId);
 	LOG.debug("Exiting from update Session With Zipcode service");
-	return locationResponse;
+	return bp;
     }
 
-    @RequestMapping(value = "/trips/upcoming", method = { RequestMethod.POST,
+    @RequestMapping(value = "/trips/upcoming/{sessionId}", method = { RequestMethod.POST,
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Reservation> getUpcomingTrips() {
+    public BaseResponse<List<Reservation>> getUpcomingTrips(@PathVariable String sessionId,
+	    @RequestParam(name = "username", required = true, defaultValue = "") String username) {
 	LOG.debug("Entered into get upcoming trips");
-	List<Reservation> reservationList = reservationService.getUpcomingTrips();
+	BaseResponse<List<Reservation>> bp = new BaseResponse<>();
+	List<Reservation> reservationList = reservationService.getUpcomingTrips(sessionId, username);
+	bp.setResponse(reservationList);
+	bp.setSuccess(true);
+	bp.setSessionId(sessionId);
 	LOG.debug("Entered into get upcoming trips");
-	return reservationList;
+	return bp;
     }
 
     // @HystrixCommand(fallbackMethod = "create_fallback")
     @RequestMapping(value = "/create", method = { RequestMethod.POST,
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Reservation create(@RequestBody ReservationRequest reservationRequest) {
+    public Reservation create(@RequestBody ReservationRequest reservationRequest) throws IOException {
 	LOG.debug("Entered into create reservation service");
 	Reservation reservation = reservationService.createReservation(reservationRequest);
 	LOG.debug("Exiting from create reservation service");
