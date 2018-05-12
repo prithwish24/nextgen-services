@@ -1,8 +1,6 @@
 
 package com.cts.product.rental.bo;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,11 +9,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "duration", "sessionId.original", "date-period.original", "sessionId", "duration.original",
 	"date-period", "TypeOfItems", "cartype", "TypeOfItems.original", "TypeOfService.original", "TypeOfService",
 	"cartype.original", "pickuptime", "pickupdate.original", "pickupdate", "pickuptime.original", "pickuplocation",
-	"landmark", "landmark.original", "pickupfromnearestlocation" })
+	"landmark", "landmark.original", "pickupfromnearestlocation", "confirmationnumber", "step" })
 public class Parameters {
 
     @JsonProperty("duration")
-    private String duration;
+    private Duration duration;
     @JsonProperty("sessionId.original")
     private String sessionIdOriginal;
     @JsonProperty("date-period.original")
@@ -29,7 +27,7 @@ public class Parameters {
     @JsonProperty("TypeOfItems")
     private String typeOfItems;
     @JsonProperty("cartype")
-    private List<String> cartype;
+    private String cartype;
     @JsonProperty("TypeOfItems.original")
     private String typeOfItemsOriginal;
     @JsonProperty("TypeOfService.original")
@@ -60,12 +58,12 @@ public class Parameters {
     private String step;
 
     @JsonProperty("duration")
-    public String getDuration() {
+    public Duration getDuration() {
 	return duration;
     }
 
     @JsonProperty("duration")
-    public void setDuration(String duration) {
+    public void setDuration(Duration duration) {
 	this.duration = duration;
     }
 
@@ -130,12 +128,12 @@ public class Parameters {
     }
 
     @JsonProperty("cartype")
-    public List<String> getCartype() {
+    public String getCartype() {
 	return cartype;
     }
 
     @JsonProperty("cartype")
-    public void setCartype(List<String> cartype) {
+    public void setCartype(String cartype) {
 	this.cartype = cartype;
     }
 
