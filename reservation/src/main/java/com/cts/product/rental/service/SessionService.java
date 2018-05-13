@@ -15,4 +15,6 @@ public interface SessionService {
     Session findBySessionId(String requestSessionId);
 
     void updateSessionWithReservation(String sessionId, Reservation reservation) throws IOException;
+
+    void clearSession(String sessionId);
 }

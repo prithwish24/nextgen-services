@@ -38,4 +38,9 @@ public class SessionServiceImpl implements SessionService {
     public void updateSessionWithReservation(String sessionId, Reservation reservation) throws IOException {
 	sessionDao.updateReservation(sessionId, reservation);
     }
+
+    @Override
+    public void clearSession(String sessionId) {
+	sessionDao.clearSession(sessionId);
+    }
 }

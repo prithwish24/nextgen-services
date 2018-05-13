@@ -4,10 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class ReservationSession {
@@ -23,9 +20,8 @@ public class ReservationSession {
     private Date pickupDateTime;
     @Column(name = "dropoffDateTime")
     private Date dropoffDateTime;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "session_id")
-    private Session session;
+    @Column(name = "user_id")
+    private String userId;
 
     public String getId() {
 	return id;
@@ -67,12 +63,11 @@ public class ReservationSession {
 	this.dropoffDateTime = dropoffDateTime;
     }
 
-    public Session getSession() {
-	return session;
+    public String getUserId() {
+	return userId;
     }
 
-    public void setSession(Session session) {
-	this.session = session;
+    public void setUserId(String userId) {
+	this.userId = userId;
     }
-
 }

@@ -25,23 +25,17 @@ public class SessionDaoImpl implements SessionDao {
 	Session session = new Session();
 	session.setSessionId(sessionId);
 	session.setUserId(userId);
-	TypedQuery<Session> createNamedQuery = entityManager.createQuery("from Session where user_id='" + userId + "'",
-		Session.class);
-	List<Session> sessionResults = createNamedQuery.getResultList();
+	TypedQuery<ReservationSession> createNamedQuery = entityManager
+		.createQuery("from ReservationSession where user_id='" + userId + "'", ReservationSession.class);
+	List<ReservationSession> reservationSessions = createNamedQuery.getResultList();
 	List<Reservation> reservations = new ArrayList<Reservation>();
-	boolean isNewSession = true;
-	if (sessionResults != null && !sessionResults.isEmpty()) {
-	    for (Session sessionResult : sessionResults) {
-		List<ReservationSession> reservationSessions = sessionResult.getReservations();
-		for (ReservationSession reservationSession : reservationSessions) {
-		    reservations.add(populateReservation(reservationSession));
-		}
-		if (sessionResult.getSessionId().equals(sessionId)) {
-		    isNewSession = false;
-		}
+	if (reservationSessions != null && !reservationSessions.isEmpty()) {
+	    for (ReservationSession reservationSession : reservationSessions) {
+		reservations.add(populateReservation(reservationSession));
 	    }
 	}
-	if (isNewSession) {
+	Session sessionResult = findBySessionId(sessionId);
+	if (sessionResult == null) {
 	    entityManager.persist(session);
 	}
 	return reservations;
@@ -54,7 +48,7 @@ public class SessionDaoImpl implements SessionDao {
 	reservationSession.setDropPoint(reservation.getDropPoint());
 	reservationSession.setPickupDateTime(reservation.getPickupDateTime());
 	reservationSession.setDropoffDateTime(reservation.getDropoffDateTime());
-	reservationSession.setSession(session);
+	reservationSession.setUserId(session.getUserId());
 	return reservationSession;
     }
 
@@ -91,8 +85,14 @@ public class SessionDaoImpl implements SessionDao {
 	if (session == null) {
 	    throw new IOException("Invalid session Id");
 	}
-	session.getReservations().add(populateReservationSession(session, reservation));
-	entityManager.merge(session);
+	ReservationSession populateReservationSession = populateReservationSession(session, reservation);
+	entityManager.persist(populateReservationSession);
+    }
+
+    @Override
+    public void clearSession(String sessionId) {
+	Session session = findBySessionId(sessionId);
+	entityManager.remove(session);
     }
 
 }

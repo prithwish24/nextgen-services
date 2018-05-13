@@ -15,4 +15,6 @@ public interface SessionDao {
     Session findBySessionId(String sessionId);
 
     void updateReservation(String sessionId, Reservation reservation) throws IOException;
+
+    void clearSession(String sessionId);
 }

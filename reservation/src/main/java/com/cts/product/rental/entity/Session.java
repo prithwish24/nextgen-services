@@ -1,13 +1,8 @@
 package com.cts.product.rental.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Session {
@@ -19,8 +14,6 @@ public class Session {
     private String userId;
     @Column(name = "zipcode")
     private String zipcode;
-    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReservationSession> reservationSessions;
 
     public String getUserId() {
 	return userId;
@@ -44,13 +37,6 @@ public class Session {
 
     public void setZipcode(String zipcode) {
 	this.zipcode = zipcode;
-    }
-
-    public List<ReservationSession> getReservations() {
-	if (reservationSessions == null) {
-	    reservationSessions = new ArrayList<ReservationSession>();
-	}
-	return reservationSessions;
     }
 
 }

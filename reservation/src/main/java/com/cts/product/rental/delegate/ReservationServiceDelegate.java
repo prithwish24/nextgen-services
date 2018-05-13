@@ -44,6 +44,7 @@ public class ReservationServiceDelegate {
 		    });
 	    if (reservation != null) {
 		sessionService.updateSessionWithReservation(sessionId, reservation);
+		sessionService.clearSession(sessionId);
 	    }
 	    reservationResponse = ReservationResponseMapper.mapReservation(reservationRequest, reservation);
 	    break;
