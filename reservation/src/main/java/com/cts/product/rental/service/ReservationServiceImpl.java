@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -36,6 +37,7 @@ public class ReservationServiceImpl implements ReservationService {
 	List<Reservation> reservationList = getAllReservations();
 	int nextInt = new Random().nextInt(3);
 	Reservation reservation = reservationList.get(nextInt);
+	reservation.setId(RandomStringUtils.randomNumeric(9));
 	return reservation;
     }
 

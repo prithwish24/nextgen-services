@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -24,14 +25,23 @@ public class SessionDaoImpl implements SessionDao {
 	Session session = new Session();
 	session.setSessionId(sessionId);
 	session.setUserId(userId);
-	Session sessionResult = entityManager.find(Session.class, sessionId);
+	TypedQuery<Session> createNamedQuery = entityManager.createQuery("from Session where user_id='" + userId + "'",
+		Session.class);
+	List<Session> sessionResults = createNamedQuery.getResultList();
 	List<Reservation> reservations = new ArrayList<Reservation>();
-	if (sessionResult != null) {
-	    List<ReservationSession> reservationSessions = sessionResult.getReservations();
-	    for (ReservationSession reservationSession : reservationSessions) {
-		reservations.add(populateReservation(reservationSession));
+	boolean isNewSession = true;
+	if (sessionResults != null && !sessionResults.isEmpty()) {
+	    for (Session sessionResult : sessionResults) {
+		List<ReservationSession> reservationSessions = sessionResult.getReservations();
+		for (ReservationSession reservationSession : reservationSessions) {
+		    reservations.add(populateReservation(reservationSession));
+		}
+		if (sessionResult.getSessionId().equals(sessionId)) {
+		    isNewSession = false;
+		}
 	    }
-	} else {
+	}
+	if (isNewSession) {
 	    entityManager.persist(session);
 	}
 	return reservations;

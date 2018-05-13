@@ -15,47 +15,47 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class ProfileServiceImpl implements ProfileService {
 
-	@Override
-	public UserProfile authenticate(String username, String password) {
-		List<UserProfile> userProfileList = getAllUsers();
-		UserProfile profile = null;
-		for (UserProfile userProfile : userProfileList)
-			if (username.equalsIgnoreCase(userProfile.getUserId()) && password.equals(userProfile.getPassword())) {
-				profile = userProfile;
-				break;
-			}
+    @Override
+    public UserProfile authenticate(String username, String password) {
+	List<UserProfile> userProfileList = getAllUsers();
+	UserProfile profile = null;
+	for (UserProfile userProfile : userProfileList)
+	    if (userProfile.getUserId().equalsIgnoreCase(username) && userProfile.getPassword().equals(password)) {
+		profile = userProfile;
+		break;
+	    }
 
-		return profile;
+	return profile;
+    }
+
+    @Override
+    public UserProfile getUserProfile(String userId) {
+	List<UserProfile> userProfileList = getAllUsers();
+	UserProfile profile = null;
+	for (UserProfile userProfile : userProfileList) {
+	    if (userProfile.getUserId().equals(userId)) {
+		profile = userProfile;
+		break;
+	    }
 	}
+	return profile;
+    }
 
-	@Override
-	public UserProfile getUserProfile(String userId) {
-		List<UserProfile> userProfileList = getAllUsers();
-		UserProfile profile = null;
-		for (UserProfile userProfile : userProfileList) {
-			if (userProfile.getUserId().equals(userId)) {
-				profile = userProfile;
-				break;
-			}
-		}
-		return profile;
+    public List<UserProfile> getAllUsers() {
+	ObjectMapper mapper = new ObjectMapper();
+	TypeReference<List<UserProfile>> typeReference = new TypeReference<List<UserProfile>>() {
+
+	};
+	List<UserProfile> userProfileList = null;
+	try {
+	    userProfileList = mapper.readValue(new ClassPathResource("data.json").getInputStream(), typeReference);
+	} catch (JsonParseException e) {
+	    e.printStackTrace();
+	} catch (JsonMappingException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
 	}
-
-	public List<UserProfile> getAllUsers() {
-		ObjectMapper mapper = new ObjectMapper();
-		TypeReference<List<UserProfile>> typeReference = new TypeReference<List<UserProfile>>() {
-
-		};
-		List<UserProfile> userProfileList = null;
-		try {
-			userProfileList = mapper.readValue(new ClassPathResource("data.json").getInputStream(), typeReference);
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return userProfileList;
-	}
+	return userProfileList;
+    }
 }
