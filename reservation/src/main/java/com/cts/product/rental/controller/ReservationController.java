@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,11 +63,20 @@ public class ReservationController {
     public BaseResponse<Location> updateSessionWithZipcode(@PathVariable String sessionId, @RequestParam String zipcode)
 	    throws IOException {
 	LOG.debug("Entered into update Session With Zipcode service");
-	Location locationResponse = reservationService.updateSessionWithZipcode(sessionId, zipcode);
+	Location locationResponse = null;
 	BaseResponse<Location> bp = new BaseResponse<>();
-	bp.setResponse(locationResponse);
-	bp.setSuccess(true);
-	bp.setSessionId(sessionId);
+	if (StringUtils.isEmpty(zipcode)) {
+	    bp.setServiceError("2001", "ERROR", "Zipcode is required");
+	} else {
+	    try {
+		locationResponse = reservationService.updateSessionWithZipcode(sessionId, zipcode);
+		bp.setResponse(locationResponse);
+		bp.setSuccess(true);
+		bp.setSessionId(sessionId);
+	    } catch (Exception ex) {
+		bp.setServiceError("2001", "ERROR", "Invalid session Id");
+	    }
+	}
 	LOG.debug("Exiting from update Session With Zipcode service");
 	return bp;
     }
@@ -77,10 +87,14 @@ public class ReservationController {
 	    @RequestParam(name = "username", required = true, defaultValue = "") String username) {
 	LOG.debug("Entered into get upcoming trips");
 	BaseResponse<List<Reservation>> bp = new BaseResponse<>();
-	List<Reservation> reservationList = reservationService.getUpcomingTrips(sessionId, username);
-	bp.setResponse(reservationList);
-	bp.setSuccess(true);
-	bp.setSessionId(sessionId);
+	if (StringUtils.isEmpty(username)) {
+	    bp.setServiceError("2001", "ERROR", "Username is required");
+	} else {
+	    List<Reservation> reservationList = reservationService.getUpcomingTrips(sessionId, username);
+	    bp.setResponse(reservationList);
+	    bp.setSuccess(true);
+	    bp.setSessionId(sessionId);
+	}
 	LOG.debug("Entered into get upcoming trips");
 	return bp;
     }

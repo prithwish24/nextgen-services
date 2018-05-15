@@ -20,7 +20,7 @@ public class ProfileServiceImpl implements ProfileService {
 	List<UserProfile> userProfileList = getAllUsers();
 	UserProfile profile = null;
 	for (UserProfile userProfile : userProfileList)
-	    if (userProfile.getUserId().equalsIgnoreCase(username) && userProfile.getPassword().equals(password)) {
+	    if (userProfile.getUsername().equalsIgnoreCase(username) && userProfile.getPassword().equals(password)) {
 		profile = userProfile;
 		break;
 	    }
@@ -33,7 +33,7 @@ public class ProfileServiceImpl implements ProfileService {
 	List<UserProfile> userProfileList = getAllUsers();
 	UserProfile profile = null;
 	for (UserProfile userProfile : userProfileList) {
-	    if (userProfile.getUserId().equals(userId)) {
+	    if (userProfile.getUsername().equals(userId)) {
 		profile = userProfile;
 		break;
 	    }

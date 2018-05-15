@@ -21,12 +21,12 @@ public class SessionDaoImpl implements SessionDao {
     private EntityManager entityManager;
 
     @Override
-    public List<Reservation> getUpcomingTrips(String sessionId, String userId) {
+    public List<Reservation> getUpcomingTrips(String sessionId, String username) {
 	Session session = new Session();
 	session.setSessionId(sessionId);
-	session.setUserId(userId);
+	session.setUsername(username);
 	TypedQuery<ReservationSession> createNamedQuery = entityManager
-		.createQuery("from ReservationSession where user_id='" + userId + "'", ReservationSession.class);
+		.createQuery("from ReservationSession where username='" + username + "'", ReservationSession.class);
 	List<ReservationSession> reservationSessions = createNamedQuery.getResultList();
 	List<Reservation> reservations = new ArrayList<Reservation>();
 	if (reservationSessions != null && !reservationSessions.isEmpty()) {
@@ -48,7 +48,8 @@ public class SessionDaoImpl implements SessionDao {
 	reservationSession.setDropPoint(reservation.getDropPoint());
 	reservationSession.setPickupDateTime(reservation.getPickupDateTime());
 	reservationSession.setDropoffDateTime(reservation.getDropoffDateTime());
-	reservationSession.setUserId(session.getUserId());
+	reservationSession.setUsername(session.getUsername());
+	reservationSession.setCarType(reservation.getCarType());
 	return reservationSession;
     }
 
@@ -59,6 +60,7 @@ public class SessionDaoImpl implements SessionDao {
 	reservation.setDropPoint(reservationSession.getDropPoint());
 	reservation.setPickupDateTime(reservationSession.getPickupDateTime());
 	reservation.setDropoffDateTime(reservationSession.getDropoffDateTime());
+	reservation.setCarType(reservationSession.getCarType());
 	return reservation;
     }
 

@@ -10,17 +10,17 @@ public class Session {
     @Id
     @Column(name = "session_id")
     private String sessionId;
-    @Column(name = "user_id")
-    private String userId;
+    @Column(name = "username")
+    private String username;
     @Column(name = "zipcode")
     private String zipcode;
 
-    public String getUserId() {
-	return userId;
+    public String getUsername() {
+	return username;
     }
 
-    public void setUserId(String userId) {
-	this.userId = userId;
+    public void setUsername(String username) {
+	this.username = username;
     }
 
     public String getSessionId() {

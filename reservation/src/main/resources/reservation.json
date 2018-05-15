@@ -2,25 +2,29 @@
   "id":"1987456",
   "pickupPoint":"St. Louis",
   "dropPoint":"St. Louis",
-  "pickupDateTime":"2018-02-05",
-  "dropoffDateTime":"2018-02-06"
+  "pickupDateTime":"Tuesday May 01, 2018 - 12:00 PM",
+  "dropoffDateTime":"Wednesday May 02, 2018 - 12:00 PM",
+  "carType":"Economy"
 },
 {
   "id":"1987457",
   "pickupPoint":"Richmond",
   "dropPoint":"Richmond",
-  "pickupDateTime":"2018-03-05",
-  "dropoffDateTime":"2018-03-06"
+  "pickupDateTime":"Tuesday May 08, 2018 - 12:00 PM",
+  "dropoffDateTime":"Wednesday May 09, 2018 - 12:00 PM",
+  "carType":"Compact"
 },{
   "id":"1987458",
   "pickupPoint":"Orlando",
   "dropPoint":"Orlando",
-  "pickupDateTime":"2018-02-12",
-  "dropoffDateTime":"2018-02-13"
+  "pickupDateTime":"Tuesday May 15, 2018 - 12:00 PM",
+  "dropoffDateTime":"Wednesday May 16, 2018 - 12:00 PM",
+  "carType":"Intermediate"
 },{
   "id":"1987459",
   "pickupPoint":"Chesterfield",
   "dropPoint":"Chesterfield",
-  "pickupDateTime":"2018-02-12",
-  "dropoffDateTime":"2018-02-13"
+  "pickupDateTime":"Tuesday May 22, 2018 - 12:00 PM",
+  "dropoffDateTime":"Wednesday May 23, 2018 - 12:00 PM",
+  "carType":"Standard"
 }]

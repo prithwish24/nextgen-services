@@ -8,7 +8,7 @@ import com.cts.product.rental.entity.Session;
 
 public interface SessionDao {
 
-    List<Reservation> getUpcomingTrips(String sessionId, String userId);
+    List<Reservation> getUpcomingTrips(String sessionId, String username);
 
     void updateZip(String sessionId, String zipcode) throws IOException;
 

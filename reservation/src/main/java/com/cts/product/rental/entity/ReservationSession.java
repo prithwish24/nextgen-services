@@ -1,7 +1,5 @@
 package com.cts.product.rental.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,11 +15,13 @@ public class ReservationSession {
     @Column(name = "dropPoint")
     private String dropPoint;
     @Column(name = "pickupDateTime")
-    private Date pickupDateTime;
+    private String pickupDateTime;
     @Column(name = "dropoffDateTime")
-    private Date dropoffDateTime;
-    @Column(name = "user_id")
-    private String userId;
+    private String dropoffDateTime;
+    @Column(name = "username")
+    private String username;
+    @Column(name = "carType")
+    private String carType;
 
     public String getId() {
 	return id;
@@ -47,27 +47,35 @@ public class ReservationSession {
 	this.dropPoint = dropPoint;
     }
 
-    public Date getPickupDateTime() {
+    public String getPickupDateTime() {
 	return pickupDateTime;
     }
 
-    public void setPickupDateTime(Date pickupDateTime) {
+    public void setPickupDateTime(String pickupDateTime) {
 	this.pickupDateTime = pickupDateTime;
     }
 
-    public Date getDropoffDateTime() {
+    public String getDropoffDateTime() {
 	return dropoffDateTime;
     }
 
-    public void setDropoffDateTime(Date dropoffDateTime) {
+    public void setDropoffDateTime(String dropoffDateTime) {
 	this.dropoffDateTime = dropoffDateTime;
     }
 
-    public String getUserId() {
-	return userId;
+    public String getCarType() {
+	return carType;
     }
 
-    public void setUserId(String userId) {
-	this.userId = userId;
+    public void setCarType(String carType) {
+	this.carType = carType;
+    }
+
+    public String getUsername() {
+	return username;
+    }
+
+    public void setUsername(String username) {
+	this.username = username;
     }
 }
