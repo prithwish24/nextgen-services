@@ -1,7 +1,5 @@
 package com.cts.product.rental.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,9 +18,11 @@ public class ReservationSession {
     @Column(name = "dropPoint")
     private String dropPoint;
     @Column(name = "pickupDateTime")
-    private Date pickupDateTime;
+    private String pickupDateTime;
     @Column(name = "dropoffDateTime")
-    private Date dropoffDateTime;
+    private String dropoffDateTime;
+    @Column(name = "carType")
+    private String carType;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "session_id")
     private Session session;
@@ -51,20 +51,28 @@ public class ReservationSession {
 	this.dropPoint = dropPoint;
     }
 
-    public Date getPickupDateTime() {
+    public String getPickupDateTime() {
 	return pickupDateTime;
     }
 
-    public void setPickupDateTime(Date pickupDateTime) {
+    public void setPickupDateTime(String pickupDateTime) {
 	this.pickupDateTime = pickupDateTime;
     }
 
-    public Date getDropoffDateTime() {
+    public String getDropoffDateTime() {
 	return dropoffDateTime;
     }
 
-    public void setDropoffDateTime(Date dropoffDateTime) {
+    public void setDropoffDateTime(String dropoffDateTime) {
 	this.dropoffDateTime = dropoffDateTime;
+    }
+
+    public String getCarType() {
+	return carType;
+    }
+
+    public void setCarType(String carType) {
+	this.carType = carType;
     }
 
     public Session getSession() {

@@ -32,13 +32,23 @@ public class ProfileController {
 	LOG.debug("Inside userlogin(");
 
 	BaseResponse<UserProfile> bp = new BaseResponse<>();
-	UserProfile profile = delegate.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
-	if (profile == null) {
-	    bp.setServiceError("2001", "ERROR", "Invalid User Login");
-	} else {
-	    bp.setSuccess(true);
-	    bp.setResponse(profile);
-	    bp.setSessionId(delegate.createSession(profile.getUserId()));
+	if (StringUtils.isEmpty(loginRequest.getUsername())) {
+	    bp.setServiceError("2001", "ERROR", "Username is required");
+	}
+
+	if (StringUtils.isEmpty(loginRequest.getPassword())) {
+	    bp.setServiceError("2001", "ERROR", "Password is required");
+	}
+
+	if (!StringUtils.isEmpty(loginRequest.getUsername()) && !StringUtils.isEmpty(loginRequest.getPassword())) {
+	    UserProfile profile = delegate.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
+	    if (profile == null) {
+		bp.setServiceError("2001", "ERROR", "Invalid user credentials");
+	    } else {
+		bp.setSuccess(true);
+		bp.setResponse(profile);
+		bp.setSessionId(delegate.createSession(profile.getUsername()));
+	    }
 	}
 	return bp;
     }

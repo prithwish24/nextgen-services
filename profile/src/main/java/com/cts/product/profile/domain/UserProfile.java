@@ -1,51 +1,70 @@
 package com.cts.product.profile.domain;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class UserProfile {
 
-	private String fullName;
-	private String userId;
-	private String mobileNo;
-	private String emailId;
-	private String password;
-	private Date dateOfBirth;
-	private List<Preference> preferences;
+    private String fullname;
+    private String username;
+    private String mobileNo;
+    private String emailId;
+    private String password;
+    private String dateOfBirth;
+    private List<Preference> preferences;
 
-	public String getFullName() {
-		return fullName;
-	}
+    public String getFullname() {
+	return fullname;
+    }
 
-	public String getUserId() {
-		return userId;
-	}
+    public void setFullname(String fullname) {
+	this.fullname = fullname;
+    }
 
-	public String getMobileNo() {
-		return mobileNo;
-	}
+    public String getUsername() {
+	return username;
+    }
 
-	public String getEmailId() {
-		return emailId;
-	}
+    public void setUsername(String username) {
+	this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getMobileNo() {
+	return mobileNo;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setMobileNo(String mobileNo) {
+	this.mobileNo = mobileNo;
+    }
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
+    public String getEmailId() {
+	return emailId;
+    }
 
-	public List<Preference> getPreferences() {
-		if (preferences == null) {
-			preferences = new ArrayList<Preference>();
-		}
-		return preferences;
+    public void setEmailId(String emailId) {
+	this.emailId = emailId;
+    }
+
+    public String getPassword() {
+	return password;
+    }
+
+    public void setPassword(String password) {
+	this.password = password;
+    }
+
+    public String getDateOfBirth() {
+	return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+	this.dateOfBirth = dateOfBirth;
+    }
+
+    public List<Preference> getPreferences() {
+	if (preferences == null) {
+	    preferences = new ArrayList<Preference>();
 	}
+	return preferences;
+    }
 }

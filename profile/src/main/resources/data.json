@@ -1,7 +1,7 @@
 [{
-		"fullName": "John Smith",
-		"userId": "jsmith",
-		"dateOfBirth": "1982-01-01",
+		"fullname": "John Smith",
+		"username": "jsmith",
+		"dateOfBirth": "Tuesday May 08, 1982",
 		"mobileNo": "3145125555",
 		"emailId": "jsmith@mailinator.com",
 		"password":"password1$",
@@ -20,9 +20,9 @@
 		]
 	},
 	{
-		"fullName": "Virat Kohli",
-		"userId": "viratk",
-		"dateOfBirth": "1988-11-05",
+		"fullname": "Virat Kohli",
+		"username": "viratk",
+		"dateOfBirth": "Wednesday May 09, 1988",
 		"mobileNo": "9840387202",
 		"emailId": "viratk@cricket.com",
 		"password":"password1$",
@@ -41,9 +41,9 @@
 		]
 	},
 	{
-		"fullName": "Amitabh Bachchan",
-		"userId": "ab",
-		"dateOfBirth": "1942-10-11",
+		"fullname": "Amitabh Bachchan",
+		"username": "ab",
+		"dateOfBirth": "Monday May 07, 1988",
 		"mobileNo": "9732173892",
 		"emailId": "ab@bollywood.in",
 		"password":"password1$",

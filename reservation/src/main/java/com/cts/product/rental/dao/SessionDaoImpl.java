@@ -54,6 +54,7 @@ public class SessionDaoImpl implements SessionDao {
 	reservationSession.setDropPoint(reservation.getDropPoint());
 	reservationSession.setPickupDateTime(reservation.getPickupDateTime());
 	reservationSession.setDropoffDateTime(reservation.getDropoffDateTime());
+	reservationSession.setCarType(reservation.getCarType());
 	reservationSession.setSession(session);
 	return reservationSession;
     }
@@ -65,6 +66,7 @@ public class SessionDaoImpl implements SessionDao {
 	reservation.setDropPoint(reservationSession.getDropPoint());
 	reservation.setPickupDateTime(reservationSession.getPickupDateTime());
 	reservation.setDropoffDateTime(reservationSession.getDropoffDateTime());
+	reservation.setCarType(reservationSession.getCarType());
 	return reservation;
     }
 
