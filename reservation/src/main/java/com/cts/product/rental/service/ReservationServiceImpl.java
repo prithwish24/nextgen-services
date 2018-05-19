@@ -72,4 +72,14 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> getUpcomingTrips(String sessionId, String username) {
 	return sessionService.getUpcomingTrips(sessionId, username);
     }
+
+    @Override
+    public List<Reservation> getAllRentals(String username) {
+	return sessionService.getAllRentals(username);
+    }
+
+    @Override
+    public void removeAllRentals(String username) {
+	sessionService.removeAllRentals(username);
+    }
 }

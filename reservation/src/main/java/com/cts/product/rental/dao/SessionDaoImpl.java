@@ -1,11 +1,13 @@
 package com.cts.product.rental.dao;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -25,9 +27,10 @@ public class SessionDaoImpl implements SessionDao {
 	Session session = new Session();
 	session.setSessionId(sessionId);
 	session.setUsername(username);
-	TypedQuery<ReservationSession> createNamedQuery = entityManager
-		.createQuery("from ReservationSession where username='" + username + "'", ReservationSession.class);
-	List<ReservationSession> reservationSessions = createNamedQuery.getResultList();
+	TypedQuery<ReservationSession> createNamedQuery = entityManager.createQuery(
+		"from ReservationSession where username='" + username + "' order by bookingTime desc",
+		ReservationSession.class);
+	List<ReservationSession> reservationSessions = createNamedQuery.setMaxResults(1).getResultList();
 	List<Reservation> reservations = new ArrayList<Reservation>();
 	if (reservationSessions != null && !reservationSessions.isEmpty()) {
 	    for (ReservationSession reservationSession : reservationSessions) {
@@ -41,6 +44,20 @@ public class SessionDaoImpl implements SessionDao {
 	return reservations;
     }
 
+    @Override
+    public List<Reservation> getAllRentals(String username) {
+	TypedQuery<ReservationSession> createNamedQuery = entityManager
+		.createQuery("from ReservationSession where username='" + username + "'", ReservationSession.class);
+	List<ReservationSession> reservationSessions = createNamedQuery.getResultList();
+	List<Reservation> reservations = new ArrayList<Reservation>();
+	if (reservationSessions != null && !reservationSessions.isEmpty()) {
+	    for (ReservationSession reservationSession : reservationSessions) {
+		reservations.add(populateReservation(reservationSession));
+	    }
+	}
+	return reservations;
+    }
+
     private ReservationSession populateReservationSession(Session session, Reservation reservation) {
 	ReservationSession reservationSession = new ReservationSession();
 	reservationSession.setId(reservation.getId());
@@ -50,6 +67,7 @@ public class SessionDaoImpl implements SessionDao {
 	reservationSession.setDropoffDateTime(reservation.getDropoffDateTime());
 	reservationSession.setUsername(session.getUsername());
 	reservationSession.setCarType(reservation.getCarType());
+	reservationSession.setBookingTime(LocalDateTime.now());
 	return reservationSession;
     }
 
@@ -97,4 +115,10 @@ public class SessionDaoImpl implements SessionDao {
 	entityManager.remove(session);
     }
 
+    @Override
+    public void removeAllRentals(String username) {
+	Query createQuery = entityManager
+		.createQuery("DELETE from ReservationSession where username='" + username + "'");
+	createQuery.executeUpdate();
+    }
 }

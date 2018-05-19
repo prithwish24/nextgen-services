@@ -81,6 +81,23 @@ public class ReservationController {
 	return bp;
     }
 
+    @RequestMapping(value = "/rentals", method = { RequestMethod.POST,
+	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+    public BaseResponse<List<Reservation>> getAllRentals(
+	    @RequestParam(name = "username", required = true, defaultValue = "") String username) {
+	LOG.debug("Entered into get all rentals");
+	BaseResponse<List<Reservation>> bp = new BaseResponse<>();
+	if (StringUtils.isEmpty(username)) {
+	    bp.setServiceError("2001", "ERROR", "Username is required");
+	} else {
+	    List<Reservation> reservationList = reservationService.getAllRentals(username);
+	    bp.setResponse(reservationList);
+	    bp.setSuccess(true);
+	}
+	LOG.debug("Entered into get all rentals");
+	return bp;
+    }
+
     @RequestMapping(value = "/trips/upcoming/{sessionId}", method = { RequestMethod.POST,
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<List<Reservation>> getUpcomingTrips(@PathVariable String sessionId,
@@ -96,6 +113,21 @@ public class ReservationController {
 	    bp.setSessionId(sessionId);
 	}
 	LOG.debug("Entered into get upcoming trips");
+	return bp;
+    }
+
+    @RequestMapping(value = "/rental/remove", method = { RequestMethod.POST,
+	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+    public BaseResponse<List<Reservation>> removeAllRentals(
+	    @RequestParam(name = "username", required = true, defaultValue = "") String username) {
+	LOG.debug("secret");
+	BaseResponse<List<Reservation>> bp = new BaseResponse<>();
+	if (StringUtils.isEmpty(username)) {
+	    bp.setServiceError("2001", "ERROR", "Username is required");
+	} else {
+	    reservationService.removeAllRentals(username);
+	    bp.setSuccess(true);
+	}
 	return bp;
     }
 

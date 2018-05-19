@@ -1,5 +1,7 @@
 package com.cts.product.rental.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,18 +12,20 @@ public class ReservationSession {
     @Id
     @Column(name = "id")
     private String id;
-    @Column(name = "pickupPoint")
+    @Column(name = "pickup_point")
     private String pickupPoint;
-    @Column(name = "dropPoint")
+    @Column(name = "drop_point")
     private String dropPoint;
-    @Column(name = "pickupDateTime")
+    @Column(name = "pickup_time")
     private String pickupDateTime;
-    @Column(name = "dropoffDateTime")
+    @Column(name = "dropoff_time")
     private String dropoffDateTime;
     @Column(name = "username")
     private String username;
-    @Column(name = "carType")
+    @Column(name = "car_type")
     private String carType;
+    @Column(name = "booking_time")
+    private LocalDateTime bookingTime;
 
     public String getId() {
 	return id;
@@ -77,5 +81,13 @@ public class ReservationSession {
 
     public void setUsername(String username) {
 	this.username = username;
+    }
+
+    public LocalDateTime getBookingTime() {
+	return bookingTime;
+    }
+
+    public void setBookingTime(LocalDateTime bookingTime) {
+	this.bookingTime = bookingTime;
     }
 }

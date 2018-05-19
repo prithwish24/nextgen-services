@@ -11,6 +11,10 @@ public interface ReservationService {
 
     Reservation createReservation(ReservationRequest reservationRequest) throws IOException;
 
+    List<Reservation> getAllRentals(String username);
+
+    void removeAllRentals(String username);
+
     List<Reservation> getUpcomingTrips(String sessionId, String username);
 
     Location updateSessionWithZipcode(String sessionId, String zipcode) throws IOException;

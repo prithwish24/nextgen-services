@@ -43,4 +43,14 @@ public class SessionServiceImpl implements SessionService {
     public void clearSession(String sessionId) {
 	sessionDao.clearSession(sessionId);
     }
+
+    @Override
+    public List<Reservation> getAllRentals(String username) {
+	return sessionDao.getAllRentals(username);
+    }
+
+    @Override
+    public void removeAllRentals(String username) {
+	sessionDao.removeAllRentals(username);
+    }
 }

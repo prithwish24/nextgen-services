@@ -10,6 +10,8 @@ public interface SessionDao {
 
     List<Reservation> getUpcomingTrips(String sessionId, String username);
 
+    List<Reservation> getAllRentals(String username);
+
     void updateZip(String sessionId, String zipcode) throws IOException;
 
     Session findBySessionId(String sessionId);
@@ -17,4 +19,6 @@ public interface SessionDao {
     void updateReservation(String sessionId, Reservation reservation) throws IOException;
 
     void clearSession(String sessionId);
+
+    void removeAllRentals(String username);
 }
