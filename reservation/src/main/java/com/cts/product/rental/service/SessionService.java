@@ -9,7 +9,7 @@ import com.cts.product.rental.entity.Session;
 
 public interface SessionService {
 
-    List<Reservation> getUpcomingTrips(String sessionId, String username) throws ParseException;
+    List<Reservation> getUpcomingTrips(String sessionId, String username, String count) throws ParseException;
 
     List<Reservation> getAllRentals(String username) throws ParseException;
 

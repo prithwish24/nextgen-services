@@ -70,8 +70,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getUpcomingTrips(String sessionId, String username) throws ParseException {
-	return sessionService.getUpcomingTrips(sessionId, username);
+    public List<Reservation> getUpcomingTrips(String sessionId, String username, String count) throws ParseException {
+	return sessionService.getUpcomingTrips(sessionId, username, count);
     }
 
     @Override

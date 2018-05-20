@@ -20,8 +20,8 @@ public class SessionServiceImpl implements SessionService {
     private SessionDao sessionDao;
 
     @Override
-    public List<Reservation> getUpcomingTrips(String sessionId, String username) throws ParseException {
-	return sessionDao.getUpcomingTrips(sessionId, username);
+    public List<Reservation> getUpcomingTrips(String sessionId, String username, String count) throws ParseException {
+	return sessionDao.getUpcomingTrips(sessionId, username, count);
     }
 
     @Override

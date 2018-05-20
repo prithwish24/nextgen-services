@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.cts.product.rental.bo.Reservation;
@@ -24,17 +25,23 @@ public class SessionDaoImpl implements SessionDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("EEEE MMMM dd, yyyy - hh:mm a");
+    private SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
 
     @Override
-    public List<Reservation> getUpcomingTrips(String sessionId, String username) throws ParseException {
+    public List<Reservation> getUpcomingTrips(String sessionId, String username, String count) throws ParseException {
 	Session session = new Session();
 	session.setSessionId(sessionId);
 	session.setUsername(username);
+	int maxResult = 0;
+	if (StringUtils.isBlank(count) || StringUtils.equals("0", count)) {
+	    maxResult = 1;
+	} else {
+	    maxResult = Integer.parseInt(count);
+	}
 	TypedQuery<ReservationSession> createNamedQuery = entityManager.createQuery(
 		"from ReservationSession where username='" + username + "' order by bookingTime desc",
 		ReservationSession.class);
-	List<ReservationSession> reservationSessions = createNamedQuery.setMaxResults(1).getResultList();
+	List<ReservationSession> reservationSessions = createNamedQuery.setMaxResults(maxResult).getResultList();
 	List<Reservation> reservations = new ArrayList<Reservation>();
 	if (reservationSessions != null && !reservationSessions.isEmpty()) {
 	    for (ReservationSession reservationSession : reservationSessions) {

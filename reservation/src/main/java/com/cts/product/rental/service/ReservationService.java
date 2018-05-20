@@ -16,7 +16,7 @@ public interface ReservationService {
 
     void removeAllRentals(String username);
 
-    List<Reservation> getUpcomingTrips(String sessionId, String username) throws ParseException;
+    List<Reservation> getUpcomingTrips(String sessionId, String username, String count) throws ParseException;
 
     Location updateSessionWithZipcode(String sessionId, String zipcode) throws IOException;
 }

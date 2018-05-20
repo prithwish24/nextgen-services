@@ -103,14 +103,14 @@ public class ReservationController {
     @RequestMapping(value = "/trips/upcoming/{sessionId}", method = { RequestMethod.POST,
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<List<Reservation>> getUpcomingTrips(@PathVariable String sessionId,
-	    @RequestParam(name = "username", required = true, defaultValue = "") String username)
-	    throws ParseException {
+	    @RequestParam(name = "username", required = true, defaultValue = "") String username,
+	    @RequestParam(name = "count", required = false, defaultValue = "") String count) throws ParseException {
 	LOG.debug("Entered into get upcoming trips");
 	BaseResponse<List<Reservation>> bp = new BaseResponse<>();
 	if (StringUtils.isEmpty(username)) {
 	    bp.setServiceError("2001", "ERROR", "Username is required");
 	} else {
-	    List<Reservation> reservationList = reservationService.getUpcomingTrips(sessionId, username);
+	    List<Reservation> reservationList = reservationService.getUpcomingTrips(sessionId, username, count);
 	    bp.setResponse(reservationList);
 	    bp.setSuccess(true);
 	    bp.setSessionId(sessionId);
