@@ -1,6 +1,7 @@
 package com.cts.product.rental.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -84,7 +85,8 @@ public class ReservationController {
     @RequestMapping(value = "/rentals", method = { RequestMethod.POST,
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<List<Reservation>> getAllRentals(
-	    @RequestParam(name = "username", required = true, defaultValue = "") String username) {
+	    @RequestParam(name = "username", required = true, defaultValue = "") String username)
+	    throws ParseException {
 	LOG.debug("Entered into get all rentals");
 	BaseResponse<List<Reservation>> bp = new BaseResponse<>();
 	if (StringUtils.isEmpty(username)) {
@@ -101,7 +103,8 @@ public class ReservationController {
     @RequestMapping(value = "/trips/upcoming/{sessionId}", method = { RequestMethod.POST,
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<List<Reservation>> getUpcomingTrips(@PathVariable String sessionId,
-	    @RequestParam(name = "username", required = true, defaultValue = "") String username) {
+	    @RequestParam(name = "username", required = true, defaultValue = "") String username)
+	    throws ParseException {
 	LOG.debug("Entered into get upcoming trips");
 	BaseResponse<List<Reservation>> bp = new BaseResponse<>();
 	if (StringUtils.isEmpty(username)) {

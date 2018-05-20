@@ -1,6 +1,7 @@
 package com.cts.product.rental.service;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Random;
 
@@ -37,7 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
 	List<Reservation> reservationList = getAllReservations();
 	int nextInt = new Random().nextInt(3);
 	Reservation reservation = reservationList.get(nextInt);
-	reservation.setId(RandomStringUtils.randomNumeric(9));
+	reservation.setConfNum(RandomStringUtils.randomNumeric(9));
 	return reservation;
     }
 
@@ -69,12 +70,12 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getUpcomingTrips(String sessionId, String username) {
+    public List<Reservation> getUpcomingTrips(String sessionId, String username) throws ParseException {
 	return sessionService.getUpcomingTrips(sessionId, username);
     }
 
     @Override
-    public List<Reservation> getAllRentals(String username) {
+    public List<Reservation> getAllRentals(String username) throws ParseException {
 	return sessionService.getAllRentals(username);
     }
 

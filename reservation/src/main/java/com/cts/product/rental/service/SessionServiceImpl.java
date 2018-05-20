@@ -1,6 +1,7 @@
 package com.cts.product.rental.service;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class SessionServiceImpl implements SessionService {
     private SessionDao sessionDao;
 
     @Override
-    public List<Reservation> getUpcomingTrips(String sessionId, String username) {
+    public List<Reservation> getUpcomingTrips(String sessionId, String username) throws ParseException {
 	return sessionDao.getUpcomingTrips(sessionId, username);
     }
 
@@ -45,7 +46,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public List<Reservation> getAllRentals(String username) {
+    public List<Reservation> getAllRentals(String username) throws ParseException {
 	return sessionDao.getAllRentals(username);
     }
 

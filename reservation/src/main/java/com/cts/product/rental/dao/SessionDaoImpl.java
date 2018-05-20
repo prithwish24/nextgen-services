@@ -1,6 +1,8 @@
 package com.cts.product.rental.dao;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,10 @@ public class SessionDaoImpl implements SessionDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    private SimpleDateFormat sdf = new SimpleDateFormat("EEEE MMMM dd, yyyy - hh:mm a");
+
     @Override
-    public List<Reservation> getUpcomingTrips(String sessionId, String username) {
+    public List<Reservation> getUpcomingTrips(String sessionId, String username) throws ParseException {
 	Session session = new Session();
 	session.setSessionId(sessionId);
 	session.setUsername(username);
@@ -45,7 +49,7 @@ public class SessionDaoImpl implements SessionDao {
     }
 
     @Override
-    public List<Reservation> getAllRentals(String username) {
+    public List<Reservation> getAllRentals(String username) throws ParseException {
 	TypedQuery<ReservationSession> createNamedQuery = entityManager
 		.createQuery("from ReservationSession where username='" + username + "'", ReservationSession.class);
 	List<ReservationSession> reservationSessions = createNamedQuery.getResultList();
@@ -60,25 +64,27 @@ public class SessionDaoImpl implements SessionDao {
 
     private ReservationSession populateReservationSession(Session session, Reservation reservation) {
 	ReservationSession reservationSession = new ReservationSession();
-	reservationSession.setId(reservation.getId());
-	reservationSession.setPickupPoint(reservation.getPickupPoint());
-	reservationSession.setDropPoint(reservation.getDropPoint());
-	reservationSession.setPickupDateTime(reservation.getPickupDateTime());
-	reservationSession.setDropoffDateTime(reservation.getDropoffDateTime());
+	reservationSession.setId(reservation.getConfNum());
+	reservationSession.setPickupPoint(reservation.getPickupLoc());
+	reservationSession.setDropPoint(reservation.getReturnLoc());
+	reservationSession.setPickupDateTime(sdf.format(reservation.getPickupDateTime()));
+	reservationSession.setDropoffDateTime(sdf.format(reservation.getReturnDateTime()));
 	reservationSession.setUsername(session.getUsername());
 	reservationSession.setCarType(reservation.getCarType());
+	reservationSession.setStatus(reservation.getStatus());
 	reservationSession.setBookingTime(LocalDateTime.now());
 	return reservationSession;
     }
 
-    private Reservation populateReservation(ReservationSession reservationSession) {
+    private Reservation populateReservation(ReservationSession reservationSession) throws ParseException {
 	Reservation reservation = new Reservation();
-	reservation.setId(reservationSession.getId());
-	reservation.setPickupPoint(reservationSession.getPickupPoint());
-	reservation.setDropPoint(reservationSession.getDropPoint());
-	reservation.setPickupDateTime(reservationSession.getPickupDateTime());
-	reservation.setDropoffDateTime(reservationSession.getDropoffDateTime());
+	reservation.setConfNum(reservationSession.getId());
+	reservation.setPickupLoc(reservationSession.getPickupPoint());
+	reservation.setReturnLoc(reservationSession.getDropPoint());
+	reservation.setPickupDateTime(sdf.parse(reservationSession.getPickupDateTime()));
+	reservation.setReturnDateTime(sdf.parse(reservationSession.getDropoffDateTime()));
 	reservation.setCarType(reservationSession.getCarType());
+	reservation.setStatus(reservationSession.getStatus());
 	return reservation;
     }
 

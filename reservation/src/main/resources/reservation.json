@@ -1,30 +1,38 @@
-[{
-  "id":"1987456",
-  "pickupPoint":"St. Louis",
-  "dropPoint":"St. Louis",
-  "pickupDateTime":"Tuesday May 01, 2018 - 12:00 PM",
-  "dropoffDateTime":"Wednesday May 02, 2018 - 12:00 PM",
-  "carType":"Economy"
-},
-{
-  "id":"1987457",
-  "pickupPoint":"Richmond",
-  "dropPoint":"Richmond",
-  "pickupDateTime":"Tuesday May 08, 2018 - 12:00 PM",
-  "dropoffDateTime":"Wednesday May 09, 2018 - 12:00 PM",
-  "carType":"Compact"
-},{
-  "id":"1987458",
-  "pickupPoint":"Orlando",
-  "dropPoint":"Orlando",
-  "pickupDateTime":"Tuesday May 15, 2018 - 12:00 PM",
-  "dropoffDateTime":"Wednesday May 16, 2018 - 12:00 PM",
-  "carType":"Intermediate"
-},{
-  "id":"1987459",
-  "pickupPoint":"Chesterfield",
-  "dropPoint":"Chesterfield",
-  "pickupDateTime":"Tuesday May 22, 2018 - 12:00 PM",
-  "dropoffDateTime":"Wednesday May 23, 2018 - 12:00 PM",
-  "carType":"Standard"
-}]
+[
+	{
+		"confNum": "1987456",
+		"pickupLoc": "St. Louis",
+		"returnLoc": "St. Louis",
+		"pickupDateTime": "Tue, 06 Nov 2018 12:00:00 CST",
+		"returnDateTime": "Wed, 07 Nov 2018 12:00:00 CST",
+		"carType": "Economy",
+		"status": "Open"
+	},
+	{
+		"confNum": "1987457",
+		"pickupLoc": "Richmond",
+		"returnLoc": "Richmond",
+		"pickupDateTime": "Tue, 13 Nov 2018 12:00:00 CST",
+		"returnDateTime": "Wed, 14 Nov 2018 12:00:00 CST",
+		"carType": "Compact",
+		"status": "Open"
+	},
+	{
+		"confNum": "1987458",
+		"pickupLoc": "Orlando",
+		"returnLoc": "Orlando",
+		"pickupDateTime": "Tue, 04 Dec 2018 12:00:00 CST",
+		"returnDateTime": "Wed, 05 Dec 2018 12:00:00 CST",
+		"carType": "Intermediate",
+		"status": "Open"
+	},
+	{
+		"confNum": "1987459",
+		"pickupLoc": "Chesterfield",
+		"returnLoc": "Chesterfield",
+		"pickupDateTime": "Tue, 11 Dec 2018 12:00:00 CST",
+		"returnDateTime": "Wed, 12 Dec 2018 12:00:00 CST",
+		"carType": "Standard",
+		"status": "Open"
+	}
+]

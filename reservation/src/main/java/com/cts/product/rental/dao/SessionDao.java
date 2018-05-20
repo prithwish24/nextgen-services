@@ -1,6 +1,7 @@
 package com.cts.product.rental.dao;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import com.cts.product.rental.bo.Reservation;
@@ -8,9 +9,9 @@ import com.cts.product.rental.entity.Session;
 
 public interface SessionDao {
 
-    List<Reservation> getUpcomingTrips(String sessionId, String username);
+    List<Reservation> getUpcomingTrips(String sessionId, String username) throws ParseException;
 
-    List<Reservation> getAllRentals(String username);
+    List<Reservation> getAllRentals(String username) throws ParseException;
 
     void updateZip(String sessionId, String zipcode) throws IOException;
 

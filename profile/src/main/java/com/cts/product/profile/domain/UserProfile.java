@@ -3,6 +3,11 @@ package com.cts.product.profile.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "fullname", "username", "mobileNo", "emailId", "password", "dateOfBirth", "preferences" })
 public class UserProfile {
 
     private String fullname;

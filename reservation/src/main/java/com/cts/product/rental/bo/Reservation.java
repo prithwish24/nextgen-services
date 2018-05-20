@@ -1,52 +1,78 @@
 package com.cts.product.rental.bo;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "step", "status", "confNum", "pickupDateTime", "returnDateTime", "pickupLoc", "returnLoc",
+	"carType" })
 public class Reservation {
 
-    private String id;
-    private String pickupPoint;
-    private String dropPoint;
-    private String pickupDateTime;
-    private String dropoffDateTime;
+    private String step;
+    private String status;
+    private String confNum;
+    private Date pickupDateTime;
+    private Date returnDateTime;
+    private String pickupLoc;
+    private String returnLoc;
     private String carType;
 
-    public String getId() {
-	return id;
+    public String getStep() {
+	return step;
     }
 
-    public void setId(String id) {
-	this.id = id;
+    public void setStep(String step) {
+	this.step = step;
     }
 
-    public String getPickupPoint() {
-	return pickupPoint;
+    public String getStatus() {
+	return status;
     }
 
-    public void setPickupPoint(String pickupPoint) {
-	this.pickupPoint = pickupPoint;
+    public void setStatus(String status) {
+	this.status = status;
     }
 
-    public String getDropPoint() {
-	return dropPoint;
+    public String getConfNum() {
+	return confNum;
     }
 
-    public void setDropPoint(String dropPoint) {
-	this.dropPoint = dropPoint;
+    public void setConfNum(String confNum) {
+	this.confNum = confNum;
     }
 
-    public String getPickupDateTime() {
+    public Date getPickupDateTime() {
 	return pickupDateTime;
     }
 
-    public void setPickupDateTime(String pickupDateTime) {
+    public void setPickupDateTime(Date pickupDateTime) {
 	this.pickupDateTime = pickupDateTime;
     }
 
-    public String getDropoffDateTime() {
-	return dropoffDateTime;
+    public Date getReturnDateTime() {
+	return returnDateTime;
     }
 
-    public void setDropoffDateTime(String dropoffDateTime) {
-	this.dropoffDateTime = dropoffDateTime;
+    public void setReturnDateTime(Date returnDateTime) {
+	this.returnDateTime = returnDateTime;
+    }
+
+    public String getPickupLoc() {
+	return pickupLoc;
+    }
+
+    public void setPickupLoc(String pickupLoc) {
+	this.pickupLoc = pickupLoc;
+    }
+
+    public String getReturnLoc() {
+	return returnLoc;
+    }
+
+    public void setReturnLoc(String returnLoc) {
+	this.returnLoc = returnLoc;
     }
 
     public String getCarType() {

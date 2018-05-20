@@ -24,6 +24,8 @@ public class ReservationSession {
     private String username;
     @Column(name = "car_type")
     private String carType;
+    @Column(name = "status")
+    private String status;
     @Column(name = "booking_time")
     private LocalDateTime bookingTime;
 
@@ -81,6 +83,14 @@ public class ReservationSession {
 
     public void setUsername(String username) {
 	this.username = username;
+    }
+
+    public String getStatus() {
+	return status;
+    }
+
+    public void setStatus(String status) {
+	this.status = status;
     }
 
     public LocalDateTime getBookingTime() {

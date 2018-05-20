@@ -25,7 +25,7 @@ public class ReservationResponseMapper {
 	    }
 	}
 	if (reservation != null) {
-	    contextOut.get(0).getParameters().setConfirmationNumber(reservation.getId());
+	    contextOut.get(0).getParameters().setConfirmationNumber(reservation.getConfNum());
 	    String speechText = "Your booking is confirmed";
 	    reservationResponse.setSpeech(speechText);
 	    reservationResponse.setDisplayText(speechText);

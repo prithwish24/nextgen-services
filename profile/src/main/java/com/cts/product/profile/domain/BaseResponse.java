@@ -1,5 +1,10 @@
 package com.cts.product.profile.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "success", "error", "sessionId", "response" })
 public class BaseResponse<T> {
     private boolean success;
     private ServiceError error;
