@@ -18,13 +18,13 @@ public class NearbyFuelStationServiceImpl implements NearbyFuelStationService {
     private SessionService sessionService;
 
     @Override
-    @Cacheable(value = "nearbyFuelStations", key = "#city")
-    public FuelStationResponse getNearbyFuelStations(String city, String sessionId) throws IOException {
+    @Cacheable(value = "nearbyFuelStations", key = "#location")
+    public FuelStationResponse getNearbyFuelStations(String location, String sessionId) throws IOException {
 	Session session = sessionService.findBySessionId(sessionId);
 	if (session == null) {
 	    throw new IOException("Invalid session Id");
 	}
-	final String q = "api_key=DEMO_KEY&location=" + city;
+	final String q = "api_key=DEMO_KEY&location=" + location;
 	final String uri = "http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?";
 	RestTemplate restTemplate = new RestTemplate();
 	FuelStationResponse result = restTemplate.getForObject(uri + q, FuelStationResponse.class);

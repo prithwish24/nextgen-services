@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.product.rental.addon.fuel.model.FuelStationResponse;
 import com.cts.product.rental.addon.fuel.rest.service.NearbyFuelStationService;
-import com.cts.product.rental.addon.weather.model.WeatherResponse;
+import com.cts.product.rental.addon.weather.model.WeatherForecast;
 import com.cts.product.rental.addon.weather.rest.service.WeatherService;
 import com.cts.product.rental.bo.BaseResponse;
 
@@ -29,15 +29,15 @@ public class AddonServicesController {
 
     @RequestMapping(value = "/weather/{sessionId}", method = {
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-    public BaseResponse<WeatherResponse> getWeatherReport(@PathVariable String sessionId,
+    public BaseResponse<WeatherForecast> getWeatherReport(@PathVariable String sessionId,
 	    @RequestParam(value = "city") String city) {
-	BaseResponse<WeatherResponse> bp = new BaseResponse<>();
+	BaseResponse<WeatherForecast> bp = new BaseResponse<>();
 	if (StringUtils.isEmpty(city)) {
 	    bp.setServiceError("2001", "ERROR", "City is required");
 	} else {
 	    try {
-		bp.setSuccess(true);
 		bp.setResponse(weatherService.getWeatherReport(city, sessionId));
+		bp.setSuccess(true);
 	    } catch (Exception ex) {
 		bp.setServiceError("2001", "ERROR", "Invalid session Id");
 	    }
@@ -48,14 +48,14 @@ public class AddonServicesController {
     @RequestMapping(value = "/nearbyFuelStations/{sessionId}", method = {
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<FuelStationResponse> getNearbyFuelStations(@PathVariable String sessionId,
-	    @RequestParam(value = "city") String city) {
+	    @RequestParam(value = "location") String location) {
 	BaseResponse<FuelStationResponse> bp = new BaseResponse<>();
-	if (StringUtils.isEmpty(city)) {
-	    bp.setServiceError("2001", "ERROR", "City is required");
+	if (StringUtils.isEmpty(location)) {
+	    bp.setServiceError("2001", "ERROR", "Location is required");
 	} else {
 	    try {
 		bp.setSuccess(true);
-		bp.setResponse(nearbyFuelStationService.getNearbyFuelStations(city, sessionId));
+		bp.setResponse(nearbyFuelStationService.getNearbyFuelStations(location, sessionId));
 	    } catch (Exception ex) {
 		bp.setServiceError("2001", "ERROR", "Invalid session Id");
 	    }
