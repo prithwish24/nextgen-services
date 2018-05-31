@@ -21,14 +21,14 @@ public class WeatherServiceImpl implements WeatherService {
     private SessionService sessionService;
 
     @Override
-    @Cacheable(value = "weather", key = "#city")
-    public WeatherForecast getWeatherReport(String city, String sessionId) throws IOException {
+    @Cacheable(value = "weather", key = "#location")
+    public WeatherForecast getWeatherReport(String location, String sessionId) throws IOException {
 	Session session = sessionService.findBySessionId(sessionId);
 	if (session == null) {
 	    throw new IOException("Invalid session Id");
 	}
 	final String q = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='"
-		+ city + "') and u='f'";
+		+ location + "') and u='f'";
 	final String uri = "https://query.yahooapis.com/v1/public/yql";
 	UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri).queryParam("q", q).queryParam("format",
 		"json");

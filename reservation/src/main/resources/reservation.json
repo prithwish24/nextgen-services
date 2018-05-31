@@ -1,8 +1,8 @@
 [
 	{
 		"confNum": "1987456",
-		"pickupLoc": "St. Louis",
-		"returnLoc": "St. Louis",
+		"pickupLoc": "10701 Lambert International Blvd, St Louis, MO",
+		"returnLoc": "10701 Lambert International Blvd, St Louis, MO",
 		"pickupDateTime": "Tue, 06 Nov 2018 12:00:00 CST",
 		"returnDateTime": "Wed, 07 Nov 2018 12:00:00 CST",
 		"carType": "Economy",
@@ -10,8 +10,8 @@
 	},
 	{
 		"confNum": "1987457",
-		"pickupLoc": "Richmond",
-		"returnLoc": "Richmond",
+		"pickupLoc": "1 Richard E Byrd Terminal Dr, Richmond, VA",
+		"returnLoc": "1 Richard E Byrd Terminal Dr, Richmond, VA",
 		"pickupDateTime": "Tue, 13 Nov 2018 12:00:00 CST",
 		"returnDateTime": "Wed, 14 Nov 2018 12:00:00 CST",
 		"carType": "Compact",
@@ -19,8 +19,8 @@
 	},
 	{
 		"confNum": "1987458",
-		"pickupLoc": "Orlando",
-		"returnLoc": "Orlando",
+		"pickupLoc": "3900 NW 25th St, Miami, FL",
+		"returnLoc": "3900 NW 25th St, Miami, FL",
 		"pickupDateTime": "Tue, 04 Dec 2018 12:00:00 CST",
 		"returnDateTime": "Wed, 05 Dec 2018 12:00:00 CST",
 		"carType": "Intermediate",
@@ -28,8 +28,8 @@
 	},
 	{
 		"confNum": "1987459",
-		"pickupLoc": "Chesterfield",
-		"returnLoc": "Chesterfield",
+		"pickupLoc": "17543 Chesterfield Airport Rd, Chesterfield, MO",
+		"returnLoc": "17543 Chesterfield Airport Rd, Chesterfield, MO",
 		"pickupDateTime": "Tue, 11 Dec 2018 12:00:00 CST",
 		"returnDateTime": "Wed, 12 Dec 2018 12:00:00 CST",
 		"carType": "Standard",

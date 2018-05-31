@@ -30,13 +30,13 @@ public class AddonServicesController {
     @RequestMapping(value = "/weather/{sessionId}", method = {
 	    RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<WeatherForecast> getWeatherReport(@PathVariable String sessionId,
-	    @RequestParam(value = "city") String city) {
+	    @RequestParam(value = "location") String location) {
 	BaseResponse<WeatherForecast> bp = new BaseResponse<>();
-	if (StringUtils.isEmpty(city)) {
-	    bp.setServiceError("2001", "ERROR", "City is required");
+	if (StringUtils.isEmpty(location)) {
+	    bp.setServiceError("2001", "ERROR", "Location is required");
 	} else {
 	    try {
-		bp.setResponse(weatherService.getWeatherReport(city, sessionId));
+		bp.setResponse(weatherService.getWeatherReport(location, sessionId));
 		bp.setSuccess(true);
 	    } catch (Exception ex) {
 		bp.setServiceError("2001", "ERROR", "Invalid session Id");
