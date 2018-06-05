@@ -4,7 +4,8 @@
 		"dateOfBirth": "Tuesday May 08, 1982",
 		"mobileNo": "3145125555",
 		"emailId": "jsmith@mailinator.com",
-		"password":"password1$",
+	"password": "password1",
+	"carTypePref": "Compact",
 		"preferences": [{
 				"type": "Fev Movie",
 				"value": "Jo Jeeta Wohi Sikandar"
@@ -25,7 +26,8 @@
 		"dateOfBirth": "Wednesday May 09, 1988",
 		"mobileNo": "9840387202",
 		"emailId": "viratk@cricket.com",
-		"password":"password1$",
+		"password": "password1",
+		"carTypePref": "Standard",
 		"preferences": [{
 				"type": "Fev Place",
 				"value": "Paris"
@@ -46,7 +48,8 @@
 		"dateOfBirth": "Monday May 07, 1988",
 		"mobileNo": "9732173892",
 		"emailId": "ab@bollywood.in",
-		"password":"password1$",
+		"password": "password1",
+		"carTypePref": "Luxury",
 		"preferences": [{
 				"type": "Hobbies",
 				"value": "Singing, Blogging, Reading"

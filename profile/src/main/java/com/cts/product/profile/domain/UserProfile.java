@@ -1,13 +1,13 @@
 package com.cts.product.profile.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "fullname", "username", "mobileNo", "emailId", "password", "dateOfBirth", "preferences" })
+@JsonPropertyOrder({"fullname", "username", "mobileNo", "emailId", "password", "dateOfBirth", "carTypePref", "preferences"})
 public class UserProfile {
 
     private String fullname;
@@ -16,6 +16,7 @@ public class UserProfile {
     private String emailId;
     private String password;
     private String dateOfBirth;
+    private String carTypePref;
     private List<Preference> preferences;
 
     public String getFullname() {
@@ -64,6 +65,14 @@ public class UserProfile {
 
     public void setDateOfBirth(String dateOfBirth) {
 	this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getCarTypePref() {
+        return carTypePref;
+    }
+
+    public void setCarTypePref(String carTypePref) {
+        this.carTypePref = carTypePref;
     }
 
     public List<Preference> getPreferences() {
