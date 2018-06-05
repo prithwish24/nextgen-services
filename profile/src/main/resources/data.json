@@ -1,5 +1,6 @@
 [{
-		"fullname": "John Smith",
+	"firstName": "John",
+	"lastName": "Smith",
 		"username": "jsmith",
 		"dateOfBirth": "Tuesday May 08, 1982",
 		"mobileNo": "3145125555",
@@ -21,7 +22,8 @@
 		]
 	},
 	{
-		"fullname": "Virat Kohli",
+		"firstName": "Virat",
+		"lastName": "Kohli",
 		"username": "viratk",
 		"dateOfBirth": "Wednesday May 09, 1988",
 		"mobileNo": "9840387202",
@@ -43,7 +45,8 @@
 		]
 	},
 	{
-		"fullname": "Amitabh Bachchan",
+		"firstName": "Amitabh",
+		"lastName": "Bachchan",
 		"username": "ab",
 		"dateOfBirth": "Monday May 07, 1988",
 		"mobileNo": "9732173892",

@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"fullname", "username", "mobileNo", "emailId", "password", "dateOfBirth", "carTypePref", "preferences"})
+@JsonPropertyOrder({"firstName", "lastName", "username", "mobileNo", "emailId", "password", "dateOfBirth", "carTypePref", "preferences"})
 public class UserProfile {
 
-    private String fullname;
+    private String firstName;
+    private String lastName;
     private String username;
     private String mobileNo;
     private String emailId;
@@ -19,12 +20,20 @@ public class UserProfile {
     private String carTypePref;
     private List<Preference> preferences;
 
-    public String getFullname() {
-	return fullname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullname(String fullname) {
-	this.fullname = fullname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
