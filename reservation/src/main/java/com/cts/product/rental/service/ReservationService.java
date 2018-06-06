@@ -19,4 +19,6 @@ public interface ReservationService {
     List<Reservation> getUpcomingTrips(String sessionId, String username, String count) throws ParseException;
 
     Location updateSessionWithZipcode(String sessionId, String zipcode) throws IOException;
+
+    ReservationRequest reviewReservation(ReservationRequest reservationRequest) throws IOException;
 }

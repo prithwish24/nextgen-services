@@ -80,6 +80,9 @@ public class SessionDaoImpl implements SessionDao {
 	reservationSession.setCarType(reservation.getCarType());
 	reservationSession.setStatus(reservation.getStatus());
 	reservationSession.setBookingTime(LocalDateTime.now());
+	reservationSession.setTotalVehicalPrice(reservation.getTotalVehicalPrice());
+	reservationSession.setTaxFees(reservation.getTaxFees());
+	reservationSession.setTotalPrice(reservation.getTotalPrice());
 	return reservationSession;
     }
 
@@ -92,6 +95,9 @@ public class SessionDaoImpl implements SessionDao {
 	reservation.setReturnDateTime(sdf.parse(reservationSession.getDropoffDateTime()));
 	reservation.setCarType(reservationSession.getCarType());
 	reservation.setStatus(reservationSession.getStatus());
+	reservation.setTotalVehicalPrice(reservationSession.getTotalVehicalPrice());
+	reservation.setTaxFees(reservationSession.getTaxFees());
+	reservation.setTotalPrice(reservationSession.getTotalPrice());
 	return reservation;
     }
 

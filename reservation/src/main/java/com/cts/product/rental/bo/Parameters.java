@@ -9,7 +9,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "duration", "sessionId.original", "date-period.original", "sessionId", "duration.original",
 	"date-period", "TypeOfItems", "cartype", "TypeOfItems.original", "TypeOfService.original", "TypeOfService",
 	"cartype.original", "pickuptime", "pickupdate.original", "pickupdate", "pickuptime.original", "pickuplocation",
-	"landmark", "landmark.original", "pickupfromnearestlocation", "confirmationnumber", "step" })
+	"landmark", "landmark.original", "pickupfromnearestlocation", "confirmationnumber", "totalVehicalPrice",
+	"taxFees", "totalPrice", "step" })
 public class Parameters {
 
     @JsonProperty("duration")
@@ -54,6 +55,12 @@ public class Parameters {
     private boolean pickupfromnearestlocation;
     @JsonProperty("confirmationnumber")
     private String confirmationnumber;
+    @JsonProperty("totalVehicalPrice")
+    private String totalVehicalPrice;
+    @JsonProperty("taxFees")
+    private String taxFees;
+    @JsonProperty("totalPrice")
+    private String totalPrice;
     @JsonProperty("step")
     private String step;
 
@@ -265,6 +272,36 @@ public class Parameters {
     @JsonProperty("confirmationnumber")
     public void setConfirmationNumber(String confirmationnumber) {
 	this.confirmationnumber = confirmationnumber;
+    }
+
+    @JsonProperty("totalVehicalPrice")
+    public String getTotalVehicalPrice() {
+	return totalVehicalPrice;
+    }
+
+    @JsonProperty("totalVehicalPrice")
+    public void setTotalVehicalPrice(String totalVehicalPrice) {
+	this.totalVehicalPrice = totalVehicalPrice;
+    }
+
+    @JsonProperty("taxFees")
+    public String getTaxFees() {
+	return taxFees;
+    }
+
+    @JsonProperty("taxFees")
+    public void setTaxFees(String taxFees) {
+	this.taxFees = taxFees;
+    }
+
+    @JsonProperty("totalPrice")
+    public String getTotalPrice() {
+	return totalPrice;
+    }
+
+    @JsonProperty("totalPrice")
+    public void setTotalPrice(String totalPrice) {
+	this.totalPrice = totalPrice;
     }
 
     @JsonProperty("step")

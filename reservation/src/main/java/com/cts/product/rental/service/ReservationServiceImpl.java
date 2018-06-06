@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import com.cts.product.rental.bo.Context;
 import com.cts.product.rental.bo.Location;
+import com.cts.product.rental.bo.Parameters;
 import com.cts.product.rental.bo.Reservation;
 import com.cts.product.rental.bo.ReservationRequest;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -27,6 +30,18 @@ public class ReservationServiceImpl implements ReservationService {
     String sessionId;
 
     @Override
+    public ReservationRequest reviewReservation(ReservationRequest reservationRequest) throws IOException {
+	reservationRequest.getResult().getContexts().stream()
+		.filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
+		    sessionId = context.getParameters().getSessionId();
+		});
+	if (sessionService.findBySessionId(sessionId) == null) {
+	    return null;
+	}
+	return reservationRequest;
+    }
+
+    @Override
     public Reservation createReservation(ReservationRequest reservationRequest) throws IOException {
 	reservationRequest.getResult().getContexts().stream()
 		.filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
@@ -35,10 +50,17 @@ public class ReservationServiceImpl implements ReservationService {
 	if (sessionService.findBySessionId(sessionId) == null) {
 	    return null;
 	}
+	List<Context> contextOut = reservationRequest.getResult().getContexts().stream()
+		.filter(context -> StringUtils.equals("carrental", context.getName())).collect(Collectors.toList());
+	Parameters parameters = contextOut.get(0).getParameters();
 	List<Reservation> reservationList = getAllReservations();
 	int nextInt = new Random().nextInt(3);
 	Reservation reservation = reservationList.get(nextInt);
 	reservation.setConfNum(RandomStringUtils.randomNumeric(9));
+	reservation.setTotalVehicalPrice(parameters.getTotalVehicalPrice());
+	reservation.setTaxFees(parameters.getTaxFees());
+	reservation.setTotalPrice(parameters.getTotalPrice());
+	reservation.setCarType(parameters.getCartype());
 	return reservation;
     }
 

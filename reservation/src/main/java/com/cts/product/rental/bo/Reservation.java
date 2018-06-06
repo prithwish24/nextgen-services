@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "step", "status", "confNum", "pickupDateTime", "returnDateTime", "pickupLoc", "returnLoc",
-	"carType" })
+	"carType", "totalVehicalPrice", "taxFees", "totalPrice" })
 public class Reservation {
 
     private String step;
@@ -18,6 +18,9 @@ public class Reservation {
     private String pickupLoc;
     private String returnLoc;
     private String carType;
+    private String totalVehicalPrice;
+    private String taxFees;
+    private String totalPrice;
 
     public String getStep() {
 	return step;
@@ -82,4 +85,29 @@ public class Reservation {
     public void setCarType(String carType) {
 	this.carType = carType;
     }
+
+    public String getTotalVehicalPrice() {
+	return totalVehicalPrice;
+    }
+
+    public void setTotalVehicalPrice(String totalVehicalPrice) {
+	this.totalVehicalPrice = totalVehicalPrice;
+    }
+
+    public String getTaxFees() {
+	return taxFees;
+    }
+
+    public void setTaxFees(String taxFees) {
+	this.taxFees = taxFees;
+    }
+
+    public String getTotalPrice() {
+	return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+	this.totalPrice = totalPrice;
+    }
+
 }

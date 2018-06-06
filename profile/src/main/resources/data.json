@@ -1,13 +1,15 @@
-[{
-	"firstName": "John",
-	"lastName": "Smith",
+[
+	{
+		"firstName": "John",
+		"lastName": "Smith",
 		"username": "jsmith",
 		"dateOfBirth": "Tuesday May 08, 1982",
 		"mobileNo": "3145125555",
 		"emailId": "jsmith@mailinator.com",
-	"password": "password1",
-	"carTypePref": "Compact",
-		"preferences": [{
+		"password": "password1",
+		"carTypePref": "Compact",
+		"preferences": [
+			{
 				"type": "Fev Movie",
 				"value": "Jo Jeeta Wohi Sikandar"
 			},
@@ -30,7 +32,8 @@
 		"emailId": "viratk@cricket.com",
 		"password": "password1",
 		"carTypePref": "Standard",
-		"preferences": [{
+		"preferences": [
+			{
 				"type": "Fev Place",
 				"value": "Paris"
 			},
@@ -53,7 +56,8 @@
 		"emailId": "ab@bollywood.in",
 		"password": "password1",
 		"carTypePref": "Luxury",
-		"preferences": [{
+		"preferences": [
+			{
 				"type": "Hobbies",
 				"value": "Singing, Blogging, Reading"
 			},

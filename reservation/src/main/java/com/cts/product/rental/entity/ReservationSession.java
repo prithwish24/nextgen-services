@@ -28,6 +28,12 @@ public class ReservationSession {
     private String status;
     @Column(name = "booking_time")
     private LocalDateTime bookingTime;
+    @Column(name = "total_vehical_price")
+    private String totalVehicalPrice;
+    @Column(name = "tax_fees")
+    private String taxFees;
+    @Column(name = "total_price")
+    private String totalPrice;
 
     public String getId() {
 	return id;
@@ -100,4 +106,29 @@ public class ReservationSession {
     public void setBookingTime(LocalDateTime bookingTime) {
 	this.bookingTime = bookingTime;
     }
+
+    public String getTotalVehicalPrice() {
+	return totalVehicalPrice;
+    }
+
+    public void setTotalVehicalPrice(String totalVehicalPrice) {
+	this.totalVehicalPrice = totalVehicalPrice;
+    }
+
+    public String getTaxFees() {
+	return taxFees;
+    }
+
+    public void setTaxFees(String taxFees) {
+	this.taxFees = taxFees;
+    }
+
+    public String getTotalPrice() {
+	return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+	this.totalPrice = totalPrice;
+    }
+
 }
