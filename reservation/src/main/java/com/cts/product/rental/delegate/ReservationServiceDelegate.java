@@ -36,7 +36,7 @@ public class ReservationServiceDelegate {
 	    Location location = locationService.getLocation(locationRequest);
 	    reservationResponse = ReservationResponseMapper.mapLocation(reservationRequest, location);
 	    break;
-	case "review":
+	case "reviewReservation":
 	    reservationRequest = reservationService.reviewReservation(reservationRequest);
 	    reservationResponse = ReservationResponseMapper.mapReviewReservation(reservationRequest);
 	    break;

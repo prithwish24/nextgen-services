@@ -37,48 +37,48 @@ public class ProfileController {
 	}
 
 	if (StringUtils.isEmpty(loginRequest.getPassword())) {
-	    bp.setServiceError("2001", "ERROR", "Password is required");
+	    bp.setServiceError("2002", "ERROR", "Password is required");
 	}
 
 	if (!StringUtils.isEmpty(loginRequest.getUsername()) && !StringUtils.isEmpty(loginRequest.getPassword())) {
-	    UserProfile profile = delegate.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
-	    if (profile == null) {
-		bp.setServiceError("2001", "ERROR", "Invalid user credentials");
-	    } else {
-		bp.setSuccess(true);
-		bp.setResponse(profile);
-		bp.setSessionId(delegate.createSession(profile.getUsername()));
-	    }
+		UserProfile profile = delegate.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
+		if (profile == null) {
+			bp.setServiceError("2003", "ERROR", "Invalid user credentials");
+		} else {
+			bp.setSuccess(true);
+			bp.setResponse(profile);
+			bp.setSessionId(delegate.createSession(profile.getUsername()));
+		}
 	}
 	return bp;
     }
 
     @RequestMapping(value = "/getprofile", method = { RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<UserProfile> getProfile(
-	    @RequestParam(name = "username", required = true, defaultValue = "") String username) {
-	LOG.debug("Inside getProfile(");
-	BaseResponse<UserProfile> bp = new BaseResponse<>();
+    		@RequestParam(name = "username", required = true, defaultValue = "") String username) {
+    	LOG.debug("Inside getProfile(");
+    	BaseResponse<UserProfile> bp = new BaseResponse<>();
 
-	if (StringUtils.isEmpty(username)) {
-	    bp.setServiceError("2002", "INFO", "Profile Not Found");
-	} else {
-	    UserProfile profile = delegate.getUserProfile(username);
-	    bp.setResponse(profile);
-	    bp.setSuccess(true);
-	}
-	return bp;
+    	if (StringUtils.isEmpty(username)) {
+    		bp.setServiceError("2002", "INFO", "Profile Not Found");
+    	} else {
+    		UserProfile profile = delegate.getUserProfile(username);
+    		bp.setResponse(profile);
+    		bp.setSuccess(true);
+    	}
+    	return bp;
     }
 
     @RequestMapping(value = "/logout", method = { RequestMethod.GET,
 	    RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse<?> logout(
-	    @RequestParam(name = "username", required = true, defaultValue = "") String username) {
-	LOG.debug("Inside logout");
+    		@RequestParam(name = "username", required = true, defaultValue = "") String username) {
+    	LOG.debug("Inside logout");
 
-	BaseResponse<?> bp = new BaseResponse<Object>();
-	delegate.logout(username);
-	bp.setSuccess(true);
-	return bp;
+    	BaseResponse<?> bp = new BaseResponse<Object>();
+    	delegate.logout(username);
+    	bp.setSuccess(true);
+    	return bp;
     }
 
 }
