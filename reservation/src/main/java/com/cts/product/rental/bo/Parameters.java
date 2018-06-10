@@ -9,308 +9,320 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "duration", "sessionId.original", "date-period.original", "sessionId", "duration.original",
 	"date-period", "TypeOfItems", "cartype", "TypeOfItems.original", "TypeOfService.original", "TypeOfService",
 	"cartype.original", "pickuptime", "pickupdate.original", "pickupdate", "pickuptime.original", "pickuplocation",
-	"landmark", "landmark.original", "pickupfromnearestlocation", "confirmationnumber", "totalVehicalPrice",
-	"taxFees", "totalPrice", "step" })
+	"landmark", "landmark.original", "pickupfromnearestlocation", "confirmationnumber", "vehicleRentPrice",
+	"consessionFee", "salesTax", "estimatedTotal", "step" })
 public class Parameters {
 
-    @JsonProperty("duration")
-    private Duration duration;
-    @JsonProperty("sessionId.original")
-    private String sessionIdOriginal;
-    @JsonProperty("date-period.original")
-    private String datePeriodOriginal;
-    @JsonProperty("sessionId")
-    private String sessionId;
-    @JsonProperty("duration.original")
-    private String durationOriginal;
-    @JsonProperty("date-period")
-    private String datePeriod;
-    @JsonProperty("TypeOfItems")
-    private String typeOfItems;
-    @JsonProperty("cartype")
-    private String cartype;
-    @JsonProperty("TypeOfItems.original")
-    private String typeOfItemsOriginal;
-    @JsonProperty("TypeOfService.original")
-    private String typeOfServiceOriginal;
-    @JsonProperty("TypeOfService")
-    private String typeOfService;
-    @JsonProperty("cartype.original")
-    private String cartypeOriginal;
-    @JsonProperty("pickuptime")
-    private String pickuptime;
-    @JsonProperty("pickupdate.original")
-    private String pickupdateOriginal;
-    @JsonProperty("pickupdate")
-    private String pickupdate;
-    @JsonProperty("pickuptime.original")
-    private String pickuptimeOriginal;
-    @JsonProperty("pickuplocation")
-    private String pickuplocation;
-    @JsonProperty("landmark")
-    private Landmark landmark;
-    @JsonProperty("landmark.original")
-    private String landmarkOriginal;
-    @JsonProperty("pickupfromnearestlocation")
-    private boolean pickupfromnearestlocation;
-    @JsonProperty("confirmationnumber")
-    private String confirmationnumber;
-    @JsonProperty("totalVehicalPrice")
-    private String totalVehicalPrice;
-    @JsonProperty("taxFees")
-    private String taxFees;
-    @JsonProperty("totalPrice")
-    private String totalPrice;
-    @JsonProperty("step")
-    private String step;
+	@JsonProperty("duration")
+	private Duration duration;
+	@JsonProperty("sessionId.original")
+	private String sessionIdOriginal;
+	@JsonProperty("date-period.original")
+	private String datePeriodOriginal;
+	@JsonProperty("sessionId")
+	private String sessionId;
+	@JsonProperty("duration.original")
+	private String durationOriginal;
+	@JsonProperty("date-period")
+	private String datePeriod;
+	@JsonProperty("TypeOfItems")
+	private String typeOfItems;
+	@JsonProperty("cartype")
+	private String cartype;
+	@JsonProperty("TypeOfItems.original")
+	private String typeOfItemsOriginal;
+	@JsonProperty("TypeOfService.original")
+	private String typeOfServiceOriginal;
+	@JsonProperty("TypeOfService")
+	private String typeOfService;
+	@JsonProperty("cartype.original")
+	private String cartypeOriginal;
+	@JsonProperty("pickuptime")
+	private String pickuptime;
+	@JsonProperty("pickupdate.original")
+	private String pickupdateOriginal;
+	@JsonProperty("pickupdate")
+	private String pickupdate;
+	@JsonProperty("pickuptime.original")
+	private String pickuptimeOriginal;
+	@JsonProperty("pickuplocation")
+	private String pickuplocation;
+	@JsonProperty("landmark")
+	private Landmark landmark;
+	@JsonProperty("landmark.original")
+	private String landmarkOriginal;
+	@JsonProperty("pickupfromnearestlocation")
+	private boolean pickupfromnearestlocation;
+	@JsonProperty("confirmationnumber")
+	private String confirmationnumber;
+	@JsonProperty("vehicleRentPrice")
+	private String vehicleRentPrice;
+	@JsonProperty("consessionFee")
+	private String consessionFee;
+	@JsonProperty("salesTax")
+	private String salesTax;
+	@JsonProperty("estimatedTotal")
+	private String estimatedTotal;
+	@JsonProperty("step")
+	private String step;
 
-    @JsonProperty("duration")
-    public Duration getDuration() {
-	return duration;
-    }
+	@JsonProperty("duration")
+	public Duration getDuration() {
+		return duration;
+	}
 
-    @JsonProperty("duration")
-    public void setDuration(Duration duration) {
-	this.duration = duration;
-    }
+	@JsonProperty("duration")
+	public void setDuration(Duration duration) {
+		this.duration = duration;
+	}
 
-    @JsonProperty("sessionId.original")
-    public String getSessionIdOriginal() {
-	return sessionIdOriginal;
-    }
+	@JsonProperty("sessionId.original")
+	public String getSessionIdOriginal() {
+		return sessionIdOriginal;
+	}
 
-    @JsonProperty("sessionId.original")
-    public void setSessionIdOriginal(String sessionIdOriginal) {
-	this.sessionIdOriginal = sessionIdOriginal;
-    }
+	@JsonProperty("sessionId.original")
+	public void setSessionIdOriginal(String sessionIdOriginal) {
+		this.sessionIdOriginal = sessionIdOriginal;
+	}
 
-    @JsonProperty("date-period.original")
-    public String getDatePeriodOriginal() {
-	return datePeriodOriginal;
-    }
+	@JsonProperty("date-period.original")
+	public String getDatePeriodOriginal() {
+		return datePeriodOriginal;
+	}
 
-    @JsonProperty("date-period.original")
-    public void setDatePeriodOriginal(String datePeriodOriginal) {
-	this.datePeriodOriginal = datePeriodOriginal;
-    }
+	@JsonProperty("date-period.original")
+	public void setDatePeriodOriginal(String datePeriodOriginal) {
+		this.datePeriodOriginal = datePeriodOriginal;
+	}
 
-    @JsonProperty("sessionId")
-    public String getSessionId() {
-	return sessionId;
-    }
+	@JsonProperty("sessionId")
+	public String getSessionId() {
+		return sessionId;
+	}
 
-    @JsonProperty("sessionId")
-    public void setSessionId(String sessionId) {
-	this.sessionId = sessionId;
-    }
+	@JsonProperty("sessionId")
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
 
-    @JsonProperty("duration.original")
-    public String getDurationOriginal() {
-	return durationOriginal;
-    }
+	@JsonProperty("duration.original")
+	public String getDurationOriginal() {
+		return durationOriginal;
+	}
 
-    @JsonProperty("duration.original")
-    public void setDurationOriginal(String durationOriginal) {
-	this.durationOriginal = durationOriginal;
-    }
+	@JsonProperty("duration.original")
+	public void setDurationOriginal(String durationOriginal) {
+		this.durationOriginal = durationOriginal;
+	}
 
-    @JsonProperty("date-period")
-    public String getDatePeriod() {
-	return datePeriod;
-    }
+	@JsonProperty("date-period")
+	public String getDatePeriod() {
+		return datePeriod;
+	}
 
-    @JsonProperty("date-period")
-    public void setDatePeriod(String datePeriod) {
-	this.datePeriod = datePeriod;
-    }
+	@JsonProperty("date-period")
+	public void setDatePeriod(String datePeriod) {
+		this.datePeriod = datePeriod;
+	}
 
-    @JsonProperty("TypeOfItems")
-    public String getTypeOfItems() {
-	return typeOfItems;
-    }
+	@JsonProperty("TypeOfItems")
+	public String getTypeOfItems() {
+		return typeOfItems;
+	}
 
-    @JsonProperty("TypeOfItems")
-    public void setTypeOfItems(String typeOfItems) {
-	this.typeOfItems = typeOfItems;
-    }
+	@JsonProperty("TypeOfItems")
+	public void setTypeOfItems(String typeOfItems) {
+		this.typeOfItems = typeOfItems;
+	}
 
-    @JsonProperty("cartype")
-    public String getCartype() {
-	return cartype;
-    }
+	@JsonProperty("cartype")
+	public String getCartype() {
+		return cartype;
+	}
 
-    @JsonProperty("cartype")
-    public void setCartype(String cartype) {
-	this.cartype = cartype;
-    }
+	@JsonProperty("cartype")
+	public void setCartype(String cartype) {
+		this.cartype = cartype;
+	}
 
-    @JsonProperty("TypeOfItems.original")
-    public String getTypeOfItemsOriginal() {
-	return typeOfItemsOriginal;
-    }
+	@JsonProperty("TypeOfItems.original")
+	public String getTypeOfItemsOriginal() {
+		return typeOfItemsOriginal;
+	}
 
-    @JsonProperty("TypeOfItems.original")
-    public void setTypeOfItemsOriginal(String typeOfItemsOriginal) {
-	this.typeOfItemsOriginal = typeOfItemsOriginal;
-    }
+	@JsonProperty("TypeOfItems.original")
+	public void setTypeOfItemsOriginal(String typeOfItemsOriginal) {
+		this.typeOfItemsOriginal = typeOfItemsOriginal;
+	}
 
-    @JsonProperty("TypeOfService.original")
-    public String getTypeOfServiceOriginal() {
-	return typeOfServiceOriginal;
-    }
+	@JsonProperty("TypeOfService.original")
+	public String getTypeOfServiceOriginal() {
+		return typeOfServiceOriginal;
+	}
 
-    @JsonProperty("TypeOfService.original")
-    public void setTypeOfServiceOriginal(String typeOfServiceOriginal) {
-	this.typeOfServiceOriginal = typeOfServiceOriginal;
-    }
+	@JsonProperty("TypeOfService.original")
+	public void setTypeOfServiceOriginal(String typeOfServiceOriginal) {
+		this.typeOfServiceOriginal = typeOfServiceOriginal;
+	}
 
-    @JsonProperty("TypeOfService")
-    public String getTypeOfService() {
-	return typeOfService;
-    }
+	@JsonProperty("TypeOfService")
+	public String getTypeOfService() {
+		return typeOfService;
+	}
 
-    @JsonProperty("TypeOfService")
-    public void setTypeOfService(String typeOfService) {
-	this.typeOfService = typeOfService;
-    }
+	@JsonProperty("TypeOfService")
+	public void setTypeOfService(String typeOfService) {
+		this.typeOfService = typeOfService;
+	}
 
-    @JsonProperty("cartype.original")
-    public String getCartypeOriginal() {
-	return cartypeOriginal;
-    }
+	@JsonProperty("cartype.original")
+	public String getCartypeOriginal() {
+		return cartypeOriginal;
+	}
 
-    @JsonProperty("cartype.original")
-    public void setCartypeOriginal(String cartypeOriginal) {
-	this.cartypeOriginal = cartypeOriginal;
-    }
+	@JsonProperty("cartype.original")
+	public void setCartypeOriginal(String cartypeOriginal) {
+		this.cartypeOriginal = cartypeOriginal;
+	}
 
-    @JsonProperty("pickuptime")
-    public String getPickuptime() {
-	return pickuptime;
-    }
+	@JsonProperty("pickuptime")
+	public String getPickuptime() {
+		return pickuptime;
+	}
 
-    @JsonProperty("pickuptime")
-    public void setPickuptime(String pickuptime) {
-	this.pickuptime = pickuptime;
-    }
+	@JsonProperty("pickuptime")
+	public void setPickuptime(String pickuptime) {
+		this.pickuptime = pickuptime;
+	}
 
-    @JsonProperty("pickupdate.original")
-    public String getPickupdateOriginal() {
-	return pickupdateOriginal;
-    }
+	@JsonProperty("pickupdate.original")
+	public String getPickupdateOriginal() {
+		return pickupdateOriginal;
+	}
 
-    @JsonProperty("pickupdate.original")
-    public void setPickupdateOriginal(String pickupdateOriginal) {
-	this.pickupdateOriginal = pickupdateOriginal;
-    }
+	@JsonProperty("pickupdate.original")
+	public void setPickupdateOriginal(String pickupdateOriginal) {
+		this.pickupdateOriginal = pickupdateOriginal;
+	}
 
-    @JsonProperty("pickupdate")
-    public String getPickupdate() {
-	return pickupdate;
-    }
+	@JsonProperty("pickupdate")
+	public String getPickupdate() {
+		return pickupdate;
+	}
 
-    @JsonProperty("pickupdate")
-    public void setPickupdate(String pickupdate) {
-	this.pickupdate = pickupdate;
-    }
+	@JsonProperty("pickupdate")
+	public void setPickupdate(String pickupdate) {
+		this.pickupdate = pickupdate;
+	}
 
-    @JsonProperty("pickuptime.original")
-    public String getPickuptimeOriginal() {
-	return pickuptimeOriginal;
-    }
+	@JsonProperty("pickuptime.original")
+	public String getPickuptimeOriginal() {
+		return pickuptimeOriginal;
+	}
 
-    @JsonProperty("pickuptime.original")
-    public void setPickuptimeOriginal(String pickuptimeOriginal) {
-	this.pickuptimeOriginal = pickuptimeOriginal;
-    }
+	@JsonProperty("pickuptime.original")
+	public void setPickuptimeOriginal(String pickuptimeOriginal) {
+		this.pickuptimeOriginal = pickuptimeOriginal;
+	}
 
-    @JsonProperty("pickuplocation")
-    public String getPickuplocation() {
-	return pickuplocation;
-    }
+	@JsonProperty("pickuplocation")
+	public String getPickuplocation() {
+		return pickuplocation;
+	}
 
-    @JsonProperty("pickuplocation")
-    public void setPickuplocation(String pickuplocation) {
-	this.pickuplocation = pickuplocation;
-    }
+	@JsonProperty("pickuplocation")
+	public void setPickuplocation(String pickuplocation) {
+		this.pickuplocation = pickuplocation;
+	}
 
-    @JsonProperty("landmark")
-    public Landmark getLandmark() {
-	return landmark;
-    }
+	@JsonProperty("landmark")
+	public Landmark getLandmark() {
+		return landmark;
+	}
 
-    @JsonProperty("landmark")
-    public void setLandmark(Landmark landmark) {
-	this.landmark = landmark;
-    }
+	@JsonProperty("landmark")
+	public void setLandmark(Landmark landmark) {
+		this.landmark = landmark;
+	}
 
-    @JsonProperty("landmark.original")
-    public String getLandmarkOriginal() {
-	return landmarkOriginal;
-    }
+	@JsonProperty("landmark.original")
+	public String getLandmarkOriginal() {
+		return landmarkOriginal;
+	}
 
-    @JsonProperty("landmark.original")
-    public void setLandmarkOriginal(String landmarkOriginal) {
-	this.landmarkOriginal = landmarkOriginal;
-    }
+	@JsonProperty("landmark.original")
+	public void setLandmarkOriginal(String landmarkOriginal) {
+		this.landmarkOriginal = landmarkOriginal;
+	}
 
-    @JsonProperty("pickupfromnearestlocation")
-    public boolean isPickupFromNearestLocation() {
-	return pickupfromnearestlocation;
-    }
+	@JsonProperty("pickupfromnearestlocation")
+	public boolean isPickupFromNearestLocation() {
+		return pickupfromnearestlocation;
+	}
 
-    @JsonProperty("pickupfromnearestlocation")
-    public void setPickupfromnearestlocation(boolean pickupfromnearestlocation) {
-	this.pickupfromnearestlocation = pickupfromnearestlocation;
-    }
+	@JsonProperty("pickupfromnearestlocation")
+	public void setPickupfromnearestlocation(boolean pickupfromnearestlocation) {
+		this.pickupfromnearestlocation = pickupfromnearestlocation;
+	}
 
-    @JsonProperty("confirmationnumber")
-    public String getConfirmationNumber() {
-	return confirmationnumber;
-    }
+	@JsonProperty("confirmationnumber")
+	public String getConfirmationNumber() {
+		return confirmationnumber;
+	}
 
-    @JsonProperty("confirmationnumber")
-    public void setConfirmationNumber(String confirmationnumber) {
-	this.confirmationnumber = confirmationnumber;
-    }
+	@JsonProperty("confirmationnumber")
+	public void setConfirmationNumber(String confirmationnumber) {
+		this.confirmationnumber = confirmationnumber;
+	}
 
-    @JsonProperty("totalVehicalPrice")
-    public String getTotalVehicalPrice() {
-	return totalVehicalPrice;
-    }
+	@JsonProperty("vehicleRentPrice")
+	public String getVehicleRentPrice() {
+		return vehicleRentPrice;
+	}
 
-    @JsonProperty("totalVehicalPrice")
-    public void setTotalVehicalPrice(String totalVehicalPrice) {
-	this.totalVehicalPrice = totalVehicalPrice;
-    }
+	@JsonProperty("vehicleRentPrice")
+	public void setVehicleRentPrice(String vehicleRentPrice) {
+		this.vehicleRentPrice = vehicleRentPrice;
+	}
 
-    @JsonProperty("taxFees")
-    public String getTaxFees() {
-	return taxFees;
-    }
+	@JsonProperty("consessionFee")
+	public String getConsessionFee() {
+		return consessionFee;
+	}
 
-    @JsonProperty("taxFees")
-    public void setTaxFees(String taxFees) {
-	this.taxFees = taxFees;
-    }
+	@JsonProperty("consessionFee")
+	public void setConsessionFee(String consessionFee) {
+		this.consessionFee = consessionFee;
+	}
 
-    @JsonProperty("totalPrice")
-    public String getTotalPrice() {
-	return totalPrice;
-    }
+	@JsonProperty("salesTax")
+	public String getSalesTax() {
+		return salesTax;
+	}
 
-    @JsonProperty("totalPrice")
-    public void setTotalPrice(String totalPrice) {
-	this.totalPrice = totalPrice;
-    }
+	@JsonProperty("salesTax")
+	public void setSalesTax(String salesTax) {
+		this.salesTax = salesTax;
+	}
 
-    @JsonProperty("step")
-    public String getStep() {
-	return step;
-    }
+	@JsonProperty("estimatedTotal")
+	public String getEstimatedTotal() {
+		return estimatedTotal;
+	}
 
-    @JsonProperty("step")
-    public void setStep(String step) {
-	this.step = step;
-    }
+	@JsonProperty("estimatedTotal")
+	public void setEstimatedTotal(String estimatedTotal) {
+		this.estimatedTotal = estimatedTotal;
+	}
+
+	@JsonProperty("step")
+	public String getStep() {
+		return step;
+	}
+
+	@JsonProperty("step")
+	public void setStep(String step) {
+		this.step = step;
+	}
 }

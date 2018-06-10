@@ -1,5 +1,7 @@
 package com.cts.product.rental.mapper;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +19,12 @@ import com.cts.product.rental.bo.ReservationResponse;
 
 public class ReservationResponseMapper {
 
+	private static final DecimalFormat DF = new DecimalFormat("###.##");
+	
+	static {
+		DF.setRoundingMode(RoundingMode.UP);
+	}
+	
 	public static ReservationResponse mapReservation(ReservationRequest reservationRequest, Reservation reservation) {
 
 		ReservationResponse reservationResponse = new ReservationResponse();
@@ -48,7 +56,7 @@ public class ReservationResponseMapper {
 		contextOut.get(0).setParameters(parameters);
 		String speechText = "Great. Thank you. I have reserved a "
 				+ parameters.getCartype()
-				+ "car for you for "
+				+ " car for you for "
 				+ parameters.getPickupdate()
 				+ ". Shall I confirm this booking?";
 		reservationResponse.setSpeech(speechText);
@@ -58,37 +66,49 @@ public class ReservationResponseMapper {
 	}
 
 	private static Parameters calculateTotalVehicalPrice(Parameters parameters) {
-		String cartype = parameters.getCartype();
-		double totalVehicalPrice = 0;
-		if (StringUtils.equalsIgnoreCase(RentalConstants.STANDARD, cartype)) {
-			totalVehicalPrice = calculateTotalVehicalPrice(parameters, RentalConstants.STANDARD_CAR_PRICE_PER_DAY);
-		} else if (StringUtils.equalsIgnoreCase(RentalConstants.ECONOMY, cartype)) {
-			totalVehicalPrice = calculateTotalVehicalPrice(parameters, RentalConstants.ECONOMY_CAR_PRICE_PER_DAY);
+		final String cartype = parameters.getCartype();
+		final Duration duration = parameters.getDuration();
+		double vehicleRentPrice = 0;
+		
+		if (StringUtils.equalsIgnoreCase(RentalConstants.ECONOMY, cartype)) {
+			vehicleRentPrice = calculateTotalVehicalPrice(duration, RentalConstants.ECONOMY_CAR_PRICE_PER_DAY);
 		} else if (StringUtils.equalsIgnoreCase(RentalConstants.COMPACT, cartype)) {
-			totalVehicalPrice = calculateTotalVehicalPrice(parameters, RentalConstants.COMPACT_CAR_PRICE_PER_DAY);
+			vehicleRentPrice = calculateTotalVehicalPrice(duration, RentalConstants.COMPACT_CAR_PRICE_PER_DAY);
 		} else if (StringUtils.equalsIgnoreCase(RentalConstants.INTERMEDIATE, cartype)) {
-			totalVehicalPrice = calculateTotalVehicalPrice(parameters, RentalConstants.INTERMEDIATE_CAR_PRICE_PER_DAY);
+			vehicleRentPrice = calculateTotalVehicalPrice(duration, RentalConstants.INTERMEDIATE_CAR_PRICE_PER_DAY);
+		} else if (StringUtils.equalsIgnoreCase(RentalConstants.STANDARD, cartype)) {
+			vehicleRentPrice = calculateTotalVehicalPrice(duration, RentalConstants.STANDARD_CAR_PRICE_PER_DAY);
+		} else if (StringUtils.equalsIgnoreCase(RentalConstants.FULLSIZE, cartype)) {
+			vehicleRentPrice = calculateTotalVehicalPrice(duration, RentalConstants.FULLSIZE_CAR_PRICE_PER_DAY);
+		} else if (StringUtils.equalsIgnoreCase(RentalConstants.PREMIUM, cartype)) {
+			vehicleRentPrice = calculateTotalVehicalPrice(duration, RentalConstants.PREMIUM_CAR_PRICE_PER_DAY);
+		} else if (StringUtils.equalsIgnoreCase(RentalConstants.LUXURY, cartype)) {
+			vehicleRentPrice = calculateTotalVehicalPrice(duration, RentalConstants.LUXURY_CAR_PRICE_PER_DAY);
 		} else {
-			totalVehicalPrice = calculateTotalVehicalPrice(parameters, RentalConstants.STANDARD_CAR_PRICE_PER_DAY);
+			vehicleRentPrice = calculateTotalVehicalPrice(duration, RentalConstants.STANDARD_CAR_PRICE_PER_DAY);
 		}
-		double totalPrice = (totalVehicalPrice + ((totalVehicalPrice * RentalConstants.SERVICE_TAX) / 100));
-		parameters.setTotalVehicalPrice(Double.toString(totalVehicalPrice));
-		parameters.setTotalPrice(Double.toString(totalPrice));
-		parameters.setTaxFees(Double.toString(RentalConstants.SERVICE_TAX));
+		
+		double consessionFee = vehicleRentPrice * RentalConstants.CONCESSIONFEE; 
+		double salesTax = vehicleRentPrice * RentalConstants.SALES_TAX;
+		double estimatedTotal = vehicleRentPrice + consessionFee + RentalConstants.VEHICLE_LICENSE_RECVRY_FEE + salesTax;
+		
+		parameters.setVehicleRentPrice(DF.format(vehicleRentPrice));
+		parameters.setConsessionFee(DF.format(consessionFee));
+		parameters.setEstimatedTotal(DF.format(estimatedTotal));
+		parameters.setSalesTax(DF.format(salesTax));		
 		return parameters;
 	}
 
-	private static double calculateTotalVehicalPrice(Parameters parameters, double price) {
-		Duration duration = parameters.getDuration();
+	private static double calculateTotalVehicalPrice(Duration duration, double price) {
 		Integer amount = duration.getAmount();
 		String unit = duration.getUnit();
-		double totalVehicalPrice = 0;
+		double rentPrice = 0;
 		if (StringUtils.equalsIgnoreCase(RentalConstants.DAY, unit)) {
-			totalVehicalPrice = price * amount;
+			rentPrice = price * amount;
 		} else if (StringUtils.equalsIgnoreCase(RentalConstants.WEEK, unit)) {
-			totalVehicalPrice = price * amount * 7;
+			rentPrice = price * amount * 7;
 		}
-		return totalVehicalPrice;
+		return rentPrice;
 	}
 
 	public static ReservationResponse mapLocation(ReservationRequest reservationRequest, Location location) {

@@ -9,126 +9,138 @@ import javax.persistence.Id;
 @Entity
 public class ReservationSession {
 
-    @Id
-    @Column(name = "id")
-    private String id;
-    @Column(name = "pickup_point")
-    private String pickupPoint;
-    @Column(name = "drop_point")
-    private String dropPoint;
-    @Column(name = "pickup_time")
-    private String pickupDateTime;
-    @Column(name = "dropoff_time")
-    private String dropoffDateTime;
-    @Column(name = "username")
-    private String username;
-    @Column(name = "car_type")
-    private String carType;
-    @Column(name = "status")
-    private String status;
-    @Column(name = "booking_time")
-    private LocalDateTime bookingTime;
-    @Column(name = "total_vehical_price")
-    private String totalVehicalPrice;
-    @Column(name = "tax_fees")
-    private String taxFees;
-    @Column(name = "total_price")
-    private String totalPrice;
+	@Id
+	@Column(name = "id")
+	private String id;
+	@Column(name = "pickup_point")
+	private String pickupPoint;
+	@Column(name = "drop_point")
+	private String dropPoint;
+	@Column(name = "pickup_time")
+	private String pickupDateTime;
+	@Column(name = "dropoff_time")
+	private String dropoffDateTime;
+	@Column(name = "username")
+	private String username;
+	@Column(name = "car_type")
+	private String carType;
+	@Column(name = "status")
+	private String status;
+	@Column(name = "booking_time")
+	private LocalDateTime bookingTime;
+	@Column(name = "vehicle_rent_price")
+	private String vehicleRentPrice;
+	@Column(name = "consession_fee")
+	private String consessionFee;
+	@Column(name = "sales_tax")
+	private String salesTax;
+	@Column(name = "estimated_total")
+	private String estimatedTotal;
 
-    public String getId() {
-	return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-	this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getPickupPoint() {
-	return pickupPoint;
-    }
+	public String getPickupPoint() {
+		return pickupPoint;
+	}
 
-    public void setPickupPoint(String pickupPoint) {
-	this.pickupPoint = pickupPoint;
-    }
+	public void setPickupPoint(String pickupPoint) {
+		this.pickupPoint = pickupPoint;
+	}
 
-    public String getDropPoint() {
-	return dropPoint;
-    }
+	public String getDropPoint() {
+		return dropPoint;
+	}
 
-    public void setDropPoint(String dropPoint) {
-	this.dropPoint = dropPoint;
-    }
+	public void setDropPoint(String dropPoint) {
+		this.dropPoint = dropPoint;
+	}
 
-    public String getPickupDateTime() {
-	return pickupDateTime;
-    }
+	public String getPickupDateTime() {
+		return pickupDateTime;
+	}
 
-    public void setPickupDateTime(String pickupDateTime) {
-	this.pickupDateTime = pickupDateTime;
-    }
+	public void setPickupDateTime(String pickupDateTime) {
+		this.pickupDateTime = pickupDateTime;
+	}
 
-    public String getDropoffDateTime() {
-	return dropoffDateTime;
-    }
+	public String getDropoffDateTime() {
+		return dropoffDateTime;
+	}
 
-    public void setDropoffDateTime(String dropoffDateTime) {
-	this.dropoffDateTime = dropoffDateTime;
-    }
+	public void setDropoffDateTime(String dropoffDateTime) {
+		this.dropoffDateTime = dropoffDateTime;
+	}
 
-    public String getCarType() {
-	return carType;
-    }
+	public String getCarType() {
+		return carType;
+	}
 
-    public void setCarType(String carType) {
-	this.carType = carType;
-    }
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
 
-    public String getUsername() {
-	return username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setUsername(String username) {
-	this.username = username;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getStatus() {
-	return status;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setStatus(String status) {
-	this.status = status;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public LocalDateTime getBookingTime() {
-	return bookingTime;
-    }
+	public LocalDateTime getBookingTime() {
+		return bookingTime;
+	}
 
-    public void setBookingTime(LocalDateTime bookingTime) {
-	this.bookingTime = bookingTime;
-    }
+	public void setBookingTime(LocalDateTime bookingTime) {
+		this.bookingTime = bookingTime;
+	}
 
-    public String getTotalVehicalPrice() {
-	return totalVehicalPrice;
-    }
+	public String getVehicleRentPrice() {
+		return vehicleRentPrice;
+	}
 
-    public void setTotalVehicalPrice(String totalVehicalPrice) {
-	this.totalVehicalPrice = totalVehicalPrice;
-    }
+	public void setVehicleRentPrice(String vehicleRentPrice) {
+		this.vehicleRentPrice = vehicleRentPrice;
+	}
 
-    public String getTaxFees() {
-	return taxFees;
-    }
+	public String getConsessionFee() {
+		return consessionFee;
+	}
 
-    public void setTaxFees(String taxFees) {
-	this.taxFees = taxFees;
-    }
+	public void setConsessionFee(String consessionFee) {
+		this.consessionFee = consessionFee;
+	}
 
-    public String getTotalPrice() {
-	return totalPrice;
-    }
+	public String getSalesTax() {
+		return salesTax;
+	}
 
-    public void setTotalPrice(String totalPrice) {
-	this.totalPrice = totalPrice;
-    }
+	public void setSalesTax(String salesTax) {
+		this.salesTax = salesTax;
+	}
+
+	public String getEstimatedTotal() {
+		return estimatedTotal;
+	}
+
+	public void setEstimatedTotal(String estimatedTotal) {
+		this.estimatedTotal = estimatedTotal;
+	}
+
+
 
 }

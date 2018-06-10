@@ -57,9 +57,10 @@ public class ReservationServiceImpl implements ReservationService {
 		int nextInt = new Random().nextInt(3);
 		Reservation reservation = reservationList.get(nextInt);
 		reservation.setConfNum(RandomStringUtils.randomNumeric(9));
-		reservation.setTotalVehicalPrice(parameters.getTotalVehicalPrice());
-		reservation.setTaxFees(parameters.getTaxFees());
-		reservation.setTotalPrice(parameters.getTotalPrice());
+		reservation.setVehicleRentPrice(parameters.getVehicleRentPrice());
+		reservation.setConsessionFee(parameters.getConsessionFee());
+		reservation.setSalesTax(parameters.getSalesTax());
+		reservation.setEstimatedTotal(parameters.getEstimatedTotal());
 		reservation.setCarType(parameters.getCartype());
 		return reservation;
 	}
