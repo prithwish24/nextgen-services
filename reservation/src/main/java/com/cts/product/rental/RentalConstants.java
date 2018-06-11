@@ -3,7 +3,7 @@ package com.cts.product.rental;
 public class RentalConstants {
 	
 	public final static double ECONOMY_CAR_PRICE_PER_DAY = 68.52;
-    public final static double COMPACT_CAR_PRICE_PER_DAY = 7.20;
+    public final static double COMPACT_CAR_PRICE_PER_DAY = 72.20;
     public final static double INTERMEDIATE_CAR_PRICE_PER_DAY = 77.23;
     public final static double STANDARD_CAR_PRICE_PER_DAY = 80.00;
     public final static double FULLSIZE_CAR_PRICE_PER_DAY = 88.79;
