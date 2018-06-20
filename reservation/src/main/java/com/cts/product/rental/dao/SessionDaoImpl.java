@@ -13,6 +13,8 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.cts.product.rental.bo.Reservation;
@@ -21,6 +23,7 @@ import com.cts.product.rental.entity.Session;
 
 @Repository
 public class SessionDaoImpl implements SessionDao {
+	private static final Logger LOG = LoggerFactory.getLogger(SessionDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -29,6 +32,7 @@ public class SessionDaoImpl implements SessionDao {
 
 	@Override
 	public List<Reservation> getUpcomingTrips(String sessionId, String username, String count) throws ParseException {
+		LOG.debug("getUpcomingTrips() : sessionId- "+sessionId);
 		Session session = new Session();
 		session.setSessionId(sessionId);
 		session.setUsername(username);
@@ -50,6 +54,7 @@ public class SessionDaoImpl implements SessionDao {
 		}
 		Session sessionResult = findBySessionId(sessionId);
 		if (sessionResult == null) {
+			LOG.debug("getUpcomingTrips() : session is NEW - "+sessionId);
 			entityManager.persist(session);
 		}
 		return reservations;
