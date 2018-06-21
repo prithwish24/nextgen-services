@@ -1,3 +1,9 @@
 hystrix:
   metrics:
     enabled: true 
+
+logging:
+  file: ${logging.path}/reservation.log
+  level:
+    com.cts.product.rental: DEBUG
+    
