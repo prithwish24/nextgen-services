@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
-	<property name="DEV_HOME" value="/opt/logs" />
+	<property name="DEV_HOME" value="/logs" />
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
@@ -32,9 +32,6 @@
 
 
 
-
-	<!-- <logger name="deng" level="DEBUG" /> -->
-
 	<logger name="com.cts.product.rental" level="debug" additivity="false">
 		<appender-ref ref="FILE-AUDIT" />
 		<appender-ref ref="STDOUT" />
@@ -42,12 +39,8 @@
 
 
 
-	<root level="warn">
+	<root level="INFO">
 		<appender-ref ref="FILE-AUDIT" />
 	</root>
-	
-	<!-- <root level="INFO">
-		<appender-ref ref="STDOUT" />
-	</root> -->
 	
 </configuration>
