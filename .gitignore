@@ -32,3 +32,8 @@ target/
 
 #eclipse bin
 bin/
+
+#intellij 
+.idea/
+*.iml
+
