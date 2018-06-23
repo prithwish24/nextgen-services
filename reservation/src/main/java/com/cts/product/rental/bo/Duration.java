@@ -8,29 +8,32 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "amount", "unit" })
 public class Duration {
 
-    @JsonProperty("amount")
-    Integer amount;
-    @JsonProperty("unit")
-    String unit;
+	@JsonProperty("amount")
+	private Integer amount;
+	@JsonProperty("unit")
+	private String unit;
 
-    @JsonProperty("amount")
-    public Integer getAmount() {
-	return amount;
-    }
+	@JsonProperty("amount")
+	public Integer getAmount() {
+		return amount;
+	}
 
-    @JsonProperty("amount")
-    public void setAmount(Integer amount) {
-	this.amount = amount;
-    }
+	@JsonProperty("amount")
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 
-    @JsonProperty("unit")
-    public String getUnit() {
-	return unit;
-    }
+	@JsonProperty("unit")
+	public String getUnit() {
+		return unit;
+	}
 
-    @JsonProperty("unit")
-    public void setUnit(String unit) {
-	this.unit = unit;
-    }
+	@JsonProperty("unit")
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 
+	public String toString() {
+		return (amount+" "+unit);
+	}
 }

@@ -2,10 +2,17 @@ package com.cts.product.rental.mapper;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.cts.product.rental.RentalConstants;
 import com.cts.product.rental.bo.Context;
@@ -18,8 +25,10 @@ import com.cts.product.rental.bo.ReservationRequest;
 import com.cts.product.rental.bo.ReservationResponse;
 
 public class ReservationResponseMapper {
+	private static final Logger LOG = LoggerFactory.getLogger(ReservationResponseMapper.class);
 
 	private static final DecimalFormat DF = new DecimalFormat("###.##");
+	private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
 	
 	static {
 		DF.setRoundingMode(RoundingMode.UP);
@@ -112,21 +121,67 @@ public class ReservationResponseMapper {
 	}
 
 	public static ReservationResponse mapLocation(ReservationRequest reservationRequest, Location location) {
-
-		ReservationResponse reservationResponse = new ReservationResponse();
+		ReservationResponse response = new ReservationResponse();
 		List<Context> contextOut = reservationRequest.getResult().getContexts().stream()
 				.filter(context -> StringUtils.equals("carrental", context.getName())).collect(Collectors.toList());
 		if (location != null) {
 			contextOut.get(0).getParameters().setPickuplocation(location.getAddress());
-			String speechText = "What type of car do you want?";
-			reservationResponse.setSpeech(speechText);
-			reservationResponse.setDisplayText(speechText);
+		
+			FollowupEvent followupEvent = new FollowupEvent();
+			followupEvent.setName("location_found");
+			response.setFollowupEvent(followupEvent);			
+			
+			String speechText = "Great. Thank you. I'm reserving a "
+					+ contextOut.get(0).getParameters().getCartype() 
+					+ " car for you for "
+					+ getPickupDateAsSpeech(contextOut.get(0).getParameters().getPickupdate())
+					+ " for " + contextOut.get(0).getParameters().getDuration().toString()
+					+ ". Shall I confirm this booking?";
+			response.setSpeech(speechText);
+			response.setDisplayText(speechText);
+
 		} else {
 			FollowupEvent followupEvent = new FollowupEvent();
 			followupEvent.setName("error_location");
-			reservationResponse.setFollowupEvent(followupEvent);
+			response.setFollowupEvent(followupEvent);
 		}
-		reservationResponse.setContextOut(contextOut);
-		return reservationResponse;
+		response.setContextOut(contextOut);
+		return response;
 	}
+	
+	private static String getPickupDateAsSpeech(String pickupdate) {
+		StringBuilder sb = new StringBuilder();
+		try {
+			Date date = SDF.parse(pickupdate);
+			Calendar cal = GregorianCalendar.getInstance();
+			cal.setTime(date);
+			int day = cal.get(Calendar.DAY_OF_MONTH);
+			
+			sb.append(cal.get(Calendar.MONTH))
+				.append(" ").append(day).append(ordinalNo(day));
+			
+		} catch (ParseException e) {
+			LOG.error("Error parsing date - "+pickupdate, e);
+		}
+		return null;
+	}
+	
+	private static String ordinalNo(int value) {
+		int hunRem = value % 100;
+		int tenRem = value % 10;
+		if (hunRem - tenRem == 10) {
+			return "th";
+		}
+		switch (tenRem) {
+		case 1:
+			return "st";
+		case 2:
+			return "nd";
+		case 3:
+			return "rd";
+		default:
+			return "th";
+		}
+	}
+	
 }
