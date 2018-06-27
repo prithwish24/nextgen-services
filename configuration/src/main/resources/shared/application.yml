@@ -1,12 +1,12 @@
 logging:
-  path: ${user.dir}/logs/
+  path: /logs/
   pattern:
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n"
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n" 
   level:
     root: WARN
     org.springframework.security: INFO
-    
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
 
 server:
   error:

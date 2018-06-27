@@ -32,9 +32,9 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public ReservationRequest reviewReservation(ReservationRequest reservationRequest) throws IOException {
 		reservationRequest.getResult().getContexts().stream()
-		.filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
-			sessionId = context.getParameters().getSessionId();
-		});
+				.filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
+					sessionId = context.getParameters().getSessionId();
+				});
 		if (sessionService.findBySessionId(sessionId) == null) {
 			return null;
 		}
@@ -44,9 +44,9 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public Reservation createReservation(ReservationRequest reservationRequest) throws IOException {
 		reservationRequest.getResult().getContexts().stream()
-		.filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
-			sessionId = context.getParameters().getSessionId();
-		});
+				.filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
+					sessionId = context.getParameters().getSessionId();
+				});
 		if (sessionService.findBySessionId(sessionId) == null) {
 			return null;
 		}

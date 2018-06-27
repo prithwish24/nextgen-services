@@ -9,8 +9,8 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import com.cts.product.rental.controller.ReservationController;
 
 @SpringBootApplication
-@EnableDiscoveryClient
-@EnableHystrix
+//@EnableDiscoveryClient
+//@EnableHystrix
 public class Application {
 	public static void main(String[] args) {
 		// SpringApplication.run(ReservationController.class, args);
