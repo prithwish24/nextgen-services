@@ -3,6 +3,8 @@ package com.cts.product.rental.delegate;
 import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import com.cts.product.rental.service.SessionService;
 
 @Service
 public class ReservationServiceDelegate {
+	private static final Logger LOG = LoggerFactory.getLogger(ReservationServiceDelegate.class);
 
     @Autowired
     private ReservationService reservationService;
@@ -28,37 +31,40 @@ public class ReservationServiceDelegate {
     String sessionId;
 
     public ReservationResponse delegate(ReservationRequest reservationRequest) throws IOException {
-	ReservationResponse reservationResponse = new ReservationResponse();
-	String action = reservationRequest.getResult().getAction();
-	switch (action) {
-	case "askLocationCallback":
-		reservationResponse = ReservationResponseMapper.mapLocationCallback(reservationRequest);
-		break;
-	case "findNearestRentOffice":
-	    Location locationRequest = LocationRequestMapper.map(reservationRequest);
-	    Location location = locationService.getLocation(locationRequest);
-	    reservationResponse = ReservationResponseMapper.mapLocation(reservationRequest, location);
-	    break;
-	case "reviewReservation":
-	    reservationRequest = reservationService.reviewReservation(reservationRequest);
-	    reservationResponse = ReservationResponseMapper.mapReviewReservation(reservationRequest);
-	    break;
-	case "createReservation":
-	    Reservation reservation = reservationService.createReservation(reservationRequest);
-	    reservationRequest.getResult().getContexts().stream()
-		    .filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
-			sessionId = context.getParameters().getSessionId();
-		    });
-	    if (reservation != null) {
-		sessionService.updateSessionWithReservation(sessionId, reservation);
-		sessionService.clearSession(sessionId);
-	    }
-	    reservationResponse = ReservationResponseMapper.mapReservation(reservationRequest, reservation);
-	    break;
-	default:
-	    throw new IOException("Undefined action (" + action + ")");
-	}
+    	ReservationResponse reservationResponse = new ReservationResponse();
+    	String action = reservationRequest.getResult().getAction();
+    	LOG.debug("action: "+action);
+    	
+    	switch (action) {
+    	case "askLocationCallback":
+    		reservationResponse = ReservationResponseMapper.mapLocationCallback(reservationRequest);
+    		break;
+    	case "findNearestRentOffice":
+    		Location locationRequest = LocationRequestMapper.map(reservationRequest);
+    		Location location = locationService.getLocation(locationRequest);
+    		reservationResponse = ReservationResponseMapper.mapLocation(reservationRequest, location);
+    		break;
+    	case "reviewReservation":
+    		reservationRequest = reservationService.reviewReservation(reservationRequest);
+    		reservationResponse = ReservationResponseMapper.mapReviewReservation(reservationRequest);
+    		break;
+    	case "createReservation":
+    		Reservation reservation = reservationService.createReservation(reservationRequest);
+    		reservationRequest.getResult().getContexts().stream()
+    		.filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
+    			sessionId = context.getParameters().getSessionId();
+    		});
+    		if (reservation != null) {
+    			sessionService.updateSessionWithReservation(sessionId, reservation);
+    			sessionService.clearSession(sessionId);
+    		}
+    		reservationResponse = ReservationResponseMapper.mapReservation(reservationRequest, reservation);
+    		break;
+    	default:
+    		throw new IOException("Undefined action (" + action + ")");
+    	}
 
-	return reservationResponse;
+    	LOG.debug("response: " +reservationResponse);
+    	return reservationResponse;
     }
 }

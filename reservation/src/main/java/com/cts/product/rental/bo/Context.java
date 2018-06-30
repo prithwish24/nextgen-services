@@ -1,6 +1,8 @@
 
 package com.cts.product.rental.bo;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -50,4 +52,8 @@ public class Context {
         this.lifespan = lifespan;
     }
 
+    @Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

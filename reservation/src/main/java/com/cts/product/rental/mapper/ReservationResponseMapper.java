@@ -121,6 +121,7 @@ public class ReservationResponseMapper {
 	}
 
 	public static ReservationResponse mapLocationCallback(ReservationRequest reservationRequest) {
+		LOG.debug("Inside mapLocationCallback() ");
 		ReservationResponse response = new ReservationResponse();
 		List<Context> contextOut = reservationRequest.getResult().getContexts().parallelStream()
 			.filter(context -> "carrental".equals(context.getName()) || "awaiting-landmark".equals(context.getName()))
@@ -134,6 +135,7 @@ public class ReservationResponseMapper {
 		FollowupEvent followupEvent = new FollowupEvent();
 		followupEvent.setName("ask_location");
 		response.setFollowupEvent(followupEvent);
+		
 		return response;
 	}
 	
