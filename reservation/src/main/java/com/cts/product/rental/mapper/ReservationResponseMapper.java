@@ -120,6 +120,23 @@ public class ReservationResponseMapper {
 		return rentPrice;
 	}
 
+	public static ReservationResponse mapLocationCallback(ReservationRequest reservationRequest) {
+		ReservationResponse response = new ReservationResponse();
+		List<Context> contextOut = reservationRequest.getResult().getContexts().parallelStream()
+			.filter(context -> "carrental".equals(context.getName()) || "awaiting-landmark".equals(context.getName()))
+			.collect(Collectors.toList());
+		response.setContextOut(contextOut);
+		
+		String speechText = "Please tell me your pickup location or some nearest landmark?";
+		response.setSpeech(speechText);
+		response.setDisplayText(speechText);
+		
+		FollowupEvent followupEvent = new FollowupEvent();
+		followupEvent.setName("ask_location");
+		response.setFollowupEvent(followupEvent);
+		return response;
+	}
+	
 	public static ReservationResponse mapLocation(ReservationRequest reservationRequest, Location location) {
 		ReservationResponse response = new ReservationResponse();
 		List<Context> contextOut = reservationRequest.getResult().getContexts().stream()

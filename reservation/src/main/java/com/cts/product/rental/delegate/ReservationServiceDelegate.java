@@ -31,6 +31,9 @@ public class ReservationServiceDelegate {
 	ReservationResponse reservationResponse = new ReservationResponse();
 	String action = reservationRequest.getResult().getAction();
 	switch (action) {
+	case "askLocationCallback":
+		reservationResponse = ReservationResponseMapper.mapLocationCallback(reservationRequest);
+		break;
 	case "findNearestRentOffice":
 	    Location locationRequest = LocationRequestMapper.map(reservationRequest);
 	    Location location = locationService.getLocation(locationRequest);
