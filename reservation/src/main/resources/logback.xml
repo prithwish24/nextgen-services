@@ -30,16 +30,16 @@
 
 	</appender>
 
-	<logger name="com.cts.product.rental" level="debug" additivity="false">
+	<logger name="com.cts.product.rental" level="DEBUG" additivity="false">
 		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
 	</logger>
-	<logger name="org.springframework.web.filter.CommonsRequestLoggingFilter">
+	<!-- <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter">
 	    <level value="DEBUG" />
 	    <appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
 	</logger>
-
+ -->
 	<root level="INFO">
 		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
