@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "followupEvent", "speech", "displayText", "contextOut" })
+@JsonPropertyOrder({ "fulfillmentText", "followupEvent", "speech", "displayText", "contextOut" })
 public class ReservationResponse {
 
 	@JsonProperty("followupEvent")
@@ -21,7 +21,20 @@ public class ReservationResponse {
 	private String displayText;
 	@JsonProperty("contextOut")
 	private List<Context> contextOut;
+	@JsonProperty("fulfillment")
+	private Fulfillment fulfilment;
+	
 
+	@JsonProperty("fulfillment")
+	public Fulfillment getFulfilment() {
+		return fulfilment;
+	}
+
+	@JsonProperty("fulfillment")
+	public void setFulfilment(Fulfillment fulfilment) {
+		this.fulfilment = fulfilment;
+	}
+	
 	@JsonProperty("followupEvent")
 	public FollowupEvent getFollowupEvent() {
 		return followupEvent;

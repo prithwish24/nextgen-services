@@ -18,11 +18,13 @@ import com.cts.product.rental.RentalConstants;
 import com.cts.product.rental.bo.Context;
 import com.cts.product.rental.bo.Duration;
 import com.cts.product.rental.bo.FollowupEvent;
+import com.cts.product.rental.bo.Fulfillment;
 import com.cts.product.rental.bo.Location;
 import com.cts.product.rental.bo.Parameters;
 import com.cts.product.rental.bo.Reservation;
 import com.cts.product.rental.bo.ReservationRequest;
 import com.cts.product.rental.bo.ReservationResponse;
+import com.cts.product.rental.google.ai.bo.ResponseMessage;
 
 public class ReservationResponseMapper {
 	private static final Logger LOG = LoggerFactory.getLogger(ReservationResponseMapper.class);
@@ -41,7 +43,7 @@ public class ReservationResponseMapper {
 	public static ReservationResponse mapRentOfficeCallback(ReservationRequest reservationRequest) {
 		LOG.debug("Inside mapRentOfficeCallback() ");
 		final ReservationResponse response = new ReservationResponse();
-		final StringBuilder speechText = new StringBuilder();
+		/*final StringBuilder speechText = new StringBuilder();
 		
 		reservationRequest.getResult().getContexts().stream()
 			.filter  (context -> "carrental".equals(context.getName()))
@@ -51,7 +53,7 @@ public class ReservationResponseMapper {
 						context.getParameters().getCarpref())) {
 					
 					speechText.append("Okey. Would you like to pick up your car from the nearest rent office?");
-							
+					
 				} else {
 					speechText.append("OK. I choose a ")
 						.append(context.getParameters().getCartype())
@@ -60,7 +62,14 @@ public class ReservationResponseMapper {
 				}
 			});
 		response.setSpeech(speechText.toString());
-		response.setDisplayText(speechText.toString());
+		response.setDisplayText(speechText.toString());*/
+		//reservationRequest.getResult().setFulfillment(fulfillment);
+		
+		final Fulfillment responseFulfilment = new Fulfillment();
+		responseFulfilment.setSpeech(reservationRequest.getResult().getFulfillment().getSpeech());
+		response.setFulfilment(responseFulfilment);
+		
+		LOG.debug("fulfilment : "+ reservationRequest.getResult().getFulfillment().toString());
 		
 		List<Context> contextOut = reservationRequest.getResult().getContexts().parallelStream()
 			.filter(context -> "carrental".equals(context.getName()) || "awaiting-rentoffice".equals(context.getName()))
@@ -160,7 +169,6 @@ public class ReservationResponseMapper {
 		return reservationResponse;
 	}
 
-	
 	
 	
 	private static Parameters calculateTotalVehicalPrice(Parameters parameters) {
