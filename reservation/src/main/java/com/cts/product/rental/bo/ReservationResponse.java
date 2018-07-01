@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "fulfillmentText", "followupEvent", "speech", "displayText", "contextOut" })
+@JsonPropertyOrder({ "fulfillmentText", "followupEvent", "speech", "displayText", "source", "contextOut" })
 public class ReservationResponse {
 
 	@JsonProperty("followupEvent")
