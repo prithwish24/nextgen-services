@@ -1,6 +1,8 @@
 package com.cts.product.rental.delegate;
 
 import java.io.IOException;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -32,10 +34,14 @@ public class ReservationServiceDelegate {
 
     public ReservationResponse delegate(ReservationRequest reservationRequest) throws IOException {
     	ReservationResponse reservationResponse = new ReservationResponse();
-    	String action = reservationRequest.getResult().getAction();
+    	String action = reservationRequest.getResult().getAction() == null?
+    			"":reservationRequest.getResult().getAction().trim();
     	LOG.debug("action: "+action);
     	
     	switch (action) {
+    	case "rentOfficeCallback":
+    		reservationResponse = ReservationResponseMapper.mapRentOfficeCallback(reservationRequest);
+    		break;
     	case "askLocationCallback":
     		reservationResponse = ReservationResponseMapper.mapLocationCallback(reservationRequest);
     		break;

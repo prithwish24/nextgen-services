@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "duration", "sessionId.original", "date-period.original", "sessionId", "duration.original",
-	"date-period", "TypeOfItems", "cartype", "TypeOfItems.original", "TypeOfService.original", "TypeOfService",
+	"date-period", "TypeOfItems", "cartype", "carpref", "TypeOfItems.original", "TypeOfService.original", "TypeOfService",
 	"cartype.original", "pickuptime", "pickupdate.original", "pickupdate", "pickuptime.original", "pickuplocation",
 	"landmark", "landmark.original", "pickupfromnearestlocation", "confirmationnumber", "vehicleRentPrice",
 	"consessionFee", "salesTax", "estimatedTotal", "step" })
@@ -29,6 +29,8 @@ public class Parameters {
 	private String typeOfItems;
 	@JsonProperty("cartype")
 	private String cartype;
+	@JsonProperty("carpref")
+	private String carpref;
 	@JsonProperty("TypeOfItems.original")
 	private String typeOfItemsOriginal;
 	@JsonProperty("TypeOfService.original")
@@ -144,6 +146,16 @@ public class Parameters {
 	@JsonProperty("cartype")
 	public void setCartype(String cartype) {
 		this.cartype = cartype;
+	}
+
+	@JsonProperty("carpref")
+	public String getCarpref() {
+		return carpref;
+	}
+
+	@JsonProperty("carpref")
+	public void setCarpref(String carpref) {
+		this.carpref = carpref;
 	}
 
 	@JsonProperty("TypeOfItems.original")
