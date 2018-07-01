@@ -65,6 +65,12 @@ public class ReservationResponseMapper {
 		response.setDisplayText(speechText.toString());*/
 		//reservationRequest.getResult().setFulfillment(fulfillment);
 		
+		String responseSpeech = reservationRequest.getResult().getFulfillment().getSpeech();
+		response.setSpeech(responseSpeech);
+		response.setDisplayText(responseSpeech);
+		response.setSource("RentOfficeCallback mapping");
+		
+		
 		final Fulfillment responseFulfilment = new Fulfillment();
 		responseFulfilment.setSpeech(reservationRequest.getResult().getFulfillment().getSpeech());
 		response.setFulfilment(responseFulfilment);

@@ -19,6 +19,8 @@ public class ReservationResponse {
 	private String speech;
 	@JsonProperty("displayText")
 	private String displayText;
+	@JsonProperty("source")
+	private String source;
 	@JsonProperty("contextOut")
 	private List<Context> contextOut;
 	@JsonProperty("fulfillment")
@@ -79,4 +81,15 @@ public class ReservationResponse {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+
+	@JsonProperty("source")
+	public String getSource() {
+		return source;
+	}
+
+	@JsonProperty("source")
+	public void setSource(String source) {
+		this.source = source;
+	}
+	
 }
