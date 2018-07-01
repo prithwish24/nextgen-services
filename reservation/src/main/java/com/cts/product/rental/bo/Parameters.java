@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"date-period", "TypeOfItems", "cartype", "carpref", "TypeOfItems.original", "TypeOfService.original", "TypeOfService",
 	"cartype.original", "pickuptime", "pickupdate.original", "pickupdate", "pickuptime.original", "pickuplocation",
 	"landmark", "landmark.original", "pickupfromnearestlocation", "confirmationnumber", "vehicleRentPrice",
-	"consessionFee", "salesTax", "estimatedTotal", "step" })
+	"consessionFee", "salesTax", "estimatedTotal", "step", "replytext" })
 public class Parameters {
 
 	@JsonProperty("duration")
@@ -67,6 +67,19 @@ public class Parameters {
 	private String estimatedTotal;
 	@JsonProperty("step")
 	private String step;
+	@JsonProperty("replytext")
+	private String replyText;
+
+	
+	@JsonProperty("replytext")
+	public String getReplyText() {
+		return replyText;
+	}
+
+	@JsonProperty("replytext")
+	public void setReplyText(String replyText) {
+		this.replyText = replyText;
+	}
 
 	@JsonProperty("duration")
 	public Duration getDuration() {

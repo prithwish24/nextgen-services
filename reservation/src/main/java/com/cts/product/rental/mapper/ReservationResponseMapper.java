@@ -70,12 +70,18 @@ public class ReservationResponseMapper {
 		response.setDisplayText(responseSpeech);
 		response.setSource("RentOfficeCallback mapping");
 		
+		reservationRequest.getResult().getContexts().stream()
+			.filter  (context -> "awaiting-rentoffice".equals(context.getName()))
+			.forEach (context -> {
+				context.getParameters().setReplyText(responseSpeech);
+			});
 		
-		final Fulfillment responseFulfilment = new Fulfillment();
+		
+		/*final Fulfillment responseFulfilment = new Fulfillment();
 		responseFulfilment.setSpeech(reservationRequest.getResult().getFulfillment().getSpeech());
 		response.setFulfilment(responseFulfilment);
 		
-		LOG.debug("fulfilment : "+ reservationRequest.getResult().getFulfillment().toString());
+		LOG.debug("fulfilment : "+ reservationRequest.getResult().getFulfillment().toString());*/
 		
 		List<Context> contextOut = reservationRequest.getResult().getContexts().parallelStream()
 			.filter(context -> "carrental".equals(context.getName()) || "awaiting-rentoffice".equals(context.getName()))
