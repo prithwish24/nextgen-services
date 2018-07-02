@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class LocationServiceImpl implements LocationService {
+	private static final Logger LOG = LoggerFactory.getLogger(LocationServiceImpl.class);
 
 	@Autowired
 	private SessionService sessionService;
@@ -30,6 +33,7 @@ public class LocationServiceImpl implements LocationService {
 		String city = null;
 		List<Location> locationList = getAllLocations();
 		boolean pickupFromNearestLocation = locationRequest.isPickupFromNearestLocation();
+		LOG.debug("pickupFromNearestLocation: "+pickupFromNearestLocation);
 		if (pickupFromNearestLocation) {
 			Session findBySessionId = sessionService.findBySessionId(locationRequest.getSessionId());
 			if (findBySessionId == null) {
@@ -39,21 +43,26 @@ public class LocationServiceImpl implements LocationService {
 		} else {
 			zipcode = locationRequest.getZipcode();
 			businessName = locationRequest.getBusinessName();
-			city = locationRequest.getCity();
+			city = StringUtils.isNotBlank(locationRequest.getCity())?
+						locationRequest.getCity():locationRequest.getAddress();
+			
 		}
 
 		String finalZipcode = zipcode;
 		String finalBusinessName = businessName;
 		String finalCity = city;
+		LOG.debug("finalZipcode: "+finalZipcode);
+		LOG.debug("finalBusinessName: "+finalBusinessName);
+		LOG.debug("finalCity: "+finalCity);
 		try {
-			location = locationList.stream().filter(
-					loc -> ((StringUtils.isNotBlank(finalZipcode) && StringUtils.equals(loc.getZipcode(), finalZipcode)
+			location = locationList.stream()
+					.filter(loc -> ((StringUtils.isNotBlank(finalZipcode) && StringUtils.equals(loc.getZipcode(), finalZipcode)
 							|| (StringUtils.isNotBlank(finalBusinessName) && StringUtils.isNotBlank(finalCity)
 									&& StringUtils.equalsIgnoreCase(loc.getBusinessName(), finalBusinessName)
 									&& StringUtils.equalsIgnoreCase(loc.getCity(), finalCity)))))
 					.findFirst().get();
 		} catch (NoSuchElementException e) {
-			return null;
+			LOG.error("NoSuchElementException: "+e.getMessage());
 		}
 		return location;
 	}

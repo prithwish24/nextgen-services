@@ -11,17 +11,16 @@ import com.cts.product.rental.bo.ReservationRequest;
 public class LocationRequestMapper {
 
 	public static Location map(ReservationRequest reservationRequest) {
-		Location locationRequest = new Location();
+		final Location locationRequest = new Location();
 		List<Context> contexts = reservationRequest.getResult().getContexts();
 		contexts.stream().filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
 			locationRequest.setPickupFromNearestLocation(context.getParameters().isPickupFromNearestLocation());
 			locationRequest.setSessionId(context.getParameters().getSessionId());
-			locationRequest.setBusinessName(context.getParameters().getLandmark() != null
-					? context.getParameters().getLandmark().getBusinessName()
-							: null);
-			locationRequest.setCity(
-					context.getParameters().getLandmark() != null ? context.getParameters().getLandmark().getCity()
-							: null);
+			if (context.getParameters().getLandmark() != null) {
+				locationRequest.setBusinessName(context.getParameters().getLandmark().getBusinessName());
+				locationRequest.setCity(context.getParameters().getLandmark().getCity());
+				locationRequest.setAddress(context.getParameters().getLandmark().getStreetAddress());
+			}
 		});
 		return locationRequest;
 	}

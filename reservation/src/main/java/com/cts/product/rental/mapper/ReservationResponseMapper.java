@@ -18,13 +18,11 @@ import com.cts.product.rental.RentalConstants;
 import com.cts.product.rental.bo.Context;
 import com.cts.product.rental.bo.Duration;
 import com.cts.product.rental.bo.FollowupEvent;
-import com.cts.product.rental.bo.Fulfillment;
 import com.cts.product.rental.bo.Location;
 import com.cts.product.rental.bo.Parameters;
 import com.cts.product.rental.bo.Reservation;
 import com.cts.product.rental.bo.ReservationRequest;
 import com.cts.product.rental.bo.ReservationResponse;
-import com.cts.product.rental.google.ai.bo.ResponseMessage;
 
 public class ReservationResponseMapper {
 	private static final Logger LOG = LoggerFactory.getLogger(ReservationResponseMapper.class);

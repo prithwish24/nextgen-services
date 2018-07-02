@@ -1,10 +1,12 @@
 
 package com.cts.product.rental.bo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "city",
@@ -17,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class Landmark {
 
+	@JsonProperty("street-address")
+    private String streetAddress;
     @JsonProperty("city")
     private String city;
     @JsonProperty("city.original")
@@ -101,5 +105,15 @@ public class Landmark {
     public void setPickuplocation(String pickuplocation) {
         this.pickuplocation = pickuplocation;
     }
+
+    @JsonProperty("street-address")
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+
+    @JsonProperty("street-address")
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
 
 }

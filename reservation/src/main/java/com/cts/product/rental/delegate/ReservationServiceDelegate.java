@@ -45,7 +45,9 @@ public class ReservationServiceDelegate {
     		break;
     	case "findNearestRentOffice":
     		Location locationRequest = LocationRequestMapper.map(reservationRequest);
+    		LOG.debug("locationRequest : " + locationRequest.toString());
     		Location location = locationService.getLocation(locationRequest);
+    		LOG.debug("location : " + location!=null?location.toString():null);
     		reservationResponse = ReservationResponseMapper.mapLocation(reservationRequest, location);
     		break;
     	case "reviewReservation":
