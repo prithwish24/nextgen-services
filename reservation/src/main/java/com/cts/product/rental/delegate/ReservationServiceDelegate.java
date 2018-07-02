@@ -47,7 +47,7 @@ public class ReservationServiceDelegate {
     		Location locationRequest = LocationRequestMapper.map(reservationRequest);
     		LOG.debug("locationRequest : " + locationRequest.toString());
     		Location location = locationService.getLocation(locationRequest);
-    		LOG.debug("location : " + location!=null?location.toString():null);
+    		LOG.debug("location : " + location);
     		reservationResponse = ReservationResponseMapper.mapLocation(reservationRequest, location);
     		break;
     	case "reviewReservation":

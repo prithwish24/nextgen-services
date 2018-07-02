@@ -116,6 +116,7 @@ public class ReservationResponseMapper {
 		List<Context> contextOut = reservationRequest.getResult().getContexts().stream()
 				.filter(context -> StringUtils.equals("carrental", context.getName())).collect(Collectors.toList());
 		if (location != null) {
+			LOG.debug("location: "+location.toString()); 
 			contextOut.get(0).getParameters().setPickuplocation(location.getAddress());
 		
 			FollowupEvent followupEvent = new FollowupEvent();
