@@ -1,15 +1,17 @@
 
 package com.cts.product.rental.bo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "duration", "sessionId.original", "date-period.original", "sessionId", "duration.original",
 	"date-period", "TypeOfItems", "cartype", "carpref", "TypeOfItems.original", "TypeOfService.original", "TypeOfService",
 	"cartype.original", "pickuptime", "pickupdate.original", "pickupdate", "pickuptime.original", "pickuplocation",
-	"landmark", "landmark.original", "pickupfromnearestlocation", "confirmationnumber", "vehicleRentPrice",
+	"landmark", "landmark.original", "pickupcity",  "pickupfromnearestlocation", "confirmationnumber", "vehicleRentPrice",
 	"consessionFee", "salesTax", "estimatedTotal", "step", "replytext" })
 public class Parameters {
 
@@ -53,6 +55,8 @@ public class Parameters {
 	private Landmark landmark;
 	@JsonProperty("landmark.original")
 	private String landmarkOriginal;
+	@JsonProperty("pickupcity")
+	private String pickupCity;
 	@JsonProperty("pickupfromnearestlocation")
 	private boolean pickupfromnearestlocation;
 	@JsonProperty("confirmationnumber")
@@ -279,6 +283,16 @@ public class Parameters {
 	@JsonProperty("landmark.original")
 	public void setLandmarkOriginal(String landmarkOriginal) {
 		this.landmarkOriginal = landmarkOriginal;
+	}
+
+	@JsonProperty("pickupcity")
+	public String getPickupCity() {
+		return pickupCity;
+	}
+
+	@JsonProperty("pickupcity")
+	public void setPickupCity(String pickupCity) {
+		this.pickupCity = pickupCity;
 	}
 
 	@JsonProperty("pickupfromnearestlocation")

@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -17,14 +19,13 @@ import com.cts.product.rental.bo.Location;
 import com.cts.product.rental.bo.Parameters;
 import com.cts.product.rental.bo.Reservation;
 import com.cts.product.rental.bo.ReservationRequest;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class ReservationServiceImpl implements ReservationService {
-
+	private static final Logger LOG = LoggerFactory.getLogger(ReservationServiceImpl.class);
+	
 	@Autowired
 	private SessionService sessionService;
 	String sessionId;
@@ -36,7 +37,7 @@ public class ReservationServiceImpl implements ReservationService {
 					sessionId = context.getParameters().getSessionId();
 				});
 		if (sessionService.findBySessionId(sessionId) == null) {
-			return null;
+			throw new RuntimeException("Invalid user session!"); 
 		}
 		return reservationRequest;
 	}
@@ -48,7 +49,7 @@ public class ReservationServiceImpl implements ReservationService {
 					sessionId = context.getParameters().getSessionId();
 				});
 		if (sessionService.findBySessionId(sessionId) == null) {
-			return null;
+			throw new RuntimeException("Invalid user session!"); 
 		}
 		List<Context> contextOut = reservationRequest.getResult().getContexts().stream()
 				.filter(context -> StringUtils.equals("carrental", context.getName())).collect(Collectors.toList());
@@ -74,12 +75,8 @@ public class ReservationServiceImpl implements ReservationService {
 		try {
 			reservationList = mapper.readValue(new ClassPathResource("reservation.json").getInputStream(),
 					typeReference);
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error("Error fetching reservation details", e);
 		}
 		return reservationList;
 	}

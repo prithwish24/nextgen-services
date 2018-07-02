@@ -16,7 +16,10 @@ public class LocationRequestMapper {
 		contexts.stream().filter(context -> StringUtils.equals("carrental", context.getName())).forEach(context -> {
 			locationRequest.setPickupFromNearestLocation(context.getParameters().isPickupFromNearestLocation());
 			locationRequest.setSessionId(context.getParameters().getSessionId());
-			if (context.getParameters().getLandmark() != null) {
+			if (StringUtils.isNotBlank(context.getParameters().getPickupCity())) {
+				locationRequest.setCity(context.getParameters().getPickupCity());
+			}
+			else if (context.getParameters().getLandmark() != null) {
 				locationRequest.setBusinessName(context.getParameters().getLandmark().getBusinessName());
 				locationRequest.setCity(context.getParameters().getLandmark().getCity());
 				locationRequest.setAddress(context.getParameters().getLandmark().getStreetAddress());
